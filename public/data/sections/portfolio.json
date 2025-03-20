@@ -96,7 +96,7 @@
                         "faColors": {"bg": null, "fill": null}
                     },
                     "links": [
-                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/Portfolio.git"}
+                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/personal-portfolio-website.git"}
                     ],
                     "locales": {
                         "en": {

@@ -2,7 +2,7 @@
 
 🎯 **Live Demo**: [Click Here](https://your-live-portfolio-link.com)  
 
-📌 **GitHub Repo**: [Portfolio Repository](https://github.com/elonerajeev/Portfolio.git)  
+📌 **GitHub Repo**: [Portfolio Repository](https://github.com/elonerajeev/personal-portfolio-website.git)  
 
 ---
 
@@ -53,8 +53,8 @@ Follow these simple steps to set up the project on your local machine:
 
 1️⃣ **Clone the Repository**  
 ```sh
-git clone https://github.com/elonerajeev/react-portfolio-template.git
-cd react-portfolio-template
+git clone https://github.com/elonerajeev/personal-portfolio-website.git
+cd personal-portfolio-website
 ```
 
 2️⃣ **Install Dependencies**  
@@ -68,7 +68,7 @@ npm run dev
 ```
 
 4️⃣ **Open in Browser**  
-Visit: `http://localhost:5173`
+Visit: `http://localhost:5173/personal-portfolio-website/`
 
 ---
 
