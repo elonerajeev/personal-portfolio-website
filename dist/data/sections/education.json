@@ -1,0 +1,76 @@
+{
+    "locales": {
+        "en": {
+            "title": "Education",
+            "title_long_prefix": "This is my",
+            "title_long": "**Educational** Background"
+        }
+    },
+    "articles": [
+        {
+            "id": "academic",
+            "component": "ArticleTimeline",
+            "config": {},
+            "locales": {},
+            "items": [
+                {
+                    "icon": {
+                        "img": "images/pictures/collage1.png",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "dates": {
+                        "start": "2022",
+                        "end": "2026"
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "**Bachelor** in Computer Science & Engineering",
+                            "info": "Jodhpur Institute of Engineering and Technology, Rajasthan, India",
+                            "text": "Currently pursuing a Bachelor's degree in Computer Science, focusing on Full-Stack Development, Cloud Computing, and DevOps. Current CGPA: 8.29.",
+                            "tags": ["Cloud Computing", "Full-Stack Development", "DevOps"]
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": "images/pictures/school1.jpg",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "dates": {
+                        "start": "2020",
+                        "end": "2022"
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "Senior Secondary **(PCM)**",
+                            "info": "Samastipur College, Samastipur, India",
+                            "text": "Completed Senior Secondary education with a focus on Physics, Chemistry, and Mathematics (PCM). Achieved 74.4%.",
+                            "tags": ["Physics", "Chemistry", "Mathematics"]
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": "images/pictures/plane.jpg",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "dates": {
+                        "start": "2018",
+                        "end": "2020"
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "High School **(10th Grade)**",
+                            "info": "M.A.B.R. Jha High School, Bahdura, Bihar, India",
+                            "text": "Completed high school with an excellent academic record, securing 87.2%.",
+                            "tags": ["Academic Excellence", "Top Performer"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

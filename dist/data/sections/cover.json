@@ -1,0 +1,167 @@
+{
+    "locales": {
+        "en": {
+            "title": "Welcome!",
+            "title_menu": "About me",
+            "title_long_prefix": "Hello...",
+            "title_long": "I'm **Rajeev Kumar**"
+        }  
+    },
+
+    "articles": [
+        {
+            "id": "contact_list",
+            "component": "ArticleGrid",
+            "config": {
+                "ignorePaddingTop": true,
+                "format": "inline"
+            },
+            "locales": {
+                "en": {}
+            },
+
+            "items": [
+                {
+                    "value": "Jodhpur (Rajasthan), India",
+                    "links": [
+                        {"href": null}
+                    ],
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-city",
+                        "faColors": {"bg": null, "fill": null}
+                    }
+                },
+                {
+                    "value": "rajeevkumarx12@gmail.com",
+                    "links": [
+                        {"href": "rajeevkumarx12@gmail.com"}
+                    ],
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-envelope",
+                        "faColors": {"bg": null, "fill": null}
+                    }
+                },
+                {
+                    "value": "@elonerajeev",
+                    "links": [
+                        {"href": "https://github.com/elonerajeev"}
+                    ],
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-brands fa-github",
+                        "faColors": {"bg": null, "fill": null}
+                    }
+                },
+
+                {
+                    "value": "@rajeev-kumar-2209b1243",
+                    "links": [
+                        {"href": "https://www.linkedin.com/in/rajeev-kumar-2209b1243/"}
+                    ],
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-brands fa-linkedin",
+                        "faColors": {"bg": null, "fill": null}
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "short_description",
+            "component": "ArticleInfoBlock",
+            "config": {},
+            "locales": {
+                "en": {"title": "**A little bit** about me..."}
+            },
+
+            "items": [
+                {
+                    "icon": {
+                        "img": "images/svg/logo.svg",
+                        "fa": null,
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "locales": {
+                        "en": {"text": "<p>I’m a Full Stack Developer with <b>expertise in ReactJS, NodeJS, ExpressJS, and MongoDB</b>, passionate about building scalable web applications. Currently, I am exploring <b>DevOps and Cloud Computing</b>, focusing on AWS, CI/CD, and containerization.</p><p>Beyond development, I have a keen interest in <b>stock and crypto trading</b>, analyzing market trends and investment opportunities.</p><p>I look forward to collaborating <b>with you!</b></p>"}
+                    }
+                }
+            ]
+        },
+
+
+
+        {
+            "id": "interests",
+            "component": "ArticleGrid",
+            "config": {
+                "format": "grid"
+            },
+            "locales": {
+                "en": {
+                    "title": "Personal **Interests**"
+                }
+            },
+            "items": [
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-code",
+                        "faColors": null
+                    },
+                    "value": null,
+                    "locales": {
+                        "en": {
+                            "title": "DevOps & Cloud Computing",
+                            "info": "Exploring cloud technologies, automation, and CI/CD pipelines to enhance software development efficiency."
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-chart-line",
+                        "faColors": null
+                    },
+                    "value": null,
+                    "locales": {
+                        "en": {
+                            "title": "Stock & Crypto Trading",
+                            "info": "Analyzing market trends, investing in stocks and cryptocurrencies, and exploring financial strategies."
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-lightbulb",
+                        "faColors": null
+                    },
+                    "value": null,
+                    "locales": {
+                        "en": {
+                            "title": "Problem Solving & DSA",
+                            "info": "Practicing Data Structures and Algorithms in Java to improve problem-solving skills."
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-music",
+                        "faColors": null
+                    },
+                    "value": null,
+                    "locales": {
+                        "en": {
+                            "title": "Listening to Music",
+                            "info": "Enjoying different genres of music to relax and boost creativity."
+                        }
+                    }
+                }
+            ]
+        }
+   ]
+}

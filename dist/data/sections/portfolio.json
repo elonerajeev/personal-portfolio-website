@@ -1,0 +1,112 @@
+{
+    "locales": {
+        "en": {
+            "title": "Project",
+            "title_long_prefix": "Take a look at",
+            "title_long": "My **Projects**"
+        }
+    },
+    "articles": [
+        {
+            "id": "portfolio",
+            "component": "ArticlePortfolio",
+            "config": {},
+            "locales": {},
+            "categories": [
+                {
+                    "id": "websites",
+                    "locales": {
+                        "en": {"singular": "Website", "plural": "Websites"}
+                    }
+                },
+                {
+                    "id": "apps",
+                    "locales": {
+                        "en": {"singular": "App", "plural": "Apps"}
+                    }
+                },
+                {
+                    "id": "utilities",
+                    "locales": {
+                        "en": {"singular": "Utility", "plural": "Utilities"}
+                    }
+                }
+            ],
+            "items": [
+                {
+                    "categoryId": "apps",
+                    "icon": {
+                        "img": "images/pictures/project-ecommerce.png",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "links": [
+                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/E-Commerce-App-MERN"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "E-Commerce MERN App",
+                            "text": "A fully functional e-commerce platform built using the MERN stack, featuring user authentication, product management, and secure payment integration.",
+                            "tags": ["MERN Stack", "E-Commerce", "JWT Authentication"]
+                        }
+                    }
+                },
+                {
+                    "categoryId": "utilities",
+                    "icon": {
+                        "img": "images/pictures/project-blockchain.png",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "links": [
+                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/Blockchain-Based-Voting-System"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Blockchain-Based Voting System",
+                            "text": "A decentralized voting system using Ethereum blockchain and Solidity smart contracts to ensure transparency and security in elections.",
+                            "tags": ["Blockchain", "Ethereum", "Smart Contracts"]
+                        }
+                    }
+                },
+                {
+                    "categoryId": "websites",
+                    "icon": {
+                        "img": "images/pictures/project-serverless.png",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "links": [
+                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/Serverless-Web-Application-on-AWS"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Serverless Web Application on AWS",
+                            "text": "A serverless web application leveraging AWS Lambda, API Gateway, DynamoDB, and CloudFront for scalability and performance.",
+                            "tags": ["AWS", "Serverless", "DynamoDB"]
+                        }
+                    }
+                },
+
+                {
+                    "categoryId": "websites",
+                    "icon": {
+                        "img": "images/pictures/portfolio.jpg",
+                        "fa": "",
+                        "faColors": {"bg": null, "fill": null}
+                    },
+                    "links": [
+                        {"faIcon": "fa-brands fa-github", "href": "https://github.com/elonerajeev/personal-portfolio-website.git"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Personal Portfolio Website using ReactJS",
+                            "text": "A personal portfolio website built using ReactJS, featuring a responsive design, smooth animations, and a clean user interface.",
+                            "tags": ["ReactJS", "Portfolio", "Responsive Design"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
