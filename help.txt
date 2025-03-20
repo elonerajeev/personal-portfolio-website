@@ -1,0 +1,7 @@
+--> Install Dependance : npm install
+
+--> Run The Project : npm run dev
+
+--> For Update The About Me - cover.json
+
+--> 

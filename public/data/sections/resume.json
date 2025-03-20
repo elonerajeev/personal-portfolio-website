@@ -1,0 +1,42 @@
+{
+    "locales": {
+        "en": {
+            "title_menu": "Resume",
+            "title_long_prefix": "Check out my",
+            "title_long": "**Resume**"
+        }
+    },
+    "articles": [
+        {
+            "id": "resume",
+            "component": "ArticleResume",
+            "config": {},
+            "locales": {
+                "en": { "title": "Download My Resume" }
+            },
+            "items": [
+                {
+                    "icon": {
+                        "img": "images/icons/resume.png",
+                        "fa": "fa-solid fa-file-pdf",
+                        "faColors": { "bg": null, "fill": null }
+                    },
+                    "links": [
+                        {
+                            "faIcon": "fa-solid fa-download",
+                            "href": "/react-portfolio-template/documents/rajeevKumar_JIETCS22087.pdf",
+                            "target": "_blank"
+                        }
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Resume PDF",
+                            "text": "Click the button below to view or download my latest resume.",
+                            "tags": ["PDF", "Resume", "Download"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+{
+    "locales": {
+        "en": {
+            "title": "Life Recently",
+            "title_menu": "Updates",
+            "title_long_prefix": "Take a look at my",
+            "title_long": "Recent **Updates**"
+        }
+    },
+    "articles": [
+        {
+            "id": "fun_facts",
+            "component": "ArticleServices",
+            "config": {},
+            "locales": {},
+            "items": [
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-code",
+                        "faColors": null
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "03",
+                            "info": "Full-Stack Projects Completed"
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-star",
+                        "faColors": null
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "200+",
+                            "info": "LeetCode Problems Solved"
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-diagram-project",
+                        "faColors": null
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "05",
+                            "info": "Open-Source Contributions"
+                        }
+                    }
+                },
+                {
+                    "icon": {
+                        "img": null,
+                        "fa": "fa-solid fa-cloud",
+                        "faColors": null
+                    },
+                    "locales": {
+                        "en": {
+                            "title": "AWS",
+                            "info": "Cloud & DevOps Certified"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "updates",
+            "component": "ArticleThread",
+            "config": {},
+            "locales": {
+                "en": { "title": "Recent Updates" }
+            },
+            "items": [
+                {
+                    "dates": {
+                        "start": "11/05/2024",
+                        "end": null
+                    },
+                    "links": [],
+                    "locales": {
+                        "en": {
+                            "title": "Started Learning **Docker & Kubernetes**",
+                            "text": "Expanding my DevOps skills by diving deep into containerization and orchestration. Currently working on automating deployments with Kubernetes."
+                        }
+                    }
+                },
+                {
+                    "dates": {
+                        "start": "05/12/2023",
+                        "end": null
+                    },
+                    "links": [
+                        {"string": "see_more", "href": "https://github.com/elonerajeev"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Contributed to **Open-Source Projects**",
+                            "text": "Actively contributing to open-source projects on GitHub, including backend API development and cloud-based applications."
+                        }
+                    }
+                },
+                {
+                    "dates": {
+                        "start": "04/01/2024",
+                        "end": null
+                    },
+                    "links": [
+                        {"string": "see_project", "href": "https://github.com/elonerajeev/E-Commerce-App-MERN"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Built a **MERN Stack E-Commerce App**",
+                            "text": "Developed a full-fledged e-commerce platform using MongoDB, Express.js, React.js, and Node.js, with authentication and payment integration."
+                        }
+                    }
+                },
+                {
+                    "dates": {
+                        "start": "12/12/2024",
+                        "end": null
+                    },
+                    "links": [
+                        {"string": "see_more", "href": "https://elonerajeev.com"}
+                    ],
+                    "locales": {
+                        "en": {
+                            "title": "Launched My **Personal Website**",
+                            "text": "Created a portfolio website to showcase my projects, blog about DevOps, and share my journey in tech."
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
