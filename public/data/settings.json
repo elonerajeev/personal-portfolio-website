@@ -17,7 +17,7 @@
         "profilePictureUrl": "images/pictures/profile-pic (1) (1).png",
 
         "locales": {
-            "en": { "role": "Backend Engineer / AWS Cloud" }
+            "en": { "role": "AWS Devops Engineer" }
         }
     },
 
@@ -26,7 +26,7 @@
         "available": true,
 
         "locales": {
-            "en": { "message": "Available for Internship" }
+            "en": { "message": "Available for Internship/Job" }
         }
     },
 
@@ -59,8 +59,9 @@
     
         "emailjs": {
             "publicKey": "GebTkI83ZqB918-Jj",
-            "serviceId": "service_oyewlgm",
-            "templateId": "template_1b7a4ez"
+            "serviceId": "service_4wy380l",
+            "templateId": "template_1b7a4ez",
+            "toEmail": "elonerajeev@gmail.com"
         }
     
     

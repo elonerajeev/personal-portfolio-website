@@ -5,11 +5,24 @@ const _status = {
     config: null
 }
 
+/**
+ * Loads EmailJS config from public/data/emailjs.json if not provided.
+ * @returns {Promise<Object>}
+ */
+const loadConfigFromPublic = async () => {
+    const response = await fetch('/data/emailjs.json')
+    if (!response.ok) throw new Error("Failed to load emailjs config")
+    return await response.json()
+}
+
 export const useEmails = () => {
     /**
-     * @param {Object} config
+     * @param {Object} [config]
      */
-    const init = (config) => {
+    const init = async (config) => {
+        if (!config) {
+            config = await loadConfigFromPublic()
+        }
         emailjs.init(config.publicKey)
         _status.config = config
         _status.didInit = true
@@ -30,16 +43,17 @@ export const useEmails = () => {
      * @return {Promise<boolean>|Boolean}
      */
     const sendContactEmail = async (fromName, fromEmail, customSubject, message) => {
-        if(!isInitialized())
-            return
+        if (!isInitialized())
+            return false
 
+        // Change 'to_email' to match your EmailJS template variable for recipient!
+        // TO this:
         const params = {
-            from_name: fromName,
-            from_email: fromEmail,
-            custom_subject: customSubject,
-            message: message
+            name: fromName,           // matches {{name}} in template
+            email: fromEmail,         // matches {{email}} in template  
+            title: customSubject,     // matches {{title}} in template
+            message: message          // matches message content
         }
-
         try {
             const response = await emailjs.send(
                 _status.config['serviceId'],
@@ -48,6 +62,7 @@ export const useEmails = () => {
             )
             return true
         } catch (error) {
+            console.error("EmailJS send error:", error)
             return false
         }
     }
