@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+const RESUME_URL = "https://rajeevxportfolio.netlify.app/documents/resume-rajeev-kumar.pdf";
+
 const Resume = () => {
   const [resumeData, setResumeData] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/data/sections/resume.json`)
+    fetch("/data/sections/resume.json")
       .then((response) => response.json())
       .then((data) => setResumeData(data))
       .catch((error) => console.error("Error loading resume data:", error));
@@ -18,8 +20,8 @@ const Resume = () => {
       <p>{resumeData.articles[0].locales.en.title}</p>
 
       <a
-        href={`${process.env.PUBLIC_URL}${resumeData.articles[0].items[0].links[0].href}`}
-        target={resumeData.articles[0].items[0].links[0].target}
+        href={RESUME_URL}
+        target="_blank"
         rel="noopener noreferrer"
         style={{
           display: "inline-block",
