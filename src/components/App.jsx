@@ -22,6 +22,7 @@ function App() {
             <AppFeedbacks/>
             <ImageCache urls={imageList}/>
             <Portfolio/>
+            <Resume/>
         </div>
     )
 }
