@@ -24,7 +24,7 @@
                     "links": [
                         {
                             "faIcon": "fa-solid fa-download",
-                            "href": "public/documents/resume-rajeev-kumar.pdf",
+                            "href": "/documents/resume-rajeev-kumar.pdf",
                             "target": "_blank"
                         }
                     ],
