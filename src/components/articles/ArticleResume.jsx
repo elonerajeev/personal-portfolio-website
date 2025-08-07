@@ -1,7 +1,7 @@
 import React from "react";
 
 const Resume = () => {
-  const resumeUrl = "https://rajeevxportfolio.netlify.app/documents/resume-rajeev-kumar.pdf";
+  const resumeUrl = "https://rajeevxportfolio.netlify.app/documents/Rajeev-Kumar-cloud.pdf";
 
 
   return (

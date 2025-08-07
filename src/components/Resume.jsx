@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const RESUME_URL = "https://rajeevxportfolio.netlify.app/documents/resume-rajeev-kumar.pdf";
+const RESUME_URL = "https://rajeevxportfolio.netlify.app/documents/Rajeev-Kumar-cloud.pdf";
 
 const Resume = () => {
   const [resumeData, setResumeData] = useState(null);
