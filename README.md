@@ -1,6 +1,6 @@
 # 🚀 **Rajeev Kumar - Portfolio Website**    
 
-🎯 **Live Demo**: [Click Here](https://your-live-portfolio-link.com)  
+🎯 **Live Demo**: [Click Here](https://rajeevxportfolio.netlify.app/)  
 
 📌 **GitHub Repo**: [Portfolio Repository](https://github.com/elonerajeev/personal-portfolio-website.git)  
 
@@ -42,9 +42,9 @@ It is designed to be **fast, responsive, and visually appealing**.
 ## 🎨 **UI Preview**  
 | **Section** | **Preview** |
 |------------|------------|
-| **Homepage** | ![Home](https://your-image-link.com/home.png) |
-| **Portfolio** | ![Portfolio](https://your-image-link.com/portfolio.png) |
-| **Contact** | ![Contact](https://your-image-link.com/contact.png) |
+| **Homepage** | ![Home](https://rajeevxportfolio.netlify.app/) |
+| **Portfolio** | ![Portfolio](https://rajeevxportfolio.netlify.app/) |
+| **Contact** | ![Contact](https://rajeevxportfolio.netlify.app/#contact) |
 
 ---
 
