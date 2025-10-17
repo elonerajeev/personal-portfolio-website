@@ -105,7 +105,7 @@
           }
         },
         {
-          "categoryId": "infra-tools",
+          "categoryId": "devops",
           "icon": {
             "img": "images/pictures/project-ecommerce.png",
             "fa": "",

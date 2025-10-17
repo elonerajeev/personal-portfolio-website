@@ -1,8 +1,11 @@
 import React from "react";
+import { useParser } from "/src/helpers/parser.js";
 
-const Resume = () => {
-  const resumeUrl = "https://rajeevxportfolio.netlify.app/documents/Rajeev-Kumar-cloud.pdf";
-
+const Resume = ({ data }) => {
+  const parser = useParser();
+  const parsedData = parser.parseArticleData(data);
+  const resumeItem = parser.parseArticleItems(parsedData.items)[0];
+  const resumeUrl = resumeItem.firstLink.href;
 
   return (
     <div

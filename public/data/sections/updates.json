@@ -139,16 +139,37 @@
         },
         {
           "dates": {
-            "start": "05/07/2025",
+            "start": "06/15/2024",
             "end": null
           },
           "links": [
-            { "string": "see_more", "href": "https://elonerajeev.com" }
+            {
+              "string": "see_project",
+              "href": "https://github.com/elonerajeev/Pulse-Monitor.git"
+            }
           ],
           "locales": {
             "en": {
-              "title": "Build Something **Big in Automation**",
-              "text": "Developing an intelligent AI agent for complete infrastructure automation - from cloud provisioning to deployment pipelines. This ambitious project aims to revolutionize how we manage and scale infrastructure by combining machine learning with DevOps practices, creating self-healing and self-optimizing systems that can predict, prevent, and resolve issues autonomously."
+              "title": "Launched a SaaS Product: **Pulse Monitor**",
+              "text": "Successfully launched Pulse Monitor, a SaaS platform for 24/7 website and server monitoring. It provides real-time status checks and instant alerts to ensure high availability and optimal performance."
+            }
+          }
+        },
+        {
+          "dates": {
+            "start": "07/20/2024",
+            "end": null
+          },
+          "links": [
+            {
+              "string": "see_more",
+              "href": "https://leetcode.com/elonerajeev/"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "Reached **200+ Problems** on LeetCode",
+              "text": "Crossed a significant milestone by solving over 200 Data Structures and Algorithms problems, sharpening my problem-solving and coding skills."
             }
           }
         }
