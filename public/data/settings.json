@@ -1,68 +1,66 @@
 {
-    "version": "1.0.0",
-    "animatedCursorEnabled": false,
-    "fullScreenButtonEnabled": false,
-    "scrollToTopButtonEnabled": true,
-    
-    "preloader": {
-        "enabled": false,
-        "title": "React <b>Portfolio</b>",
-        "subtitle": "by Rajeev Kumar"
+  "version": "1.0.0",
+  "animatedCursorEnabled": false,
+  "fullScreenButtonEnabled": false,
+  "scrollToTopButtonEnabled": true,
+
+  "preloader": {
+    "enabled": false,
+    "title": "React <b>Portfolio</b>",
+    "subtitle": "by Rajeev Kumar"
+  },
+
+  "profile": {
+    "name": "Rajeev Kumar",
+    "stylizedName": "<strong>Rajeev **Kumar**</strong>",
+    "logoUrl": "images/svg/logo.svg",
+    "profilePictureUrl": "images/pictures/profile-pic (1) (1).png",
+
+    "locales": {
+      "en": { "role": "Software Engineer" }
+    }
+  },
+
+  "status": {
+    "visible": true,
+    "available": true,
+
+    "locales": {
+      "en": { "message": "Available for Full Time Job" }
+    }
+  },
+
+  "supportedThemes": [
+    {
+      "id": "dark",
+      "default": true,
+      "icon": "fa-solid fa-moon"
     },
+    {
+      "id": "light",
+      "default": false,
+      "icon": "fa-solid fa-sun"
+    }
+  ],
 
-    "profile": {
-        "name": "Rajeev Kumar",
-        "stylizedName": "<strong>Rajeev **Kumar**</strong>",
-        "logoUrl": "images/svg/logo.svg",
-        "profilePictureUrl": "images/pictures/profile-pic (1) (1).png",
-
-        "locales": {
-            "en": { "role": "AWS Devops Engineer" }
-        }
+  "supportedLanguages": [
+    {
+      "name": "English",
+      "id": "en",
+      "flagUrl": "images/flags/hi.png",
+      "default": true
     },
+    {
+      "name": "हिन्दी",
+      "id": "hi",
+      "flagUrl": "images/flags/hi.jpg"
+    }
+  ],
 
-    "status": {
-        "visible": true,
-        "available": true,
-
-        "locales": {
-            "en": { "message": "Available for Internship/Job" }
-        }
-    },
-
-    "supportedThemes": [
-        {
-            "id": "dark",
-            "default": true,
-            "icon": "fa-solid fa-moon"
-        },
-        {
-            "id": "light",
-            "default": false,
-            "icon": "fa-solid fa-sun"
-        }
-    ],
-
-    "supportedLanguages": [
-        {
-            "name": "English",
-            "id": "en",
-            "flagUrl": "images/flags/hi.png",
-            "default": true
-        },
-        {
-            "name": "हिन्दी",
-            "id": "hi",
-            "flagUrl": "images/flags/hi.jpg"
-        }
-    ],
-    
-        "emailjs": {
-            "publicKey": "GebTkI83ZqB918-Jj",
-            "serviceId": "service_4wy380l",
-            "templateId": "template_1b7a4ez",
-            "toEmail": "elonerajeev@gmail.com"
-        }
-    
-    
+  "emailjs": {
+    "publicKey": "GebTkI83ZqB918-Jj",
+    "serviceId": "service_4wy380l",
+    "templateId": "template_1b7a4ez",
+    "toEmail": "elonerajeev@gmail.com"
+  }
 }

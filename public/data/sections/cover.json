@@ -51,9 +51,7 @@
 
         {
           "value": "@rajeev-kumar-2209b1243",
-          "links": [
-            { "href": "https://www.linkedin.com/in/rajeev-kumar-2209b1243/" }
-          ],
+          "links": [{ "href": "https://www.linkedin.com/in/heyrajeev1/" }],
           "icon": {
             "img": null,
             "fa": "fa-brands fa-linkedin",
@@ -80,7 +78,7 @@
           },
           "locales": {
             "en": {
-              "text": "<p>I’m an aspiring <b>AWS DevOps Engineer</b> with hands-on experience in <b>cloud infrastructure, CI/CD pipelines, Docker, Terraform, and monitoring with Prometheus & Grafana</b>. I’m passionate about automating scalable systems and optimizing cloud-native deployments.</p><p>I also have a solid foundation in <b>web development</b> using ReactJS, NodeJS, ExpressJS, and MongoDB, which helps me collaborate effectively with developers.</p><p>Beyond tech, I actively pursue <b>stock and crypto trading</b>, staying sharp on market trends and financial strategy.</p><p>I look forward to collaborating <b>with you!</b></p>"
+              "text": "<p>I am a versatile <b>Software Developer</b> with a passion for building innovative products from the ground up. My expertise spans the full <b>MERN stack</b> (MongoDB, Express.js, React.js, Node.js), allowing me to create robust and scalable web applications.</p><p>I have a deep understanding of <b>cloud and DevOps</b> principles, leveraging tools like <b>AWS, Docker, and Terraform</b> to design, deploy, and manage resilient infrastructure. I enjoy architecting CI/CD pipelines that automate workflows and accelerate development cycles.</p><p>From crafting intuitive user interfaces to engineering complex backend systems and deploying them on the cloud, I thrive on solving challenges and delivering high-quality software solutions. I'm always excited to work on unique projects that push the boundaries of technology.</p>"
             }
           }
         }
@@ -108,8 +106,8 @@
           "value": null,
           "locales": {
             "en": {
-              "title": "DevOps & Cloud Computing",
-              "info": "Exploring cloud technologies, automation, and CI/CD pipelines to enhance software development efficiency."
+              "title": "Full-Stack Development",
+              "info": "Building end-to-end applications with the MERN stack and modern frontend technologies."
             }
           }
         },
@@ -122,8 +120,8 @@
           "value": null,
           "locales": {
             "en": {
-              "title": "Stock & Crypto Trading",
-              "info": "Analyzing market trends, investing in stocks and cryptocurrencies, and exploring financial strategies."
+              "title": "Cloud & DevOps",
+              "info": "Automating infrastructure and deployments using AWS, Docker, and CI/CD pipelines."
             }
           }
         },

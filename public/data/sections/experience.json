@@ -39,6 +39,31 @@
         },
         {
           "icon": {
+            "img": "images/pictures/company3.png",
+            "fa": "",
+            "faColors": { "bg": null, "fill": null }
+          },
+          "dates": {
+            "start": "2024",
+            "end": "2025"
+          },
+          "locales": {
+            "en": {
+              "title": "**Software Development + DevOps Trainee**",
+              "info": "L&T EduTech JIET Universe, India",
+              "text": "<ul><li>Built full-stack JavaScript solutions utilizing Node.js backend services with CI/CD pipelines, improving deployment efficiency by 70% through infrastructure automation.</li><li>Established continuous deployment workflows for web platforms, reducing release time from hours to minutes while ensuring optimal performance.</li></ul>",
+              "tags": [
+                "Full-Stack",
+                "JavaScript",
+                "Node.js",
+                "CI/CD",
+                "Automation"
+              ]
+            }
+          }
+        },
+        {
+          "icon": {
             "img": "images/pictures/company2.jpg",
             "fa": "",
             "faColors": { "bg": null, "fill": null }

@@ -1,199 +1,223 @@
 {
-    "locales": {
-        "en": {
-            "title": "Projects",
-            "title_long_prefix": "Explore",
-            "title_long": "My **DevOps & Cloud-Native Projects**"
-        }
-    },
-    "articles": [
+  "locales": {
+    "en": {
+      "title": "Projects",
+      "title_long_prefix": "Explore",
+      "title_long": "My **DevOps & Cloud-Native Projects**"
+    }
+  },
+  "articles": [
+    {
+      "id": "portfolio",
+      "component": "ArticlePortfolio",
+      "config": {},
+      "locales": {},
+      "categories": [
         {
-            "id": "portfolio",
-            "component": "ArticlePortfolio",
-            "config": {},
-            "locales": {},
-            "categories": [
-                {
-                    "id": "cloud",
-                    "locales": {
-                        "en": {
-                            "singular": "Cloud",
-                            "plural": "Cloud"
-                        }
-                    }
-                },
-                {
-                    "id": "devops",
-                    "locales": {
-                        "en": {
-                            "singular": "DevOps",
-                            "plural": "DevOps"
-                        }
-                    }
-                },
-                {
-                    "id": "infra-tools",
-                    "locales": {
-                        "en": {
-                            "singular": "Tool",
-                            "plural": "Devops Other Tools"
-                        }
-                    }
-                }
-            ],
-            "items": [
-                {
-                    "categoryId": "cloud",
-                    "icon": {
-                        "img": "images/pictures/project1.jpg",
-                        "fa": "",
-                        "faColors": {
-                            "bg": null,
-                            "fill": null
-                        }
-                    },
-                    "links": [
-                        {
-                            "faIcon": "fa-brands fa-github",
-                            "href": "https://github.com/elonerajeev/Enterprise-Grade-Infrastructure-Automation-with-Terraform-AWS"
-                        }
-                    ],
-                    "locales": {
-                        "en": {
-                            "title": "Enterprise-Grade Infrastructure Automation with Terraform + AWS",
-                            "text": "Automated cloud infrastructure provisioning using Terraform on AWS with integrated CI/CD via GitHub Actions. Includes Dockerized services, monitoring via Prometheus & Grafana.",
-                            "tags": [
-                                "AWS",
-                                "Terraform",
-                                "CI/CD",
-                                "GitHub Actions",
-                                "Docker",
-                                "Prometheus",
-                                "Grafana"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "categoryId": "cloud",
-                    "icon": {
-                        "img": "images/pictures/project-serverless.png",
-                        "fa": "",
-                        "faColors": {
-                            "bg": null,
-                            "fill": null
-                        }
-                    },
-                    "links": [
-                        {
-                            "faIcon": "fa-brands fa-github",
-                            "href": "https://github.com/elonerajeev/Serverless-Web-Application-on-AWS"
-                        }
-                    ],
-                    "locales": {
-                        "en": {
-                            "title": "Serverless Web Application on AWS",
-                            "text": "Built a fully serverless application using AWS Lambda, API Gateway, DynamoDB, and S3. Focused on scalability, low-latency APIs, and zero-server maintenance.",
-                            "tags": [
-                                "AWS Lambda",
-                                "API Gateway",
-                                "DynamoDB",
-                                "S3",
-                                "Serverless"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "categoryId": "infra-tools",
-                    "icon": {
-                        "img": "images/pictures/project-ecommerce.png",
-                        "fa": "",
-                        "faColors": {
-                            "bg": null,
-                            "fill": null
-                        }
-                    },
-                    "links": [
-                        {
-                            "faIcon": "fa-brands fa-github",
-                            "href": "https://github.com/elonerajeev/E-Commerce-App-Deployment-Pipeline-.git"
-                        }
-                    ],
-                    "locales": {
-                        "en": {
-                            "title": "E-Commerce App Deployment Pipeline",
-                            "text": "Developed a CI/CD pipeline for a MERN stack e-commerce app using GitHub Actions and Docker",
-                            "tags": [
-                                "CI/CD",
-                                "Docker",
-                                "Render",
-                                "Automation"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "categoryId": "devops",
-                    "icon": {
-                        "img": "images/pictures/project-3tier.png",
-                        "fa": "",
-                        "faColors": {
-                            "bg": null,
-                            "fill": null
-                        }
-                    },
-                    "links": [
-                        {
-                            "faIcon": "fa-brands fa-github",
-                            "href": "https://github.com/elonerajeev/3-Tier-Architecture-Application"
-                        }
-                    ],
-                    "locales": {
-                        "en": {
-                            "title": "3-Tier Architecture Application",
-                            "text": "Implemented a production-ready 3-tier architecture on AWS, separating the web, application, and database layers. Used EC2 for compute, RDS for data storage, and ALB for load balancing. Infrastructure was provisioned using Terraform and deployed with CI/CD via GitHub Actions.",
-                            "tags": [
-                                "AWS",
-                                "Terraform",
-                                "CI/CD",
-                                "EC2",
-                                "RDS",
-                                "Load Balancer",
-                                "DevOps"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "categoryId": "infra-tools",
-                    "icon": {
-                        "img": "images/pictures/portfolio.jpg",
-                        "fa": "",
-                        "faColors": {
-                            "bg": null,
-                            "fill": null
-                        }
-                    },
-                    "links": [
-                        {
-                            "faIcon": "fa-brands fa-github",
-                            "href": "https://github.com/elonerajeev/personal-portfolio-website.git"
-                        }
-                    ],
-                    "locales": {
-                        "en": {
-                            "title": "Portfolio Website",
-                            "text": "Responsive and animated portfolio website built with ReactJS to showcase projects, experience, and DevOps achievements.",
-                            "tags": [
-                                "ReactJS",
-                                "Portfolio",
-                                "Frontend"
-                            ]
-                        }
-                    }
-                }
-            ]
+          "id": "cloud",
+          "locales": {
+            "en": {
+              "singular": "Cloud",
+              "plural": "Cloud"
+            }
+          }
+        },
+        {
+          "id": "devops",
+          "locales": {
+            "en": {
+              "singular": "DevOps",
+              "plural": "DevOps"
+            }
+          }
+        },
+        {
+          "id": "productivity",
+          "locales": {
+            "en": {
+              "singular": "Tool",
+              "plural": "My Saas Products"
+            }
+          }
         }
-    ]
+      ],
+      "items": [
+        {
+          "categoryId": "cloud",
+          "icon": {
+            "img": "images/pictures/project1.jpg",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/Enterprise-Grade-Infrastructure-Automation-with-Terraform-AWS"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "Enterprise-Grade Infrastructure Automation with Terraform + AWS",
+              "text": "Automated cloud infrastructure provisioning using Terraform on AWS with integrated CI/CD via GitHub Actions. Includes Dockerized services, monitoring via Prometheus & Grafana.",
+              "tags": [
+                "AWS",
+                "Terraform",
+                "CI/CD",
+                "GitHub Actions",
+                "Docker",
+                "Prometheus",
+                "Grafana"
+              ]
+            }
+          }
+        },
+        {
+          "categoryId": "cloud",
+          "icon": {
+            "img": "images/pictures/project-serverless.png",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/Serverless-Web-Application-on-AWS"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "Serverless Web Application on AWS",
+              "text": "Built a fully serverless application using AWS Lambda, API Gateway, DynamoDB, and S3. Focused on scalability, low-latency APIs, and zero-server maintenance.",
+              "tags": [
+                "AWS Lambda",
+                "API Gateway",
+                "DynamoDB",
+                "S3",
+                "Serverless"
+              ]
+            }
+          }
+        },
+        {
+          "categoryId": "infra-tools",
+          "icon": {
+            "img": "images/pictures/project-ecommerce.png",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/E-Commerce-App-Deployment-Pipeline-.git"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "E-Commerce App Deployment Pipeline",
+              "text": "Developed a CI/CD pipeline for a MERN stack e-commerce app using GitHub Actions and Docker",
+              "tags": ["CI/CD", "Docker", "Render", "Automation"]
+            }
+          }
+        },
+        {
+          "categoryId": "devops",
+          "icon": {
+            "img": "images/pictures/project-3tier.png",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/3-Tier-Architecture-Application"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "3-Tier Architecture Application",
+              "text": "Implemented a production-ready 3-tier architecture on AWS, separating the web, application, and database layers. Used EC2 for compute, RDS for data storage, and ALB for load balancing. Infrastructure was provisioned using Terraform and deployed with CI/CD via GitHub Actions.",
+              "tags": [
+                "AWS",
+                "Terraform",
+                "CI/CD",
+                "EC2",
+                "RDS",
+                "Load Balancer",
+                "DevOps"
+              ]
+            }
+          }
+        },
+        {
+          "categoryId": "devops",
+          "icon": {
+            "img": "images/pictures/portfolio.jpg",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/personal-portfolio-website.git"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "Portfolio Website",
+              "text": "Responsive and animated portfolio website built with ReactJS to showcase projects, experience, and DevOps achievements.",
+              "tags": ["ReactJS", "Portfolio", "Frontend"]
+            }
+          }
+        },
+
+        {
+          "categoryId": "productivity",
+          "icon": {
+            "img": "images/pictures/website icons.jpg",
+            "fa": "",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [
+            {
+              "faIcon": "fa-brands fa-github",
+              "href": "https://github.com/elonerajeev/Pulse-Monitor.git"
+            }
+          ],
+          "locales": {
+            "en": {
+              "title": "Pulse Monitor: A Saas Product for services monitoring 27*7",
+              "text": "Architected cloud-based SaaS monitoring platform using Node.js and Express.js with MongoDB, tracking website uptime, server health, and API performance achieving 99% accuracy in real-time monitoring.",
+              "tags": [
+                "AWS",
+                "Software Development",
+                "CI/CD",
+                "EC2",
+                "RDS",
+                "Load Balancer",
+                "DevOps"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
