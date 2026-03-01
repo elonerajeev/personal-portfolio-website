@@ -1,0 +1,1 @@
+import{j as s}from"./bootstrap-DzS14T2j.js";import"./react-vendor-wpXbf5jk.js";import{F as i}from"./index-D8Wmk_Ag.js";function m({faIcon:a,text:o,className:e}){return s.jsxs("div",{className:`info-badge text-1 ${e}`,children:[s.jsx(i,{iconName:a,className:"me-2 opacity-50"}),s.jsx("span",{children:o})]})}export{m as I};

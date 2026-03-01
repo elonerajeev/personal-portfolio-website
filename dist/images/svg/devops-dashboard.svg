@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">DevOps Pipeline Dashboard</title>
+  <desc id="desc">A stylized DevOps dashboard with CI/CD pipeline, cloud services, and monitoring cards.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <rect x="36" y="36" width="888" height="468" rx="18" fill="url(#panel)" stroke="#374151"/>
+
+  <text x="64" y="84" fill="#e5e7eb" font-size="26" font-family="Arial, sans-serif" font-weight="700">
+    DevOps Delivery Dashboard
+  </text>
+  <text x="64" y="112" fill="#9ca3af" font-size="14" font-family="Arial, sans-serif">
+    CI/CD | Infrastructure as Code | Observability | Cloud Reliability
+  </text>
+
+  <rect x="64" y="146" width="832" height="96" rx="12" fill="#0b1220" stroke="#334155"/>
+  <text x="84" y="176" fill="#d1d5db" font-size="14" font-family="Arial, sans-serif" font-weight="700">Pipeline</text>
+
+  <rect x="84" y="190" width="120" height="34" rx="8" fill="#1f2937" stroke="#4b5563"/>
+  <text x="144" y="212" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Code</text>
+  <rect x="236" y="190" width="120" height="34" rx="8" fill="#1f2937" stroke="#4b5563"/>
+  <text x="296" y="212" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Build</text>
+  <rect x="388" y="190" width="120" height="34" rx="8" fill="#1f2937" stroke="#4b5563"/>
+  <text x="448" y="212" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Test</text>
+  <rect x="540" y="190" width="120" height="34" rx="8" fill="#1f2937" stroke="#4b5563"/>
+  <text x="600" y="212" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Deploy</text>
+  <rect x="692" y="190" width="120" height="34" rx="8" fill="#14532d" stroke="#22c55e"/>
+  <text x="752" y="212" text-anchor="middle" fill="#dcfce7" font-size="12" font-family="Arial, sans-serif">Production</text>
+
+  <line x1="204" y1="207" x2="236" y2="207" stroke="url(#accent)" stroke-width="4"/>
+  <line x1="356" y1="207" x2="388" y2="207" stroke="url(#accent)" stroke-width="4"/>
+  <line x1="508" y1="207" x2="540" y2="207" stroke="url(#accent)" stroke-width="4"/>
+  <line x1="660" y1="207" x2="692" y2="207" stroke="url(#accent)" stroke-width="4"/>
+
+  <rect x="64" y="270" width="268" height="206" rx="12" fill="#0b1220" stroke="#334155"/>
+  <text x="84" y="300" fill="#d1d5db" font-size="14" font-family="Arial, sans-serif" font-weight="700">Cloud Stack</text>
+  <text x="84" y="330" fill="#9ca3af" font-size="13" font-family="Arial, sans-serif">AWS Lambda</text>
+  <text x="84" y="354" fill="#9ca3af" font-size="13" font-family="Arial, sans-serif">API Gateway</text>
+  <text x="84" y="378" fill="#9ca3af" font-size="13" font-family="Arial, sans-serif">DynamoDB</text>
+  <text x="84" y="402" fill="#9ca3af" font-size="13" font-family="Arial, sans-serif">S3 + IAM</text>
+
+  <rect x="348" y="270" width="268" height="206" rx="12" fill="#0b1220" stroke="#334155"/>
+  <text x="368" y="300" fill="#d1d5db" font-size="14" font-family="Arial, sans-serif" font-weight="700">DevOps Toolchain</text>
+  <rect x="368" y="322" width="96" height="28" rx="6" fill="#1f2937"/><text x="416" y="340" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Docker</text>
+  <rect x="476" y="322" width="96" height="28" rx="6" fill="#1f2937"/><text x="524" y="340" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Terraform</text>
+  <rect x="368" y="358" width="96" height="28" rx="6" fill="#1f2937"/><text x="416" y="376" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">GitHub</text>
+  <rect x="476" y="358" width="96" height="28" rx="6" fill="#1f2937"/><text x="524" y="376" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial, sans-serif">Kubernetes</text>
+  <rect x="368" y="394" width="204" height="28" rx="6" fill="#14532d" stroke="#22c55e"/>
+  <text x="470" y="412" text-anchor="middle" fill="#dcfce7" font-size="12" font-family="Arial, sans-serif">Automated Release Ready</text>
+
+  <rect x="632" y="270" width="264" height="206" rx="12" fill="#0b1220" stroke="#334155"/>
+  <text x="652" y="300" fill="#d1d5db" font-size="14" font-family="Arial, sans-serif" font-weight="700">Observability</text>
+  <rect x="652" y="324" width="224" height="16" rx="8" fill="#1f2937"/>
+  <rect x="652" y="324" width="182" height="16" rx="8" fill="url(#accent)"/>
+  <text x="652" y="356" fill="#9ca3af" font-size="12" font-family="Arial, sans-serif">Pipeline Success Rate: 96%</text>
+  <rect x="652" y="374" width="224" height="16" rx="8" fill="#1f2937"/>
+  <rect x="652" y="374" width="198" height="16" rx="8" fill="#22c55e"/>
+  <text x="652" y="406" fill="#9ca3af" font-size="12" font-family="Arial, sans-serif">Service Health: Stable</text>
+  <text x="652" y="438" fill="#86efac" font-size="12" font-family="Arial, sans-serif">Last Deploy: Successful</text>
+</svg>

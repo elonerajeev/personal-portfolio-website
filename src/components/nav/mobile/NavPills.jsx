@@ -5,6 +5,7 @@ import {useGlobalState} from "/src/providers/GlobalStateProvider.jsx"
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 import {useFeedbacks} from "/src/providers/FeedbacksProvider.jsx"
 import SensitiveButton from "/src/components/generic/SensitiveButton.jsx"
+import {getSectionFallbackLabel} from "/src/helpers/sectionLabels.js"
 
 function NavPills({ sections }) {
     const {setActiveSection, isSectionActive} = useGlobalState()
@@ -45,13 +46,16 @@ function NavPills({ sections }) {
 
 function NavPill({section, active, onClick}) {
     const {getTranslation} = useLanguage()
+    const locales = section.content?.locales
+    const fallbackLabel = getSectionFallbackLabel(section.id)
+    const label = locales ? getTranslation(locales, "title") : fallbackLabel
 
     return (
         <SensitiveButton disabled={active}
                          className={`nav-pill ${active ? `nav-pill-active` : ''}`}
                          onClick={() => { onClick(section) }}>
             <FaIcon iconName={section.faIcon}/>
-            <span>{getTranslation(section.content["locales"], "title")}</span>
+            <span>{label}</span>
         </SensitiveButton>
     )
 }

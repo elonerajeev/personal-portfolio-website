@@ -58,7 +58,8 @@
         font-size: 0.95rem;
         font-weight: bold;
         margin-top: 1px;
-        opacity: 0.75;
+        color: var(--theme-secondary-3);
+        opacity: 0.95;
     }
 
     .fa-icon {
@@ -76,6 +77,7 @@
         }
 
         span.menu-item-label {
+            color: var(--theme-highlight);
             opacity: 1;
         }
     }
@@ -91,6 +93,7 @@
     }
 
     span.menu-item-label {
+        color: var(--theme-nav-highlight);
         opacity: 1;
     }
 

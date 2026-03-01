@@ -87,7 +87,7 @@ const resumeUrl = "/documents/rajeevKumar_JIETCS22087.pdf";
 ## 📬 **Contact Me**  
 💼 **Portfolio**: [elonerajeev.github.io](https://elonerajeev.github.io)  
 📧 **Email**: [elonerajeev@gmail.com](mailto:elonerajeev@gmail.com)  
-🔗 **LinkedIn**: [linkedin.com/in/rajeev-kumar](https://linkedin.com/in/rajeev-kumar-2209b1243)  
+🔗 **LinkedIn**: [linkedin.com/in/heyrajeev1](https://www.linkedin.com/in/heyrajeev1/)  
 🐙 **GitHub**: [github.com/elonerajeev](https://github.com/elonerajeev)  
 
 ---
@@ -108,4 +108,3 @@ If you like this project, **give it a star ⭐** on GitHub! 🙌
 ✅ Optimize SEO for better visibility 🔍  
 
 ---
-

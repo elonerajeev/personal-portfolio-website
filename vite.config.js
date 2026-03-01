@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/', // 
+  base: '/',
   plugins: [react()],
   css: {
     preprocessorOptions: {
@@ -12,4 +12,17 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'bootstrap': ['bootstrap', 'react-bootstrap'],
+          'scroll-lib': ['smooth-scrollbar'],
+          'swiper-lib': ['swiper']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
 })

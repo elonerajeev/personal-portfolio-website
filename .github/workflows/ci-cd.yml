@@ -34,12 +34,12 @@ jobs:
         run: npm test
 
       - name: Build production
-        run: npm run build || echo "No build script defined, skipping build"
+        run: npm run build
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: ./build   # Update if your build output folder is different (e.g., 'out' or 'dist')
+          publish-dir: ./dist
           production-deploy: true
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

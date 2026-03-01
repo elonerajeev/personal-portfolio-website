@@ -8,21 +8,24 @@ import {FeedbacksProvider} from "/src/providers/FeedbacksProvider"
 import {WindowProvider} from "/src/providers/WindowProvider"
 import App from "/src/components/App.jsx"
 import Preloader from "/src/components/Preloader.jsx"
+import ErrorBoundary from "/src/components/ErrorBoundary.jsx"
 
 const AppProviders = ({ children }) => (
-    <DataProvider>
-        <LanguageProvider>
-            <FeedbacksProvider>
-                <WindowProvider>
-                    <ThemeProvider>
-                        <GlobalStateProvider>
-                            {children}
-                        </GlobalStateProvider>
-                    </ThemeProvider>
-                </WindowProvider>
-            </FeedbacksProvider>
-        </LanguageProvider>
-    </DataProvider>
+    <ErrorBoundary>
+        <DataProvider>
+            <LanguageProvider>
+                <FeedbacksProvider>
+                    <WindowProvider>
+                        <ThemeProvider>
+                            <GlobalStateProvider>
+                                {children}
+                            </GlobalStateProvider>
+                        </ThemeProvider>
+                    </WindowProvider>
+                </FeedbacksProvider>
+            </LanguageProvider>
+        </DataProvider>
+    </ErrorBoundary>
 )
 
 let container = null

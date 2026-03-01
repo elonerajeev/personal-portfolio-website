@@ -1,5 +1,5 @@
 import "./Section.scss"
-import React, {useEffect, useState} from 'react'
+import React, {lazy, Suspense, useEffect, useState} from 'react'
 import {useGlobalState} from "/src/providers/GlobalStateProvider.jsx"
 import Box from "/src/components/wrappers/Box.jsx"
 import BorderWrap from "/src/components/wrappers/BorderWrap.jsx"
@@ -7,22 +7,13 @@ import Scrollable from "/src/components/capabilities/Scrollable.jsx"
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useUtils} from "/src/helpers/utils.js"
 
-import ArticleCards from "/src/components/articles/ArticleCards.jsx"
-import ArticleContactForm from "/src/components/articles/ArticleContactForm.jsx"
-import ArticleGrid from "/src/components/articles/ArticleGrid.jsx"
-import ArticleInfoBlock from "/src/components/articles/ArticleInfoBlock.jsx"
-import ArticleList from "/src/components/articles/ArticleList.jsx"
-import ArticlePortfolio from "/src/components/articles/ArticlePortfolio.jsx"
-import ArticleResume from "/src/components/articles/ArticleResume.jsx"
-import ArticleServices from "/src/components/articles/ArticleServices.jsx"
-import ArticleTestimonials from "/src/components/articles/ArticleTestimonials.jsx"
-import ArticleThread from "/src/components/articles/ArticleThread.jsx"
-import ArticleTimeline from "/src/components/articles/ArticleTimeline.jsx"
 import FullScreenToggleButton from "/src/components/widgets/FullScreenToggleButton"
 import {useData} from "/src/providers/DataProvider.jsx"
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 import {useWindow} from "/src/providers/WindowProvider.jsx"
 import {useScheduler} from "/src/helpers/scheduler.js"
+import {SkeletonText, SkeletonCard} from "/src/components/generic/Skeleton.jsx"
+import {getSectionFallbackLabel} from "/src/helpers/sectionLabels.js"
 
 const TransitionClasses = {
     HIDDEN: 'section-transition-hidden',
@@ -33,17 +24,17 @@ const TransitionClasses = {
 }
 
 const ARTICLES = {
-    ArticleCards,
-    ArticleContactForm,
-    ArticleGrid,
-    ArticleInfoBlock,
-    ArticleList,
-    ArticlePortfolio,
-    ArticleResume,
-    ArticleServices,
-    ArticleTestimonials,
-    ArticleThread,
-    ArticleTimeline
+    ArticleCards: lazy(() => import("/src/components/articles/ArticleCards.jsx")),
+    ArticleContactForm: lazy(() => import("/src/components/articles/ArticleContactForm.jsx")),
+    ArticleGrid: lazy(() => import("/src/components/articles/ArticleGrid.jsx")),
+    ArticleInfoBlock: lazy(() => import("/src/components/articles/ArticleInfoBlock.jsx")),
+    ArticleList: lazy(() => import("/src/components/articles/ArticleList.jsx")),
+    ArticlePortfolio: lazy(() => import("/src/components/articles/ArticlePortfolio.jsx")),
+    ArticleResume: lazy(() => import("/src/components/articles/ArticleResume.jsx")),
+    ArticleServices: lazy(() => import("/src/components/articles/ArticleServices.jsx")),
+    ArticleTestimonials: lazy(() => import("/src/components/articles/ArticleTestimonials.jsx")),
+    ArticleThread: lazy(() => import("/src/components/articles/ArticleThread.jsx")),
+    ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx"))
 }
 
 const utils = useUtils()
@@ -121,7 +112,7 @@ function Section({ section }) {
                             <BorderWrap>
                                 <section className={`w-100`}>
                                     <SectionHeader section={section}/>
-                                    <SectionContent articles={articles}/>
+                                    <SectionContent section={section} articles={articles}/>
                                 </section>
                             </BorderWrap>
                         </Scrollable>
@@ -135,11 +126,22 @@ function Section({ section }) {
 function SectionHeader({section}) {
     const {getTranslation} = useLanguage()
     const {isBreakpoint} = useWindow()
+    const sectionLocales = section.content?.locales
 
-    let title = utils.parseJsonText(getTranslation(section.content["locales"], "title_long"))
-    let prefix = utils.parseJsonText(getTranslation(section.content["locales"], "title_long_prefix", true))
+    if(!sectionLocales) {
+        return (
+            <div className={`section-header w-100 px-0 px-md-3 text-center mt-1 mt-sm-2 mt-lg-4`}>
+                <h3 className={`fw-bold ${isBreakpoint('lg') ? 'lead-4' : ''} mx-4 mb-0`}>
+                    <span className={`text-highlight`}>{getSectionFallbackLabel(section.id)}</span>
+                </h3>
+            </div>
+        )
+    }
+
+    let title = utils.parseJsonText(getTranslation(sectionLocales, "title_long"))
+    let prefix = utils.parseJsonText(getTranslation(sectionLocales, "title_long_prefix", true))
     if(!isBreakpoint("lg")) {
-        title = getTranslation(section.content["locales"], "title")
+        title = getTranslation(sectionLocales, "title")
         title = `<span class="text-highlight">${title}</span>`
         prefix = null
     }
@@ -159,8 +161,17 @@ function SectionHeader({section}) {
     )
 }
 
-function SectionContent({articles}) {
+function SectionContent({section, articles}) {
     const shouldAddSpacerAfterTitle = false
+    const isPendingSectionContent = !section.content
+
+    if(isPendingSectionContent) {
+        return (
+            <div className={`section-content ${shouldAddSpacerAfterTitle ? 'mt-md-5' : ''}`}>
+                <SectionLoadingSkeleton/>
+            </div>
+        )
+    }
 
     return (
         <div className={`section-content ${shouldAddSpacerAfterTitle ? 'mt-md-5' : ''}`}>
@@ -173,7 +184,9 @@ function SectionContent({articles}) {
                 return (
                     <div className={`article-wrapper ${mtClass}`} key={key}>
                         {Component && (
-                            <Component data={article}/>
+                            <Suspense fallback={<ArticleLoadingSkeleton/>}>
+                                <Component data={article}/>
+                            </Suspense>
                         )}
 
                         {!Component && (
@@ -184,6 +197,33 @@ function SectionContent({articles}) {
                     </div>
                 )
             })}
+        </div>
+    )
+}
+
+function SectionLoadingSkeleton() {
+    return (
+        <div className={`mx-2 mx-md-3 mt-4`}>
+            <SkeletonText lines={3}/>
+            <div className={`mt-3`} style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '12px'
+            }}>
+                <SkeletonCard/>
+                <SkeletonCard/>
+            </div>
+        </div>
+    )
+}
+
+function ArticleLoadingSkeleton() {
+    return (
+        <div className={`mx-2 mx-md-3`}>
+            <SkeletonText lines={2}/>
+            <div className={`mt-2`}>
+                <SkeletonCard/>
+            </div>
         </div>
     )
 }

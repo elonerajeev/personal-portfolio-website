@@ -1,0 +1,44 @@
+$fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
+$fa-font-display: swap;
+
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+:root,
+:host {
+    --fa-style-family-classic: 'Font Awesome 6 Free';
+    --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Free';
+    --fa-style-family-brands: 'Font Awesome 6 Brands';
+    --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal;
+    font-weight: 900;
+    font-display: $fa-font-display;
+    src: url('#{$fa-font-path}/fa-solid-900.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
+    font-style: normal;
+    font-weight: 400;
+    font-display: $fa-font-display;
+    src: url('#{$fa-font-path}/fa-brands-400.woff2') format('woff2');
+}
+
+.fas,
+.fa-solid {
+    font-weight: 900;
+}
+
+.fab,
+.fa-brands {
+    font-weight: 400;
+}
+
+@each $name, $icon in $fa-brand-icons {
+    .fa-#{$name}:before {
+        content: unquote("\"#{ $icon }\"");
+    }
+}

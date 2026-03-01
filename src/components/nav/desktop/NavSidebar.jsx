@@ -15,6 +15,7 @@ import CursorToggleButton from "/src/components/widgets/CursorToggleButton.jsx"
 import NavLink from "/src/components/nav/desktop/NavLink.jsx"
 import {useWindow} from "/src/providers/WindowProvider.jsx"
 import {useFeedbacks} from "/src/providers/FeedbacksProvider.jsx"
+import {getSectionFallbackLabel} from "/src/helpers/sectionLabels.js"
 
 function NavSidebar() {
     const utils = useUtils()
@@ -90,7 +91,7 @@ function NavSidebarLinks({shouldShrink, sections}) {
             {sections.map((section, key) => (
                 <NavSidebarGroupItem key={key} visible={true}>
                     <NavLink shrink={shouldShrink}
-                             label={getTranslation(section.content["locales"], "title_menu", true) || getTranslation(section.content["locales"], "title")}
+                             label={_getSectionLabel(section, getTranslation)}
                              icon={section.faIcon}
                              size={1}
                              className={`px-4`}
@@ -101,6 +102,15 @@ function NavSidebarLinks({shouldShrink, sections}) {
             ))}
         </NavSidebarGroup>
     )
+}
+
+function _getSectionLabel(section, getTranslation) {
+    const locales = section.content?.locales
+    if(locales) {
+        return getTranslation(locales, "title_menu", true) || getTranslation(locales, "title")
+    }
+
+    return getSectionFallbackLabel(section.id)
 }
 
 function NavSidebarBottomMenu({shouldShrink}) {

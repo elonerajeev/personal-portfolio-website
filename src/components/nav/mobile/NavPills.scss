@@ -21,6 +21,7 @@
         font-family: $custom-subheadings-font-family;
         font-size: 0.95rem;
         font-weight: bold;
+        color: var(--theme-secondary-3);
         @include media-breakpoint-down(sm) {
             display: none;
         }
@@ -38,6 +39,10 @@
         span, .fa-icon {
             opacity: 1;
         }
+
+        span {
+            color: var(--theme-highlight);
+        }
     }
 }
 
@@ -49,5 +54,9 @@
 
     span, .fa-icon {
         opacity: 1!important;
+    }
+
+    span {
+        color: var(--theme-nav-highlight);
     }
 }

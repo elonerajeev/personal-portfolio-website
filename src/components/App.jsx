@@ -1,28 +1,33 @@
 import "/src/styles/app.scss"
-import React, {useEffect, useState} from 'react'
+import React, {lazy, Suspense} from 'react'
 import {useData} from "/src/providers/DataProvider.jsx"
 import Portfolio from "/src/components/Portfolio.jsx"
-import Resume from "/src/components/Resume.jsx"
 import {AnimatedCursor} from "/src/components/feedbacks/AnimatedCursor"
 import ActivitySpinner from "/src/components/feedbacks/ActivitySpinner.jsx"
-import ImageCache from "/src/components/generic/ImageCache.jsx"
-import YoutubeModal from "/src/components/modals/YoutubeModal.jsx"
-import GalleryModal from "/src/components/modals/GalleryModal.jsx"
 import Notifications from "/src/components/feedbacks/Notifications.jsx"
-import ConfirmationWindow from "/src/components/modals/ConfirmationWindow.jsx"
 import {useFeedbacks} from "/src/providers/FeedbacksProvider.jsx"
 
-function App() {
-    const {listImagesForCache} = useData()
+const Resume = lazy(() => import("/src/components/Resume.jsx"))
+const YoutubeModal = lazy(() => import("/src/components/modals/YoutubeModal.jsx"))
+const GalleryModal = lazy(() => import("/src/components/modals/GalleryModal.jsx"))
+const ConfirmationWindow = lazy(() => import("/src/components/modals/ConfirmationWindow.jsx"))
 
-    const imageList = listImagesForCache()
+function App() {
+    const {getSectionLoadingProgress, areAllSectionsLoaded} = useData()
+    const loadingProgress = getSectionLoadingProgress()
 
     return (
         <div className={`app-wrapper`}>
             <AppFeedbacks/>
-            <ImageCache urls={imageList}/>
             <Portfolio/>
-            <Resume/>
+            <Suspense fallback={null}>
+                <Resume/>
+            </Suspense>
+
+            {!areAllSectionsLoaded() && loadingProgress.total > 0 && (
+                <BackgroundLoadingIndicator loaded={loadingProgress.loaded}
+                                            total={loadingProgress.total}/>
+            )}
         </div>
     )
 }
@@ -43,7 +48,6 @@ function AppFeedbacks() {
         hideConfirmationDialog
     } = useFeedbacks()
 
-
     const spinnerActivities = listSpinnerActivities()
     const animatedCursorEnabled = isAnimatedCursorEnabled()
     const animatedCursorActive = isAnimatedCursorActive()
@@ -55,7 +59,7 @@ function AppFeedbacks() {
                 <ActivitySpinner activities={spinnerActivities}/>
             )}
 
-            {isAnimatedCursorEnabled() && (
+            {animatedCursorEnabled && (
                 <AnimatedCursor enabled={animatedCursorEnabled}
                                 active={animatedCursorActive}
                                 modalOpen={modalOpen}/>
@@ -66,20 +70,44 @@ function AppFeedbacks() {
                                killNotification={killNotification}/>
             )}
 
+            <Suspense fallback={null}>
+                {displayingYoutubeVideo && (
+                    <YoutubeModal displayingYoutubeVideo={displayingYoutubeVideo}
+                                  hideYoutubeVideo={hideYoutubeVideo}/>
+                )}
 
-            <YoutubeModal   displayingYoutubeVideo={displayingYoutubeVideo}
-                            hideYoutubeVideo={hideYoutubeVideo}/>
+                {displayingGallery && (
+                    <GalleryModal displayingGallery={displayingGallery}
+                                  hideGallery={hideGallery}/>
+                )}
 
-
-
-            <GalleryModal   displayingGallery={displayingGallery}
-                            hideGallery={hideGallery}/>
-
-
-
-            <ConfirmationWindow pendingConfirmation={pendingConfirmation}
-                                hideConfirmationDialog={hideConfirmationDialog}/>
+                {pendingConfirmation && (
+                    <ConfirmationWindow pendingConfirmation={pendingConfirmation}
+                                        hideConfirmationDialog={hideConfirmationDialog}/>
+                )}
+            </Suspense>
         </>
+    )
+}
+
+function BackgroundLoadingIndicator({loaded, total}) {
+    return (
+        <div style={{
+            position: 'fixed',
+            right: '10px',
+            bottom: '70px',
+            zIndex: 500,
+            padding: '6px 10px',
+            borderRadius: '999px',
+            fontSize: '12px',
+            fontWeight: 700,
+            backgroundColor: 'rgba(0, 0, 0, 0.65)',
+            color: 'var(--theme-highlight)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            backdropFilter: 'blur(4px)'
+        }}>
+            Loading sections {loaded}/{total}
+        </div>
     )
 }
 

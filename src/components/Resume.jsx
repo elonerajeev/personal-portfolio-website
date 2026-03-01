@@ -9,7 +9,7 @@ const Resume = () => {
     fetch("/data/sections/resume.json")
       .then((response) => response.json())
       .then((data) => setResumeData(data))
-      .catch((error) => console.error("Error loading resume data:", error));
+      .catch(() => {});
   }, []);
 
   if (!resumeData) return <p>Loading...</p>;
