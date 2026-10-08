@@ -13,8 +13,8 @@
 [![GitHub](https://img.shields.io/badge/GitHub-elonerajeev-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elonerajeev)
 [![Email](https://img.shields.io/badge/Email-elonerajeev%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elonerajeev@gmail.com)
 
-[![CD](https://img.shields.io/github/actions/workflow/status/elonerajeev/personal-portfolio-website/cd.yml?branch=main&label=deploy&style=flat-square&logo=netlify&logoColor=white)](https://github.com/elonerajeev/personal-portfolio-website/actions/workflows/cd.yml)
-![Last commit](https://img.shields.io/github/last-commit/elonerajeev/personal-portfolio-website?style=flat-square)
+[![CD](https://img.shields.io/github/actions/workflow/status/elonerajeev/rajeev.pro/cd.yml?branch=main&label=deploy&style=flat-square&logo=netlify&logoColor=white)](https://github.com/elonerajeev/rajeev.pro/actions/workflows/cd.yml)
+![Last commit](https://img.shields.io/github/last-commit/elonerajeev/rajeev.pro?style=flat-square)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 </div>
@@ -89,8 +89,8 @@ A single-page portfolio with sections for About, Education, Skills, Resume, Expe
 Requires Node.js 20+ (CI uses the version in `.nvmrc`).
 
 ```sh
-git clone https://github.com/elonerajeev/personal-portfolio-website.git
-cd personal-portfolio-website
+git clone https://github.com/elonerajeev/rajeev.pro.git
+cd rajeev.pro
 npm install
 npm run dev        # http://localhost:5173
 ```
