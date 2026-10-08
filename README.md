@@ -1,151 +1,50 @@
 <div align="center">
 
-```
-~/portfolio $ open https://www.rajeev.pro
-```
-
 # Rajeev Kumar · Portfolio
 
-### ☁️ Cloud & DevOps Engineer · Zynsera Technologies · India
+**Cloud & DevOps Engineer** · [www.rajeev.pro](https://www.rajeev.pro)
 
 [![Website](https://img.shields.io/badge/Website-rajeev.pro-00C896?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.rajeev.pro)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-heyrajeev1-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/heyrajeev1/)
-[![GitHub](https://img.shields.io/badge/GitHub-elonerajeev-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elonerajeev)
 [![Email](https://img.shields.io/badge/Email-elonerajeev%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elonerajeev@gmail.com)
 
 [![CD](https://img.shields.io/github/actions/workflow/status/elonerajeev/rajeev.pro/cd.yml?branch=main&label=deploy&style=flat-square&logo=netlify&logoColor=white)](https://github.com/elonerajeev/rajeev.pro/actions/workflows/cd.yml)
-![Last commit](https://img.shields.io/github/last-commit/elonerajeev/rajeev.pro?style=flat-square)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 </div>
 
----
+My personal portfolio: experience, projects, skills and certifications as a Cloud & DevOps Engineer with 2+ years on AWS, Azure, Kubernetes and Terraform.
 
-## 👋 About me
+## Highlights
 
-Cloud & DevOps Engineer with **2+ years** of hands-on experience building and running cloud infrastructure, CI/CD pipelines and container platforms on **AWS** and **Azure**. I care about faster, safer releases, higher uptime and infrastructure that scales with the business. Outside the cloud, I follow **finance & markets** closely.
+- **TerX terminal**: explore the profile from a Linux-style shell (`neofetch`, `kubectl get pods`, `git log`, `terraform plan`, `helm list`, …)
+- **Search- and AI-ready**: content rendered into the HTML at build time, Person schema, `llms.txt`, sitemap
+- **Content as data**: every section is a JSON file in `public/data/`, so updates need no code changes
+- **Fast and accessible**: Lighthouse accessibility 100, minimal layout shift, dark and light themes
 
-## 💼 Experience
+## Stack
 
-| Role | Company | Period |
-|---|---|---|
-| **DevOps Engineer** | Zynsera Technologies · India · On-site | Sep 2026 → Present |
-| **Cloud DevOps Engineer** | Zintellix™ · India · Hybrid | Oct 2025 → Jun 2026 |
-| **DevOps Engineer** (Apprenticeship) | L&T EduTech · India · On-site | May 2024 → May 2025 |
+[![Stack](https://skillicons.dev/icons?i=react,vite,bootstrap,sass,netlify,githubactions)](https://skillicons.dev)
 
-**Highlights:** CI/CD for 10+ developers (−50% deployment time) · −30% cloud spend · Terraform IaC + Docker/Kubernetes provisioning · Jenkins & GitHub Actions pipelines (−60% deployment time).
+React 18 · Vite 6 · Bootstrap 5 · SCSS · Netlify · GitHub Actions
 
-## 🛠 Skills & tools
-
-**Cloud & Infrastructure**
-
-[![Skills](https://skillicons.dev/icons?i=aws,azure,gcp,terraform,ansible)](https://skillicons.dev)
-
-**Containers & CI/CD**
-
-[![Skills](https://skillicons.dev/icons?i=docker,kubernetes,jenkins,githubactions,git,github,gitlab)](https://skillicons.dev)
-
-**Monitoring, OS & Scripting**
-
-[![Skills](https://skillicons.dev/icons?i=prometheus,grafana,linux,bash,python)](https://skillicons.dev)
-
-**Automation & AI**
-
-![n8n](https://img.shields.io/badge/n8n-AI_Workflow_Automation-EA4B71?style=flat-square&logo=n8n&logoColor=white)
-
----
-
-## 🌐 About this website
-
-**Live:** **[www.rajeev.pro](https://www.rajeev.pro)**
-
-A single-page portfolio with sections for About, Education, Skills, Resume, Experience, Projects, Achievements, Updates and Contact.
-
-- 🌗 Dark and light themes
-- 📱 Responsive layout, with a sidebar on desktop and tab navigation on mobile
-- 🧩 All content lives in JSON files, so updating the site means editing data, not components
-- 🏷️ Official tool and company logos throughout
-- ✉️ Working contact form (EmailJS)
-- 📄 Resume viewer and download
-- 📈 Google Analytics, plus SEO tags (canonical URL, Open Graph, sitemap, robots.txt)
-- 🤖 Search- and AI-friendly: a build step (`seo/vite-plugin-seo.js`) writes all content into the HTML, adds Person/WebSite schema, and generates `llms.txt`, `llms-full.txt` and `sitemap.xml`
-
-### Built with
-
-[![Tech](https://skillicons.dev/icons?i=react,vite,bootstrap,sass,js,html,css,netlify)](https://skillicons.dev)
-
-| Layer | Tech |
-|---|---|
-| UI | React 18, React Bootstrap, Bootstrap 5, SCSS |
-| Build | Vite 6 |
-| Extras | Swiper (carousels), Chart.js, Font Awesome, EmailJS |
-| Hosting | Netlify; CI on every PR, CD from `main` via GitHub Actions |
-| Domain | `rajeev.pro` (redirects to `www.rajeev.pro`) |
-
----
-
-## 🚀 Run it locally
-
-Requires Node.js 20+ (CI uses the version in `.nvmrc`).
+## Quick start
 
 ```sh
-git clone https://github.com/elonerajeev/rajeev.pro.git
-cd rajeev.pro
+git clone https://github.com/elonerajeev/rajeev.pro.git && cd rajeev.pro
 npm install
-npm run dev        # http://localhost:5173
+npm run dev     # http://localhost:5173
+npm test        # production build + verification
 ```
 
-| Command | What it does |
-|---|---|
-| `npm run dev` | Start the dev server with hot reload |
-| `npm run build` | Production build into `dist/` |
-| `npm run preview` | Serve the production build locally |
-| `npm run verify` | Check the build (files, SEO, privacy guard) |
-| `npm test` | Build + verify |
+Requires Node.js 20+.
 
-## ✏️ Editing content
+## CI/CD
 
-Everything shown on the site comes from `public/data/`:
+- **CI** runs on every pull request: install → `npm audit` → build → verify.
+- **CD** runs on `main` only: same checks, then deploy to Netlify and smoke-test the live site.
+- `npm run verify` blocks a release if required SEO files are missing or any private data (phone number, non-public email) ends up in the build.
 
-| What | File |
-|---|---|
-| Name, role, theme, contact-form keys | `public/data/settings.json` |
-| Section order and navigation | `public/data/structure.json` |
-| About me | `public/data/sections/cover.json` |
-| Education | `public/data/sections/education.json` |
-| Skills | `public/data/sections/skills.json` |
-| Resume | `public/data/sections/resume.json`, plus the PDF in `public/documents/` |
-| Experience | `public/data/sections/experience.json` |
-| Projects | `public/data/sections/portfolio.json` |
-| Achievements & certifications | `public/data/sections/achievements.json` |
-| Updates | `public/data/sections/updates.json` |
-| Contact | `public/data/sections/contact.json` |
+## License
 
-Logos live in `public/images/tech/` (tools) and `public/images/pictures/` (companies and photos).
-
-The SEO copy, structured data, `llms.txt` and sitemap are rebuilt from these files on every `npm run build`, so you never need to edit them by hand.
-
-## 📦 CI/CD
-
-| Workflow | Runs on | What it does |
-|---|---|---|
-| **CI** (`.github/workflows/ci.yml`) | Every pull request | `npm ci` → `npm audit` (fails on high/critical) → build → `npm run verify` → build artifact; plus dependency review of new packages |
-| **CD** (`.github/workflows/cd.yml`) | Push/merge to `main` only | Runs CI, then deploys the verified artifact to Netlify production and smoke-tests www.rajeev.pro |
-
-Pipeline practices: actions pinned to commit SHAs, least-privilege `permissions`, no persisted git credentials, one production deploy at a time (never cancelled mid-flight), Dependabot for npm and GitHub Actions.
-
-`npm run verify` (`scripts/verify-build.mjs`) checks the built site: required files are present, SEO essentials exist, and there's **no phone number or non-public email** anywhere in the output. Run `npm test` locally to build and verify in one step.
-
-Deploy secrets: `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`.
-
-## 📜 License
-
-[MIT](LICENSE). Feel free to learn from the code. The personal content (text, photos, resume) belongs to Rajeev Kumar.
-
-<div align="center">
-
-**Open to Cloud & DevOps opportunities** · [Let's connect](https://www.linkedin.com/in/heyrajeev1/)
-
-*"Automate everything. Break nothing in prod."*
-
-</div>
+[MIT](LICENSE) for the code. Personal content (text, photos, resume) © Rajeev Kumar.
