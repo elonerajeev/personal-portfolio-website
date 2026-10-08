@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site, socials } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:px-6">
+    <p>
+      © {year} {site.name}. Built with Astro & Tailwind CSS.
+    </p>
+    <ul class="flex items-center gap-4">
+      {socials.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            class="transition-colors hover:text-fg"
+            rel="me noopener"
+            target="_blank"
+          >
+            <Icon name={s.icon} class="size-4" aria-hidden="true" />
+            <span class="sr-only">{s.label}</span>
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="https://github.com/elonerajeev/personal-portfolio-website"
+          class="transition-colors hover:text-fg"
+          target="_blank"
+          rel="noopener"
+        >
+          Source
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

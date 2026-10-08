@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Section from '../Section.astro';
+import Tags from '../Tags.astro';
+import { formatRange } from '../../lib/dates';
+
+const jobs = (await getCollection('experience')).sort((a, b) =>
+  b.data.start.localeCompare(a.data.start),
+);
+---
+
+<Section id="experience" eyebrow="Experience" title="Where I've worked">
+  <ol class="relative space-y-10 border-l border-border pl-8">
+    {jobs.map(({ data }) => (
+      <li class="relative">
+        <span
+          class:list={[
+            'absolute top-1.5 -left-[2.3rem] size-3 rounded-full ring-4 ring-bg',
+            data.end ? 'bg-border' : 'bg-accent',
+          ]}
+          aria-hidden="true"
+        />
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h3 class="text-lg font-medium">
+            {data.role} <span class="text-muted">· {data.company}</span>
+          </h3>
+          <p class="font-mono text-xs text-muted">{formatRange(data.start, data.end)}</p>
+        </div>
+        <p class="mt-1 text-sm text-muted">
+          {data.type} · {data.location} · {data.mode}
+        </p>
+        <p class="mt-3 max-w-3xl text-pretty">{data.summary}</p>
+        {data.highlights.length > 0 && (
+          <ul class="mt-3 max-w-3xl list-disc space-y-1 pl-5 text-sm text-muted marker:text-accent">
+            {data.highlights.map((h) => (
+              <li>{h}</li>
+            ))}
+          </ul>
+        )}
+        <div class="mt-4">
+          <Tags items={data.stack} />
+        </div>
+      </li>
+    ))}
+  </ol>
+</Section>

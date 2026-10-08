@@ -1,0 +1,36 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from '../Section.astro';
+import { strengths } from '../../data/site';
+---
+
+<Section id="about" eyebrow="About" title="Production readiness, built in from the start">
+  <div class="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
+    <div class="space-y-4 text-pretty text-muted">
+      <p>
+        I'm a <strong class="font-medium text-fg">Cloud & DevOps Engineer</strong> with hands-on
+        experience running reliable cloud environments and automated release systems. My focus is
+        production readiness: stability, observability and confidence in every deployment.
+      </p>
+      <p>
+        I design and maintain CI/CD pipelines, container platforms on Docker and Kubernetes,
+        serverless workloads on AWS, and infrastructure provisioned with Terraform. I add monitoring
+        and alerting so systems stay observable and resilient.
+      </p>
+      <p>
+        I care about measurable outcomes: faster and safer releases, less operational risk, better
+        uptime, and infrastructure that scales cleanly as the business grows.
+      </p>
+    </div>
+
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {strengths.map((s) => (
+        <li class="rounded-xl border border-border bg-surface p-5">
+          <Icon name={s.icon} class="size-6 text-accent" aria-hidden="true" />
+          <h3 class="mt-3 font-medium">{s.title}</h3>
+          <p class="mt-1.5 text-sm text-muted">{s.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

@@ -1,0 +1,53 @@
+- id: pulse-monitor
+  title: Pulse Monitor
+  category: SaaS
+  date: '2024-09'
+  featured: true
+  summary: >-
+    Enterprise CLI and web SaaS for 24/7 monitoring, alerting and incident response,
+    giving real-time health and performance insight into production workloads.
+  impact:
+    - Automated CI/CD with Jenkins and GitHub Actions, including integrated quality gates.
+    - Containerised and orchestrated on Docker and Kubernetes for scalable releases.
+  stack: [TypeScript, Kubernetes, Docker, Jenkins, GitHub Actions]
+  repo: https://github.com/elonerajeev/Pulse-Monitor
+
+- id: multi-cloud-platform
+  title: Multi-Cloud DevOps Deployment Platform
+  category: Cloud
+  date: '2026-02'
+  featured: true
+  summary: >-
+    A deployment platform that standardises CI/CD across AWS and Azure with
+    containerised services and Kubernetes orchestration.
+  impact:
+    - One set of deployment automation patterns across cloud providers.
+    - Better release portability and consistent operations.
+  stack: [AWS, Azure, Kubernetes, Docker, CI/CD]
+  repo: https://github.com/elonerajeev/Multi-Cloud-DevOps-Deployment-Platform
+
+- id: three-tier-k8s
+  title: Three-Tier MERN on Kubernetes
+  category: DevOps
+  date: '2024-06'
+  summary: >-
+    Production-ready three-tier MERN architecture on Kubernetes with tuned resource
+    allocation and a Jenkins delivery pipeline.
+  impact:
+    - 40% smaller container images.
+    - Zero-downtime deploys with secrets management and rollback support.
+  stack: [Kubernetes, Jenkins, Docker, MongoDB, Node.js]
+  repo: https://github.com/elonerajeev/3-Tier-Architecture-Application
+
+- id: terraform-aws
+  title: Infrastructure Automation with Terraform & AWS
+  category: Cloud
+  date: '2024-05'
+  summary: >-
+    Highly available AWS infrastructure from reusable Terraform modules: Auto Scaling
+    Groups, load balancers and a multi-AZ layout.
+  impact:
+    - 80% less manual provisioning time.
+    - Prometheus, Grafana and CloudWatch monitoring for early incident detection.
+  stack: [Terraform, AWS, Prometheus, Grafana, CloudWatch]
+  repo: https://github.com/elonerajeev/Enterprise-Grade-Infrastructure-Automation-with-Terraform-AWS

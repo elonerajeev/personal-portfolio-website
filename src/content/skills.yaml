@@ -1,0 +1,50 @@
+- id: cloud
+  group: Cloud
+  icon: lucide:cloud
+  items:
+    - { name: AWS, icon: 'simple-icons:amazonwebservices' }
+    - { name: Azure, icon: 'simple-icons:microsoftazure' }
+    - { name: Google Cloud, icon: 'simple-icons:googlecloud' }
+    - { name: Lambda & Serverless, icon: 'simple-icons:awslambda' }
+
+- id: containers
+  group: Containers & Orchestration
+  icon: lucide:container
+  items:
+    - { name: Docker, icon: 'simple-icons:docker' }
+    - { name: Kubernetes, icon: 'simple-icons:kubernetes' }
+    - { name: Helm, icon: 'simple-icons:helm' }
+    - { name: ECS / EKS, icon: 'simple-icons:amazonecs' }
+
+- id: cicd
+  group: CI/CD & Source Control
+  icon: lucide:git-branch
+  items:
+    - { name: GitHub Actions, icon: 'simple-icons:githubactions' }
+    - { name: Jenkins, icon: 'simple-icons:jenkins' }
+    - { name: GitLab CI, icon: 'simple-icons:gitlab' }
+    - { name: Git, icon: 'simple-icons:git' }
+
+- id: iac
+  group: Infrastructure as Code
+  icon: lucide:layers
+  items:
+    - { name: Terraform, icon: 'simple-icons:terraform' }
+    - { name: CloudFormation, icon: 'simple-icons:amazonwebservices' }
+
+- id: observability
+  group: Observability
+  icon: lucide:activity
+  items:
+    - { name: Prometheus, icon: 'simple-icons:prometheus' }
+    - { name: Grafana, icon: 'simple-icons:grafana' }
+    - { name: CloudWatch, icon: 'simple-icons:amazoncloudwatch' }
+
+- id: systems
+  group: Systems & Scripting
+  icon: lucide:terminal
+  items:
+    - { name: Linux, icon: 'simple-icons:linux' }
+    - { name: Bash, icon: 'simple-icons:gnubash' }
+    - { name: Python, icon: 'simple-icons:python' }
+    - { name: Networking & IAM }

@@ -1,0 +1,47 @@
+- id: zintellix
+  role: Cloud DevOps Engineer
+  company: Zintellix™
+  type: Internship
+  location: Jaipur, Rajasthan, India
+  mode: On-site
+  start: '2025-10'
+  summary: >-
+    Primary Cloud DevOps engineer in a small product team, owning cloud and DevOps
+    delivery end to end.
+  highlights:
+    - Own Git/GitHub workflows, CI/CD pipelines and production deployments across AWS and Azure.
+    - Standardised secure, repeatable release practices for every service the team ships.
+    - Work alongside developers to improve deployment reliability, incident readiness and release confidence.
+  stack: [AWS, Azure, GitHub Actions, Docker, CI/CD, Release Engineering]
+
+- id: zeetron
+  role: Full Stack Developer
+  company: Zeetron Networks Pvt. Ltd.
+  type: Internship
+  location: Jaipur, Rajasthan, India
+  mode: Remote
+  start: '2024-05'
+  end: '2024-07'
+  summary: >-
+    Built and maintained web application modules with backend API integration in a
+    sprint-based team.
+  highlights:
+    - Delivered features through structured sprints and version-controlled releases.
+    - Integrated REST APIs and worked on quality practices for production-bound code.
+  stack: [Web Development, REST APIs, Git, Agile Delivery]
+
+- id: lnt-edutech
+  role: DevOps Engineer Trainee
+  company: L&T EduTech
+  type: Trainee
+  location: Jodhpur, Rajasthan, India
+  mode: On-site
+  start: '2023-05'
+  end: '2025-05'
+  summary: >-
+    Structured DevOps and cloud programme with hands-on implementation of production
+    practices.
+  highlights:
+    - Linux administration, automation workflows and CI/CD delivery pipelines.
+    - Cloud resource management, monitoring and reliability-focused troubleshooting.
+  stack: [Linux, Jenkins, Docker, AWS, Monitoring, Bash]

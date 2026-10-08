@@ -1,0 +1,25 @@
+- id: btech
+  degree: B.Tech, Computer Science & Engineering
+  school: Jodhpur Institute of Engineering and Technology
+  location: Jodhpur, Rajasthan, India
+  start: 2022
+  end: 2026
+  grade: CGPA 8.50
+  focus: [Cloud Computing, DevOps, Full-Stack Development]
+
+- id: senior-secondary
+  degree: Senior Secondary (PCM)
+  school: Samastipur College
+  location: Samastipur, Bihar, India
+  start: 2020
+  end: 2022
+  grade: 74.4%
+  focus: [Physics, Chemistry, Mathematics]
+
+- id: high-school
+  degree: High School (10th)
+  school: M.A.B.R. Jha High School
+  location: Bahdura, Bihar, India
+  start: 2018
+  end: 2020
+  grade: 87.2%

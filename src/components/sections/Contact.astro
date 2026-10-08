@@ -1,0 +1,143 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from '../Section.astro';
+import { site, socials } from '../../data/site';
+
+const field =
+  'mt-1.5 w-full rounded-md border border-border bg-bg px-3 py-2 text-sm placeholder:text-muted/60 focus:border-accent focus:outline-none';
+---
+
+<Section
+  id="contact"
+  eyebrow="Contact"
+  title="Let's build something reliable"
+  intro="Hiring for a Cloud or DevOps role, or need help with a pipeline or platform? Send a message and I'll reply within a couple of days."
+>
+  <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr]">
+    <!-- Handled by Netlify Forms. The JS below submits in place; without JS it posts to /thanks. -->
+    <form
+      name="contact"
+      method="POST"
+      action="/thanks"
+      data-netlify="true"
+      netlify-honeypot="company"
+      class="rounded-xl border border-border bg-surface p-6"
+      data-contact-form
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hidden">
+        <label>
+          Leave this empty <input name="company" tabindex="-1" autocomplete="off" />
+        </label>
+      </p>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="block text-sm">
+          Name
+          <input name="name" required autocomplete="name" maxlength="100" class={field} />
+        </label>
+        <label class="block text-sm">
+          Email
+          <input
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            maxlength="200"
+            class={field}
+          />
+        </label>
+      </div>
+      <label class="mt-4 block text-sm">
+        Subject
+        <input name="subject" required maxlength="150" class={field} />
+      </label>
+      <label class="mt-4 block text-sm">
+        Message
+        <textarea name="message" required rows="5" maxlength="5000" class={field}></textarea>
+      </label>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <button
+          type="submit"
+          class="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90 disabled:opacity-50"
+        >
+          <Icon name="lucide:send" class="size-4" aria-hidden="true" />
+          Send message
+        </button>
+        <p role="status" aria-live="polite" class="text-sm" data-form-status></p>
+      </div>
+    </form>
+
+    <div>
+      <h3 class="font-mono text-sm text-muted">Or reach me directly</h3>
+      <ul class="mt-4 space-y-2">
+        <li>
+          <a
+            href={`mailto:${site.email}`}
+            class="flex items-center gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-accent"
+          >
+            <Icon name="lucide:mail" class="size-5 text-accent" aria-hidden="true" />
+            <span>
+              <span class="block text-xs text-muted">Email</span>
+              {site.email}
+            </span>
+          </a>
+        </li>
+        {socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              target="_blank"
+              rel="me noopener"
+              class="flex items-center gap-3 rounded-lg border border-border bg-surface p-4 transition-colors hover:border-accent"
+            >
+              <Icon name={s.icon} class="size-5 text-accent" aria-hidden="true" />
+              <span>
+                <span class="block text-xs text-muted">{s.label}</span>
+                {s.handle}
+              </span>
+            </a>
+          </li>
+        ))}
+        <li class="flex items-center gap-3 p-4 text-sm text-muted">
+          <Icon name="lucide:map-pin" class="size-5" aria-hidden="true" />
+          {site.location}
+        </li>
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const status = form?.querySelector<HTMLElement>('[data-form-status]');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!status || !button) return;
+
+    button.disabled = true;
+    status.className = 'text-sm text-muted';
+    status.textContent = 'Sending…';
+
+    try {
+      const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      form.reset();
+      status.className = 'text-sm text-accent';
+      status.textContent = 'Thanks! Your message is on its way.';
+    } catch {
+      status.className = 'text-sm text-red-500';
+      status.textContent = 'Something went wrong. Please email me directly.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

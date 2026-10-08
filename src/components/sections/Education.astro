@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Section from '../Section.astro';
+import Tags from '../Tags.astro';
+
+const schools = (await getCollection('education')).sort((a, b) => b.data.end - a.data.end);
+---
+
+<Section id="education" eyebrow="Education" title="Academic background">
+  <ul class="grid gap-4 md:grid-cols-3">
+    {schools.map(({ data }) => (
+      <li class="flex flex-col rounded-xl border border-border bg-surface p-5">
+        <p class="font-mono text-xs text-muted">
+          {data.start} – {data.end}
+        </p>
+        <h3 class="mt-2 font-medium">{data.degree}</h3>
+        <p class="text-sm text-muted">{data.school}</p>
+        <p class="text-sm text-muted">{data.location}</p>
+        <p class="mt-3 font-mono text-sm text-accent">{data.grade}</p>
+        {data.focus.length > 0 && (
+          <div class="mt-auto pt-4">
+            <Tags items={data.focus} label="Focus areas" />
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+</Section>

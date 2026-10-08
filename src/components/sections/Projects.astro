@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Section from '../Section.astro';
+import Tags from '../Tags.astro';
+import { formatYearMonth } from '../../lib/dates';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) =>
+    Number(b.data.featured) - Number(a.data.featured) || b.data.date.localeCompare(a.data.date),
+);
+---
+
+<Section
+  id="projects"
+  eyebrow="Projects"
+  title="Cloud, DevOps & automation work"
+  intro="Infrastructure and delivery projects with measurable results. Each one links to its source."
+>
+  <ul class="grid gap-6 md:grid-cols-2">
+    {projects.map(({ data }) => (
+      <li class="group relative flex flex-col rounded-xl border border-border bg-surface p-6 transition-colors hover:border-accent/60">
+        <div class="flex items-center justify-between gap-4 font-mono text-xs text-muted">
+          <span class="rounded-full border border-border px-2 py-0.5 text-accent">
+            {data.category}
+          </span>
+          <span>{formatYearMonth(data.date)}</span>
+        </div>
+        <h3 class="mt-4 text-xl font-medium">
+          <a href={data.repo} target="_blank" rel="noopener" class="after:absolute after:inset-0">
+            {data.title}
+          </a>
+        </h3>
+        <p class="mt-2 text-pretty text-muted">{data.summary}</p>
+        {data.impact.length > 0 && (
+          <ul class="mt-4 space-y-1.5 text-sm">
+            {data.impact.map((i) => (
+              <li class="flex gap-2">
+                <Icon
+                  name="lucide:check"
+                  class="mt-0.5 size-4 shrink-0 text-accent"
+                  aria-hidden="true"
+                />
+                {i}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div class="mt-auto flex items-end justify-between gap-4 pt-6">
+          <Tags items={data.stack} />
+          <Icon
+            name="lucide:arrow-up-right"
+            class="size-5 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+            aria-hidden="true"
+          />
+        </div>
+      </li>
+    ))}
+  </ul>
+  <p class="mt-8 text-sm text-muted">
+    More on{' '}
+    <a
+      href="https://github.com/elonerajeev?tab=repositories"
+      target="_blank"
+      rel="noopener"
+      class="text-accent underline-offset-4 hover:underline"
+    >
+      GitHub
+    </a>
+    .
+  </p>
+</Section>

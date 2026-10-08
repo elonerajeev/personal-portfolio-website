@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Section from '../Section.astro';
+
+const order = ['cloud', 'containers', 'cicd', 'iac', 'observability', 'systems'];
+const groups = (await getCollection('skills')).sort(
+  (a, b) => order.indexOf(a.id) - order.indexOf(b.id),
+);
+---
+
+<Section id="skills" eyebrow="Skills" title="Tools I work with every day">
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {groups.map(({ data }) => (
+      <li class="rounded-xl border border-border bg-surface p-5">
+        <h3 class="flex items-center gap-2 font-medium">
+          <Icon name={data.icon} class="size-5 text-accent" aria-hidden="true" />
+          {data.group}
+        </h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {data.items.map((item) => (
+            <li class="inline-flex items-center gap-1.5 rounded-md bg-surface-2 px-2.5 py-1 text-sm">
+              {item.icon && (
+                <Icon name={item.icon} class="size-3.5 text-muted" aria-hidden="true" />
+              )}
+              {item.name}
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</Section>
