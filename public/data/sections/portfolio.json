@@ -45,7 +45,7 @@
         {
           "categoryId": "productivity",
           "icon": {
-            "img": "images/pictures/website icons.jpg",
+            "img": "images/tech/project-pulse-monitor.svg",
             "fa": "",
             "faColors": {
               "bg": null,
@@ -77,7 +77,7 @@
         {
           "categoryId": "devops",
           "icon": {
-            "img": "images/pictures/project-3tier.png",
+            "img": "images/tech/project-three-tier-k8s.svg",
             "fa": "",
             "faColors": {
               "bg": null,
@@ -108,7 +108,7 @@
         {
           "categoryId": "cloud",
           "icon": {
-            "img": "images/pictures/project1.jpg",
+            "img": "images/tech/project-terraform-aws.svg",
             "fa": "",
             "faColors": {
               "bg": null,
@@ -141,7 +141,7 @@
         {
           "categoryId": "cloud",
           "icon": {
-            "img": "images/svg/devops-dashboard.svg",
+            "img": "images/tech/project-multi-cloud.svg",
             "fa": "fa-solid fa-cloud",
             "faColors": {
               "bg": "#0f172a",

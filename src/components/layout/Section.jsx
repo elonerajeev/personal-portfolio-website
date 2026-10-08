@@ -32,6 +32,7 @@ const ARTICLES = {
     ArticlePortfolio: lazy(() => import("/src/components/articles/ArticlePortfolio.jsx")),
     ArticleResume: lazy(() => import("/src/components/articles/ArticleResume.jsx")),
     ArticleServices: lazy(() => import("/src/components/articles/ArticleServices.jsx")),
+    ArticleTerminal: lazy(() => import("/src/components/articles/ArticleTerminal.jsx")),
     ArticleTestimonials: lazy(() => import("/src/components/articles/ArticleTestimonials.jsx")),
     ArticleThread: lazy(() => import("/src/components/articles/ArticleThread.jsx")),
     ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx"))

@@ -7,7 +7,8 @@ const SECTION_LABELS = {
     portfolio: "Projects",
     achievements: "Achievements",
     updates: "Updates",
-    contact: "Contact"
+    contact: "Contact",
+    terx: "TerX"
 }
 
 export const getSectionFallbackLabel = (sectionId) => {

@@ -9,7 +9,7 @@ function ImageCache({urls}) {
                 <img key={key}
                      alt={``}
                      src={url}
-                     fetchPriority={`low`}
+                     fetchpriority={`low`}
                      decoding={`async`}
                      style={{width: '5px', height: '5px'}}/>
             ))}

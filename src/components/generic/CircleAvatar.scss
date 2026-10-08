@@ -69,3 +69,16 @@ $circle-avatar-multipliers: (
         left: 0;
     }
 }
+
+// Subtle lift on official logos when their card is hovered.
+.card .circle-avatar:has(img[src*="images/tech/"]) {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover .circle-avatar:has(img[src*="images/tech/"]) {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 6px 18px rgba(157, 255, 142, 0.18);
+}
+@media (prefers-reduced-motion: reduce) {
+    .card .circle-avatar:has(img[src*="images/tech/"]) { transition: none; }
+    .card:hover .circle-avatar:has(img[src*="images/tech/"]) { transform: none; }
+}

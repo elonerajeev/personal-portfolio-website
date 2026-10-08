@@ -1,0 +1,20 @@
+{
+  "locales": {
+    "en": {
+      "title": "TerX",
+      "title_menu": "TerX",
+      "title_long_prefix": "root@rajeev:~#",
+      "title_long": "Explore me in the **TerX** terminal"
+    }
+  },
+  "articles": [
+    {
+      "id": "terminal",
+      "component": "ArticleTerminal",
+      "config": {},
+      "locales": {
+        "en": {}
+      }
+    }
+  ]
+}

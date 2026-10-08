@@ -1,0 +1,147 @@
+@import "/src/styles/extend";
+
+// Kali-style terminal palette (fixed in both site themes: terminals are dark).
+.article-terminal {
+    --terx-bg: #0d1117;
+    --terx-bar: #161b22;
+    --terx-border: #30363d;
+    --terx-text: #d6deeb;
+    --terx-muted: #8b949e;
+    --terx-accent: #9dff8e;
+    --terx-info: #58a6ff;
+    --terx-ok: #3fb950;
+    --terx-warn: #d29922;
+    --terx-err: #ff6b6b;
+    --terx-user: #ff5c57;
+    --terx-path: #57c7ff;
+
+    .terx-window {
+        background: var(--terx-bg);
+        border: 1px solid var(--terx-border);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        cursor: text;
+    }
+
+    .terx-titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: var(--terx-bar);
+        border-bottom: 1px solid var(--terx-border);
+        user-select: none;
+    }
+
+    .terx-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+    .terx-dot-red { background: #ff5f56; }
+    .terx-dot-yellow { background: #ffbd2e; }
+    .terx-dot-green { background: #27c93f; }
+
+    .terx-title {
+        flex: 1;
+        text-align: center;
+        margin-right: 44px;
+        color: var(--terx-muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 0.8rem;
+    }
+
+    .terx-output {
+        height: min(62vh, 560px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 14px 16px 18px;
+        color: var(--terx-text);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 0.86rem;
+        line-height: 1.55;
+        white-space: pre-wrap;
+        word-break: break-word;
+
+        @include media-breakpoint-down(md) {
+            height: 60vh;
+            font-size: 0.78rem;
+            padding: 12px;
+        }
+
+        &::-webkit-scrollbar { width: 8px; }
+        &::-webkit-scrollbar-thumb { background: var(--terx-border); border-radius: 4px; }
+    }
+
+    .terx-line { min-height: 1.55em; }
+    .terx-echo { margin-top: 2px; }
+
+    .terx-prompt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .terx-frame { color: var(--terx-info); }
+    .terx-user { color: var(--terx-user); font-weight: 700; }
+    .terx-path { color: var(--terx-path); font-weight: 700; }
+    .terx-hash { color: var(--terx-user); font-weight: 700; margin-right: 6px; }
+    .terx-cmd { color: var(--terx-text); }
+
+    .terx-input-line {
+        display: flex;
+        align-items: center;
+    }
+
+    .terx-input {
+        flex: 1;
+        min-width: 0;
+        background: transparent;
+        border: 0;
+        outline: none;
+        padding: 0;
+        color: var(--terx-text);
+        caret-color: var(--terx-accent);
+        font: inherit;
+
+        &::placeholder { color: var(--terx-muted); opacity: 0.7; }
+
+        // iOS zooms into inputs smaller than 16px.
+        @include media-breakpoint-down(md) { font-size: 16px; }
+    }
+
+    .terx-tone-accent { color: var(--terx-accent); }
+    .terx-tone-muted { color: var(--terx-muted); }
+    .terx-tone-info { color: var(--terx-info); }
+    .terx-tone-ok { color: var(--terx-ok); }
+    .terx-tone-warn { color: var(--terx-warn); }
+    .terx-tone-err { color: var(--terx-err); }
+    .terx-tone-bold { color: #ffffff; font-weight: 700; }
+
+    .terx-link {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        &:hover { filter: brightness(1.2); }
+    }
+
+    .terx-quick {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .terx-chip {
+        border: 1px solid var(--terx-border);
+        background: var(--theme-tag-color, #181818);
+        color: var(--theme-secondary, #eee);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        transition: border-color 0.2s ease, color 0.2s ease;
+
+        &:hover:not(:disabled),
+        &:focus-visible {
+            border-color: var(--terx-accent);
+            color: var(--terx-accent);
+        }
+        &:disabled { opacity: 0.5; }
+    }
+}
