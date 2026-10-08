@@ -61,6 +61,13 @@
             "categoryId": "more",
             "jsonPath": "/data/sections/contact.json",
             "faIcon": "fa-solid fa-pen-to-square"
+        },
+
+        {
+            "id": "terx",
+            "categoryId": "more",
+            "jsonPath": "/data/sections/terx.json",
+            "faIcon": "fa-solid fa-terminal"
         }
     ],
 

@@ -78,7 +78,7 @@ function renderItem(item) {
 function renderStaticHtml({ settings, sections }) {
     const name = settings.profile.name
     const role = en(settings.profile.locales).role
-    const nav = sections.map((s) => {
+    const nav = sections.filter((s) => (s.data.articles || []).some((a) => (a.items || []).length)).map((s) => {
         const l = en(s.data.locales)
         return `<li><a href="#${s.id}">${escapeHtml(l.title_menu || l.title || s.id)}</a></li>`
     }).join('')
@@ -92,6 +92,7 @@ function renderStaticHtml({ settings, sections }) {
             if (!items) return ''
             return `${at ? `<h3>${richText(at)}</h3>` : ''}<ul>${items}</ul>`
         }).join('')
+        if (!articles) return '' // interactive-only sections (e.g. the TerX terminal) have nothing to index
         return `<section id="${s.id}" aria-label="${escapeHtml(heading)}"><h2>${escapeHtml(heading)}</h2>${articles}</section>`
     }).join('\n')
 
