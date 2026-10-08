@@ -13,7 +13,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-elonerajeev-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/elonerajeev)
 [![Email](https://img.shields.io/badge/Email-elonerajeev%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:elonerajeev@gmail.com)
 
-[![Deploy](https://img.shields.io/github/actions/workflow/status/elonerajeev/personal-portfolio-website/ci-cd.yml?branch=main&label=deploy&style=flat-square&logo=netlify&logoColor=white)](https://github.com/elonerajeev/personal-portfolio-website/actions)
+[![CD](https://img.shields.io/github/actions/workflow/status/elonerajeev/personal-portfolio-website/cd.yml?branch=main&label=deploy&style=flat-square&logo=netlify&logoColor=white)](https://github.com/elonerajeev/personal-portfolio-website/actions/workflows/cd.yml)
 ![Last commit](https://img.shields.io/github/last-commit/elonerajeev/personal-portfolio-website?style=flat-square)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
@@ -77,16 +77,16 @@ A single-page portfolio with sections for About, Education, Skills, Resume, Expe
 | Layer | Tech |
 |---|---|
 | UI | React 18, React Bootstrap, Bootstrap 5, SCSS |
-| Build | Vite 5 |
+| Build | Vite 6 |
 | Extras | Swiper (carousels), Chart.js, Font Awesome, EmailJS |
-| Hosting | Netlify, deployed by GitHub Actions on every push to `main` |
+| Hosting | Netlify; CI on every PR, CD from `main` via GitHub Actions |
 | Domain | `rajeev.pro` (redirects to `www.rajeev.pro`) |
 
 ---
 
 ## 🚀 Run it locally
 
-Requires Node.js 18+.
+Requires Node.js 20+ (CI uses the version in `.nvmrc`).
 
 ```sh
 git clone https://github.com/elonerajeev/personal-portfolio-website.git
@@ -100,6 +100,8 @@ npm run dev        # http://localhost:5173
 | `npm run dev` | Start the dev server with hot reload |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the production build locally |
+| `npm run verify` | Check the build (files, SEO, privacy guard) |
+| `npm test` | Build + verify |
 
 ## ✏️ Editing content
 
@@ -123,9 +125,18 @@ Logos live in `public/images/tech/` (tools) and `public/images/pictures/` (compa
 
 The SEO copy, structured data, `llms.txt` and sitemap are rebuilt from these files on every `npm run build`, so you never need to edit them by hand.
 
-## 📦 Deployment
+## 📦 CI/CD
 
-`.github/workflows/ci-cd.yml` installs, builds and deploys `dist/` to Netlify on every push to `main`. It needs the repository secrets `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID`.
+| Workflow | Runs on | What it does |
+|---|---|---|
+| **CI** (`.github/workflows/ci.yml`) | Every pull request | `npm ci` → `npm audit` (fails on high/critical) → build → `npm run verify` → build artifact; plus dependency review of new packages |
+| **CD** (`.github/workflows/cd.yml`) | Push/merge to `main` only | Runs CI, then deploys the verified artifact to Netlify production and smoke-tests www.rajeev.pro |
+
+Pipeline practices: actions pinned to commit SHAs, least-privilege `permissions`, no persisted git credentials, one production deploy at a time (never cancelled mid-flight), Dependabot for npm and GitHub Actions.
+
+`npm run verify` (`scripts/verify-build.mjs`) checks the built site: required files are present, SEO essentials exist, and there's **no phone number or non-public email** anywhere in the output. Run `npm test` locally to build and verify in one step.
+
+Deploy secrets: `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`.
 
 ## 📜 License
 
