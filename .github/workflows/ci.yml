@@ -1,0 +1,92 @@
+name: CI / Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Type-check, lint, format & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run check
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  deploy:
+    name: Deploy to Netlify
+    needs: validate
+    # Production on main; preview deploys for PRs from this repo (forks have no secrets).
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+
+      # netlify.toml lives in the repo root; it's only needed for headers/redirects.
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: netlify.toml
+          sparse-checkout-cone-mode: false
+          path: repo
+
+      - name: Deploy
+        id: deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          IS_PROD: ${{ github.ref == 'refs/heads/main' }}
+          ALIAS: pr-${{ github.event.pull_request.number }}
+        run: |
+          cp repo/netlify.toml .
+          args=(--dir=dist --no-build --json)
+          if [ "$IS_PROD" = "true" ]; then args+=(--prod); else args+=(--alias="$ALIAS"); fi
+          out=$(npx --yes netlify-cli@27 deploy "${args[@]}")
+          url=$(echo "$out" | jq -r 'if .url then .url else .deploy_url end')
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Deployed to $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment preview URL
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          URL: ${{ steps.deploy.outputs.url }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          body="🔍 Preview deploy: $URL"
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --edit-last --body "$body" \
+            || gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body "$body"

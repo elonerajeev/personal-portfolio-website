@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      astro:
+        patterns: ['astro', '@astrojs/*']
+      tooling:
+        patterns: ['eslint*', '@eslint/*', 'typescript*', 'prettier*', 'globals']
+      styles-and-icons:
+        patterns:
+          [
+            'tailwindcss',
+            '@tailwindcss/*',
+            '@iconify-json/*',
+            'astro-icon',
+            '@fontsource-variable/*',
+          ]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
