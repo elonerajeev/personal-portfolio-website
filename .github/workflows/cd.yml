@@ -56,4 +56,7 @@ jobs:
             echo "${path} -> ${code}"
             [ "$code" = "200" ]
           done
-          curl -s https://www.rajeev.pro/ | grep -q 'rel="canonical" href="https://www.rajeev.pro/"'
+          # Fetch first, then search: piping curl into `grep -q` breaks the pipe (curl exit 23) under pipefail.
+          html=$(curl -fsS --retry 3 --retry-delay 5 https://www.rajeev.pro/)
+          grep -q 'rel="canonical" href="https://www.rajeev.pro/"' <<< "$html"
+          echo "canonical tag present"
