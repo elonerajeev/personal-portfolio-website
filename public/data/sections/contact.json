@@ -57,13 +57,13 @@
           }
         },
         {
-          "value": "twitter.com/rajeev02030066",
-          "links": [{ "href": "https://twitter.com/rajeev02030066" }],
+          "value": "x.com/rajeev02030066",
+          "links": [{ "href": "https://x.com/rajeev02030066" }],
           "icon": {
-            "fa": "fa-brands fa-twitter"
+            "fa": "fa-brands fa-x-twitter"
           },
           "locales": {
-            "en": { "title": "Twitter" }
+            "en": { "title": "X" }
           }
         }
       ]

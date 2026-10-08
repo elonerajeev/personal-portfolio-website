@@ -14,7 +14,7 @@
     "name": "Rajeev Kumar",
     "stylizedName": "<strong>Rajeev **Kumar**</strong>",
     "logoUrl": "images/svg/logo.svg",
-    "profilePictureUrl": "images/pictures/profile-pic.png",
+    "profilePictureUrl": "images/pictures/profile-pic.webp",
 
     "locales": {
       "en": { "role": "Cloud & DevOps Engineer" }
@@ -45,15 +45,10 @@
 
   "supportedLanguages": [
     {
-      "name": "English",
+      "name": "English (India)",
       "id": "en",
-      "flagUrl": "images/flags/hi.png",
+      "flagUrl": "images/flags/in.svg",
       "default": true
-    },
-    {
-      "name": "हिन्दी",
-      "id": "hi",
-      "flagUrl": "images/flags/hi.jpg"
     }
   ],
 

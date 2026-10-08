@@ -15,59 +15,85 @@
       "items": [
         {
           "icon": {
-            "img": "",
+            "img": "images/pictures/zynsera.png",
+            "fa": "",
+            "faColors": { "bg": null, "fill": null }
+          },
+          "dates": {
+            "start": "Sep 2026",
+            "end": "now"
+          },
+          "locales": {
+            "en": {
+              "title": "**DevOps Engineer**",
+              "info": "Zynsera Technologies · Full-time · India · On-site",
+              "text": "Building scalable, reliable cloud environments with a focus on cloud infrastructure, automation and CI/CD. Hands-on with AWS, Kubernetes (EKS), ECS, Lambda, Terraform and CodePipeline.",
+              "tags": [
+                "AWS",
+                "Kubernetes (EKS)",
+                "ECS",
+                "Lambda",
+                "Terraform",
+                "CodePipeline"
+              ]
+            }
+          }
+        },
+        {
+          "icon": {
+            "img": "images/pictures/zintellix.png",
             "fa": "fa-solid fa-cloud-arrow-up",
             "faColors": { "bg": "#0f172a", "fill": "#38bdf8" }
           },
           "dates": {
             "start": "Oct 2025",
-            "end": "now"
+            "end": "Jun 2026"
           },
           "locales": {
             "en": {
               "title": "**Cloud DevOps Engineer**",
-              "info": "Zintellix™ · Internship · Jaipur, Rajasthan, India · On-site",
-              "text": "Serving as the primary Cloud DevOps Engineer in a small product team, owning end-to-end cloud and DevOps delivery. Managing Git/GitHub workflows, CI/CD pipelines, and production deployments across AWS and Azure with a strong focus on secure, repeatable release practices. Partnering closely with developers to improve deployment reliability, incident readiness, and overall release confidence.",
+              "info": "Zintellix™ · Full-time · India · Hybrid",
+              "text": "Primary Cloud DevOps Engineer in a small product team, with full ownership of Git/GitHub, CI/CD pipelines, deployments and production infrastructure on AWS and Azure. Cut deployment time by 50% for 10+ developers and reduced cloud spend by 30%, with security best practices, code-quality checks and monitoring built in.",
               "tags": [
                 "AWS",
                 "Azure",
                 "CI/CD",
-                "GitHub Actions",
-                "Cloud Operations",
-                "Release Engineering"
+                "Terraform",
+                "Kubernetes",
+                "Cost Optimization"
               ]
             }
           }
         },
         {
           "icon": {
-            "img": "images/pictures/company3.jpg",
+            "img": "images/pictures/lt-edutech.png",
             "fa": "",
             "faColors": { "bg": null, "fill": null }
           },
           "dates": {
-            "start": "May 2023",
+            "start": "May 2024",
             "end": "May 2025"
           },
           "locales": {
             "en": {
               "title": "**DevOps Engineer**",
-              "info": "L&T EduTech · Trainee · Jodhpur, Rajasthan, India · On-site",
-              "text": "Completed structured DevOps and cloud training with hands-on implementation of Linux administration, automation workflows, and CI/CD delivery pipelines. Built a strong engineering foundation in cloud resource management, monitoring, troubleshooting, and reliability-focused operations. This role established disciplined execution for production-ready DevOps practices.",
+              "info": "L&T EduTech · Apprenticeship · India · On-site",
+              "text": "Hands-on DevOps and cloud work across Linux, cloud infrastructure and automation. Built Jenkins and GitHub Actions CI/CD pipelines that cut deployment time by 60%, used Terraform for consistent infrastructure across environments, and handled monitoring and troubleshooting to improve reliability.",
               "tags": [
+                "Jenkins",
+                "GitHub Actions",
+                "Terraform",
                 "Linux",
                 "CI/CD",
-                "Cloud Infrastructure",
-                "Monitoring",
-                "Troubleshooting",
-                "Automation"
+                "Monitoring"
               ]
             }
           }
         },
         {
           "icon": {
-            "img": "images/pictures/company1.png",
+            "img": "images/pictures/zeetron.png",
             "fa": "",
             "faColors": { "bg": null, "fill": null }
           },
@@ -78,7 +104,7 @@
           "locales": {
             "en": {
               "title": "**Full Stack Development**",
-              "info": "Zeetron Networks Pvt. Ltd. India · Internship · Jaipur, Rajasthan, India · Remote",
+              "info": "Zeetron Networks Pvt. Ltd. India · Internship · India · Remote",
               "text": "Contributed to building and maintaining web application modules with backend API integration and collaborative feature delivery. Strengthened execution in structured sprint workflows, version-controlled releases, and production-minded quality practices. This internship improved cross-functional communication and delivery discipline for real project environments.",
               "tags": [
                 "Software Development",
