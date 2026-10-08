@@ -12,6 +12,7 @@ export const LanguageProvider = ({children}) => {
     const allLanguages = settings['supportedLanguages'] || []
     const localStorageName = 'language-preferences'
     const canChangeLanguage = allLanguages.length >= 2
+    const hasLanguages = allLanguages.length >= 1
 
     const [defaultLanguageId, setDefaultLanguageId] = useState(null)
     const [selectedLanguageId, setSelectedLanguageId] = useState(null)
@@ -77,6 +78,7 @@ export const LanguageProvider = ({children}) => {
         <LanguageContext.Provider value={{
             selectedLanguageId,
             canChangeLanguage,
+            hasLanguages,
             setSelectedLanguage,
             getSelectedLanguage,
             getAvailableLanguages,

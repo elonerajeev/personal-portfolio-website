@@ -5,7 +5,7 @@ import {useUtils} from "/src/helpers/utils.js"
 
 function LanguagePicker({shrink}) {
     const utils = useUtils()
-    const {setSelectedLanguage, getSelectedLanguage, getAvailableLanguages, canChangeLanguage} = useLanguage()
+    const {setSelectedLanguage, getSelectedLanguage, getAvailableLanguages, canChangeLanguage, hasLanguages} = useLanguage()
 
     const selectedLanguage = getSelectedLanguage()
     const availableLanguages = getAvailableLanguages()
@@ -25,13 +25,14 @@ function LanguagePicker({shrink}) {
 
     return (
         <div>
-            {canChangeLanguage && (
+            {hasLanguages && (
+                // With a single language there is nothing to switch to, so show it as a plain badge.
                 <DropdownPicker selectedOption={_toDropdownOption(selectedLanguage)}
-                                availableOptions={availableLanguages.map(_toDropdownOption)}
+                                availableOptions={canChangeLanguage ? availableLanguages.map(_toDropdownOption) : [_toDropdownOption(selectedLanguage)]}
                                 onOptionSelected={_onOptionSelected}
                                 size={2}
                                 tooltip={null}
-                                alwaysForceDropdown={true}
+                                alwaysForceDropdown={canChangeLanguage}
                                 shrink={shrink}/>
             )}
         </div>

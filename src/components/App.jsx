@@ -7,7 +7,6 @@ import ActivitySpinner from "/src/components/feedbacks/ActivitySpinner.jsx"
 import Notifications from "/src/components/feedbacks/Notifications.jsx"
 import {useFeedbacks} from "/src/providers/FeedbacksProvider.jsx"
 
-const Resume = lazy(() => import("/src/components/Resume.jsx"))
 const YoutubeModal = lazy(() => import("/src/components/modals/YoutubeModal.jsx"))
 const GalleryModal = lazy(() => import("/src/components/modals/GalleryModal.jsx"))
 const ConfirmationWindow = lazy(() => import("/src/components/modals/ConfirmationWindow.jsx"))
@@ -20,9 +19,6 @@ function App() {
         <div className={`app-wrapper`}>
             <AppFeedbacks/>
             <Portfolio/>
-            <Suspense fallback={null}>
-                <Resume/>
-            </Suspense>
 
             {!areAllSectionsLoaded() && loadingProgress.total > 0 && (
                 <BackgroundLoadingIndicator loaded={loadingProgress.loaded}

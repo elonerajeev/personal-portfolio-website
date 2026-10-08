@@ -45,9 +45,9 @@ function InfoCard({title, text, img, fallbackIcon, fallbackIconColors, dateInter
                 </div>
 
                 <div className={`info mt-3`}>
-                    <h5 className={`fw-bold`}>
+                    <h3 className={`eq-h5 fw-bold`}>
                         <span dangerouslySetInnerHTML={{__html: utils.parseJsonText(title)}}/>
-                    </h5>
+                    </h3>
 
                     <div className={`text-3 opacity-75 mt-3 mb-3`} dangerouslySetInnerHTML={{__html: utils.parseJsonText(text)}}/>
                 </div>

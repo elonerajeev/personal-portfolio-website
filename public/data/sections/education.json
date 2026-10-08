@@ -26,8 +26,8 @@
                     "locales": {
                         "en": {
                             "title": "**Bachelor** in Computer Science & Engineering",
-                            "info": "Jodhpur Institute of Engineering and Technology, Rajasthan, India",
-                            "text": "Completed Bachelor's degree in Computer Science & Engineering with a CGPA of 8.50, with strong academic focus on Cloud Computing and DevOps.",
+                            "info": "Jodhpur Institute of Engineering and Technology, India",
+                            "text": "Completed Bachelor's degree in Computer Science & Engineering with a CGPA of 8.43, with strong academic focus on Cloud Computing and DevOps.",
                             "tags": ["Cloud Computing", "Full-Stack Development", "DevOps"]
                         }
                     }
@@ -45,7 +45,7 @@
                     "locales": {
                         "en": {
                             "title": "Senior Secondary **(PCM)**",
-                            "info": "Samastipur College, Samastipur, India",
+                            "info": "Samastipur College, India",
                             "text": "Completed Senior Secondary education with a focus on Physics, Chemistry, and Mathematics (PCM). Achieved 74.4%.",
                             "tags": ["Physics", "Chemistry", "Mathematics"]
                         }
@@ -53,7 +53,7 @@
                 },
                 {
                     "icon": {
-                        "img": "images/pictures/plane.jpg",
+                        "img": "images/tech/graduation-cap.svg",
                         "fa": "",
                         "faColors": {"bg": null, "fill": null}
                     },
@@ -64,7 +64,7 @@
                     "locales": {
                         "en": {
                             "title": "High School **(10th Grade)**",
-                            "info": "M.A.B.R. Jha High School, Bahdura, Bihar, India",
+                            "info": "M.A.B.R. Jha High School, India",
                             "text": "Completed high school with an excellent academic record, securing 87.2%.",
                             "tags": ["Academic Excellence", "Top Performer"]
                         }

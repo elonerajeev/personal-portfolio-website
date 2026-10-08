@@ -128,12 +128,15 @@ function SectionHeader({section}) {
     const {isBreakpoint} = useWindow()
     const sectionLocales = section.content?.locales
 
+    // Only one section is shown at a time, so its title is the view's <h1>. eq-h3 keeps the original h3 sizing.
+    const HeadingTag = 'h1'
+
     if(!sectionLocales) {
         return (
             <div className={`section-header w-100 px-0 px-md-3 text-center mt-1 mt-sm-2 mt-lg-4`}>
-                <h3 className={`fw-bold ${isBreakpoint('lg') ? 'lead-4' : ''} mx-4 mb-0`}>
+                <HeadingTag className={`eq-h3 fw-bold ${isBreakpoint('lg') ? 'lead-4' : ''} mx-4 mb-0`}>
                     <span className={`text-highlight`}>{getSectionFallbackLabel(section.id)}</span>
-                </h3>
+                </HeadingTag>
             </div>
         )
     }
@@ -155,7 +158,7 @@ function SectionHeader({section}) {
                 </div>
             )}
 
-            <h3 className={`fw-bold ${isBreakpoint('lg') ? 'lead-4' : ''} mx-4 mb-0`}
+            <HeadingTag className={`eq-h3 fw-bold ${isBreakpoint('lg') ? 'lead-4' : ''} mx-4 mb-0`}
                 dangerouslySetInnerHTML={{__html: title}}/>
         </div>
     )
@@ -173,8 +176,11 @@ function SectionContent({section, articles}) {
         )
     }
 
+    // One Suspense boundary per section: all article chunks resolve together, so the section
+    // appears once in its final layout instead of shifting as each article loads.
     return (
         <div className={`section-content ${shouldAddSpacerAfterTitle ? 'mt-md-5' : ''}`}>
+            <Suspense fallback={<SectionLoadingSkeleton/>}>
             {articles.map((article, key) => {
                 const Component = ARTICLES[article.component]
                 let mtClass = `mt-4 pt-1 pt-md-3`
@@ -184,9 +190,7 @@ function SectionContent({section, articles}) {
                 return (
                     <div className={`article-wrapper ${mtClass}`} key={key}>
                         {Component && (
-                            <Suspense fallback={<ArticleLoadingSkeleton/>}>
-                                <Component data={article}/>
-                            </Suspense>
+                            <Component data={article}/>
                         )}
 
                         {!Component && (
@@ -197,6 +201,7 @@ function SectionContent({section, articles}) {
                     </div>
                 )
             })}
+            </Suspense>
         </div>
     )
 }

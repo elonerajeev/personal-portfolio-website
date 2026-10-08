@@ -69,8 +69,7 @@
             "id": "home",
             "faIcon": "fa-solid fa-home",
             "locales": {
-                "en": {"title": "Home"},
-                "hi": {"title": "घर"}
+                "en": {"title": "Home"}
             }
         },
 
@@ -78,8 +77,7 @@
             "id": "background",
             "faIcon": "fa-solid fa-clock",
             "locales": {
-                "en": {"title": "History"},
-                "hi": {"title": "इतिहास"}
+                "en": {"title": "History"}
             }
         },
 
@@ -87,8 +85,7 @@
             "id": "showcase",
             "faIcon": "fa-solid fa-images",
             "locales": {
-                "en": {"title": "Showcase"},
-                "hi": {"title": "शोकेस"}
+                "en": {"title": "Showcase"}
             }
         },
 
@@ -96,8 +93,7 @@
             "id": "more",
             "faIcon": "fa-solid fa-plus",
             "locales": {
-                "en": {"title": "More"},
-                "hi": {"title": "अधिक"}
+                "en": {"title": "More"}
             }
         }
     ]

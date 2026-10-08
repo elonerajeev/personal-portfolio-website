@@ -1,0 +1,8 @@
+# One canonical host: send the old Netlify subdomain to the custom domain.
+https://rajeevxportfolio.netlify.app/*  https://www.rajeev.pro/:splat  301!
+http://rajeevxportfolio.netlify.app/*   https://www.rajeev.pro/:splat  301!
+
+# Old resume file names that may still be linked from elsewhere.
+/documents/Rajeev_Full_Stack_1yr.pdf      /documents/Rajeev_Kumar_DevOps_Cloud_Resume.pdf  301
+/documents/resume-rajeev-kumar.pdf        /documents/Rajeev_Kumar_DevOps_Cloud_Resume.pdf  301
+/documents/Rajeev-Kumar-cloud.pdf         /documents/Rajeev_Kumar_DevOps_Cloud_Resume.pdf  301

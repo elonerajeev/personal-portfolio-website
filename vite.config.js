@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import seoPlugin from './seo/vite-plugin-seo.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react()],
+  plugins: [react(), seoPlugin()],
   css: {
     preprocessorOptions: {
       scss: {

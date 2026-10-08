@@ -61,7 +61,7 @@ $loader-background-color: #111111;
 
     --theme-dark: #101010;
     --theme-dark-opacity: rgba(16, 16, 16, 0.2);
-    --theme-muted: #6c757d;
+    --theme-muted: #959ca3; // was #6c757d; raised for WCAG AA contrast on dark cards
     --theme-white: #EEE;
 
     --theme-bg: url('/images/css/bg-dark.png');

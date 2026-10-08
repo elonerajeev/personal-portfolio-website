@@ -35,7 +35,7 @@ function ProjectCard({className, img, fallbackIcon, fallbackIconColors, title, s
                               fallbackIconColors={fallbackIconColors}/>
 
                 <div className={`title-wrapper`}>
-                    <h5 className={`title fw-bold mb-0 text-highlight`}>{title}</h5>
+                    <h3 className={`eq-h5 title fw-bold mb-0 text-highlight`}>{title}</h3>
                     <span className={`font-family-subheadings fw-bold text-muted text-1 ms-1`}>{subtitle}</span>
                 </div>
 

@@ -30,7 +30,7 @@ function StatusMessage({title, message, faIcon, type}) {
                                   fallbackIconColors={fallbackIconColors}/>
 
                     <div className={`status-message-content mt-2`}>
-                        <h5 className={`fw-bold mb-3`}>{title}</h5>
+                        <h3 className={`eq-h5 fw-bold mb-3`}>{title}</h3>
                         <p className={`text-5 text-muted`} dangerouslySetInnerHTML={{__html: message}}/>
                     </div>
                 </div>

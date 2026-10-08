@@ -26,7 +26,7 @@ function FunFact({ img, fallbackIcon, fallbackIconColors, title, info }) {
                           }}/>
 
             <div className={`fun-fact-texts mt-3`}>
-                <h5 className={`text-highlight fw-bold mb-1`} dangerouslySetInnerHTML={{__html: title}}/>
+                <h3 className={`eq-h5 text-highlight fw-bold mb-1`} dangerouslySetInnerHTML={{__html: title}}/>
                 <span className={`mt-0 text-2 font-family-subheadings fw-bold`} dangerouslySetInnerHTML={{__html: info}}/>
             </div>
         </div>

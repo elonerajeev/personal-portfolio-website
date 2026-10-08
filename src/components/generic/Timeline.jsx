@@ -55,7 +55,7 @@ function TimelineItem({item}) {
             <div className={`timeline-content-wrapper`}>
                 <header className={`timeline-content-header mb-3`}>
                     <div className={`timeline-content-header-left`}>
-                        <h5 className={`title fw-bold mb-2`} dangerouslySetInnerHTML={{__html: utils.parseJsonText(item.title)}}/>
+                        <h3 className={`eq-h5 title fw-bold mb-2`} dangerouslySetInnerHTML={{__html: utils.parseJsonText(item.title)}}/>
                         <div className={`info ms-3 text-muted font-family-subheadings fw-bold text-2`}>
                             <FaIcon iconName={'fa-solid fa-building'} className={`me-2`}/>
                             <span className={``} dangerouslySetInnerHTML={{__html: item.info}}/>

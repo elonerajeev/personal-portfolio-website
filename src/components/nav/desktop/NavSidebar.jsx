@@ -114,13 +114,13 @@ function _getSectionLabel(section, getTranslation) {
 }
 
 function NavSidebarBottomMenu({shouldShrink}) {
-    const {canChangeLanguage} = useLanguage()
+    const {hasLanguages} = useLanguage()
     const {canChangeTheme} = useTheme()
     const {isAnimatedCursorEnabled} = useFeedbacks()
 
     return (
         <NavSidebarGroup direction={`horizontal`} shrink={shouldShrink}>
-            <NavSidebarGroupItem visible={canChangeLanguage}>
+            <NavSidebarGroupItem visible={hasLanguages}>
                 <LanguagePicker shrink={true}/>
             </NavSidebarGroupItem>
 

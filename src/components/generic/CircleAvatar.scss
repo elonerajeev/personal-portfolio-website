@@ -52,3 +52,20 @@ $circle-avatar-multipliers: (
     }
 }
 
+
+// Official tool logos: show the whole mark on a light disc so brand colours stay legible.
+// !important overrides the per-item icon colour that CircleAvatar sets inline.
+.circle-avatar:has(img[src*="images/tech/"]) {
+    background-color: #ffffff !important;
+
+    .image-view-wrapper {
+        padding: 20%;
+    }
+
+    .image {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        left: 0;
+    }
+}

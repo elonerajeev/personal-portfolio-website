@@ -7,8 +7,10 @@ function ImageCache({urls}) {
             <div className={`bg-green`} style={{width: '5px', height: '5px'}}/>
             {urls.map((url, key) => (
                 <img key={key}
-                     alt={`cached`}
+                     alt={``}
                      src={url}
+                     fetchPriority={`low`}
+                     decoding={`async`}
                      style={{width: '5px', height: '5px'}}/>
             ))}
         </div>

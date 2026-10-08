@@ -3,7 +3,7 @@
     "en": {
       "title": "Skills",
       "title_long_prefix": "Cloud & DevOps",
-      "title_long": "My **1 Year Skill Set**"
+      "title_long": "My **Skill Set**"
     }
   },
 
@@ -18,52 +18,52 @@
       "items": [
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/aws.svg",
             "fa": "fa-solid fa-cloud",
             "faColors": { "bg": "#1E3A8A", "fill": "#BFDBFE" }
           },
           "dates": {
-            "start": "2025",
+            "start": "2024",
             "end": null
           },
           "locales": {
             "en": {
               "title": "Cloud Infrastructure",
-              "text": "1 year of hands-on AWS infrastructure work focused on reliability, scalability, and clean deployment structure."
+              "text": "Hands-on AWS infrastructure work focused on reliability, scalability, and clean deployment structure."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/github-actions.svg",
             "fa": "fa-solid fa-diagram-project",
             "faColors": { "bg": "#0B3B2E", "fill": "#5EF3B3" }
           },
           "dates": {
-            "start": "2025",
+            "start": "2024",
             "end": null
           },
           "locales": {
             "en": {
               "title": "CI/CD & Automation",
-              "text": "1 year building CI/CD pipelines with repeatable build, test, and deployment automation."
+              "text": "Building CI/CD pipelines with repeatable build, test, and deployment automation."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/prometheus.svg",
             "fa": "fa-solid fa-chart-line",
             "faColors": { "bg": "#3F2A00", "fill": "#FFD166" }
           },
           "dates": {
-            "start": "2025",
+            "start": "2024",
             "end": null
           },
           "locales": {
             "en": {
               "title": "Observability & Operations",
-              "text": "1 year using monitoring and logs to improve uptime, visibility, and incident response quality."
+              "text": "Using monitoring and logs to improve uptime, visibility, and incident response quality."
             }
           }
         }
@@ -81,52 +81,52 @@
       "items": [
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/aws.svg",
             "fa": "fa-brands fa-aws",
             "faColors": { "bg": "#FFD700", "fill": "#111" }
           },
           "value": 83,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "AWS Cloud",
-              "info": "1 year working with AWS services for deployment, security, storage, and API-driven systems."
+              "info": "Working with AWS services for deployment, security, storage, and API-driven systems."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/azure.svg",
             "fa": "fa-brands fa-microsoft",
             "faColors": { "bg": "#0078D4", "fill": "#EEE" }
           },
           "value": 55,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Azure",
-              "info": "1 year of practical exposure to core Azure services and cloud fundamentals."
+              "info": "Practical exposure to core Azure services and cloud fundamentals."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/google-cloud.svg",
             "fa": "fa-brands fa-google",
             "faColors": { "bg": "#4285F4", "fill": "#EEE" }
           },
           "value": 50,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Google Cloud",
-              "info": "1 year of foundational work with compute, storage, and cloud-native deployment concepts."
+              "info": "Foundational work with compute, storage, and cloud-native deployment concepts."
             }
           }
         }
@@ -144,154 +144,154 @@
       "items": [
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/docker.svg",
             "fa": "fa-brands fa-docker",
             "faColors": { "bg": "#2496ED", "fill": "#EEE" }
           },
           "value": 80,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Docker",
-              "info": "1 year containerizing applications and standardizing deployment environments."
+              "info": "Containerizing applications and standardizing deployment environments."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/kubernetes.svg",
             "fa": "fa-solid fa-dharmachakra",
             "faColors": { "bg": "#326CE5", "fill": "#EEE" }
           },
           "value": 74,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Kubernetes",
-              "info": "1 year deploying and managing container workloads with core Kubernetes operations."
+              "info": "Deploying and managing container workloads with core Kubernetes operations."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/jenkins.svg",
             "fa": "fa-brands fa-jenkins",
             "faColors": { "bg": "#D33833", "fill": "#EEE" }
           },
           "value": 72,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Jenkins",
-              "info": "1 year building Jenkins pipelines for automated integration and delivery."
+              "info": "Building Jenkins pipelines for automated integration and delivery."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/github-actions.svg",
             "fa": "fa-brands fa-github",
             "faColors": { "bg": "#161B22", "fill": "#EEE" }
           },
           "value": 78,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "GitHub Actions",
-              "info": "1 year creating GitHub Actions workflows for testing and deployment automation."
+              "info": "Creating GitHub Actions workflows for testing and deployment automation."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/git.svg",
             "fa": "fa-brands fa-git",
             "faColors": { "bg": "#F05032", "fill": "#111" }
           },
           "value": 82,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Git & GitHub",
-              "info": "1 year following clean version-control workflows, collaboration, and release branching."
+              "info": "Following clean version-control workflows, collaboration, and release branching."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/terraform.svg",
             "fa": "fa-solid fa-cubes",
             "faColors": { "bg": "#623CE4", "fill": "#EEE" }
           },
           "value": 72,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Terraform",
-              "info": "1 year using Terraform for consistent infrastructure provisioning."
+              "info": "Using Terraform for consistent infrastructure provisioning."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/helm.svg",
             "fa": "fa-solid fa-boxes-stacked",
             "faColors": { "bg": "#0F766E", "fill": "#CCFBF1" }
           },
           "value": 66,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Helm",
-              "info": "1 year using Helm charts for Kubernetes release consistency across environments."
+              "info": "Using Helm charts for Kubernetes release consistency across environments."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/grafana.svg",
             "fa": "fa-solid fa-chart-line",
             "faColors": { "bg": "#E6522C", "fill": "#FEE2E2" }
           },
           "value": 70,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Prometheus & Grafana",
-              "info": "1 year building dashboards and monitoring views for service health tracking."
+              "info": "Building dashboards and monitoring views for service health tracking."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/linux.svg",
             "fa": "fa-brands fa-linux",
             "faColors": { "bg": "#FCC624", "fill": "#111" }
           },
           "value": 80,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Linux",
-              "info": "1 year working with Linux operations, server basics, and troubleshooting."
+              "info": "Working with Linux operations, server basics, and troubleshooting."
             }
           }
         }
@@ -309,26 +309,60 @@
       "items": [
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/bash.svg",
             "fa": "fa-solid fa-terminal",
             "faColors": { "bg": "#1F2937", "fill": "#93C5FD" }
           },
           "value": 76,
           "dates": {
-            "start": "2025"
+            "start": "2024"
           },
           "locales": {
             "en": {
               "title": "Bash & Automation Scripting",
-              "info": "1 year writing shell scripts for task automation, checks, and repeatable operations."
+              "info": "Writing shell scripts for task automation, checks, and repeatable operations."
             }
           }
         },
         {
           "icon": {
-            "img": null,
+            "img": "images/tech/aws-iam.svg",
             "fa": "fa-solid fa-shield-halved",
             "faColors": { "bg": "#14532D", "fill": "#DCFCE7" }
+          },
+          "value": 70,
+          "dates": {
+            "start": "2024"
+          },
+          "locales": {
+            "en": {
+              "title": "Networking & Security Basics",
+              "info": "Applying networking and IAM fundamentals for safer cloud deployment."
+            }
+          }
+        },
+        {
+          "icon": {
+            "img": "images/tech/aws-cloudwatch.svg",
+            "fa": "fa-solid fa-screwdriver-wrench",
+            "faColors": { "bg": "#3F3F46", "fill": "#E4E4E7" }
+          },
+          "value": 74,
+          "dates": {
+            "start": "2024"
+          },
+          "locales": {
+            "en": {
+              "title": "Incident Troubleshooting",
+              "info": "Handling build, deployment, and runtime issues with root-cause troubleshooting."
+            }
+          }
+        },
+        {
+          "icon": {
+            "img": "images/tech/n8n.svg",
+            "fa": "fa-solid fa-robot",
+            "faColors": { "bg": "#1F2937", "fill": "#EA4B71" }
           },
           "value": 70,
           "dates": {
@@ -336,25 +370,8 @@
           },
           "locales": {
             "en": {
-              "title": "Networking & Security Basics",
-              "info": "1 year applying networking and IAM fundamentals for safer cloud deployment."
-            }
-          }
-        },
-        {
-          "icon": {
-            "img": null,
-            "fa": "fa-solid fa-screwdriver-wrench",
-            "faColors": { "bg": "#3F3F46", "fill": "#E4E4E7" }
-          },
-          "value": 74,
-          "dates": {
-            "start": "2025"
-          },
-          "locales": {
-            "en": {
-              "title": "Incident Troubleshooting",
-              "info": "1 year handling build, deployment, and runtime issues with root-cause troubleshooting."
+              "title": "AI Workflow Automation",
+              "info": "Building AI-powered workflow automation with n8n and API-first integrations, as in Flowsyc at Zintellix."
             }
           }
         }
@@ -366,14 +383,13 @@
       "component": "ArticleList",
       "config": {},
       "locales": {
-        "en": { "title": "Languages" },
-        "hi": { "title": "भाषा" }
+        "en": { "title": "Languages" }
       },
 
       "items": [
         {
           "icon": {
-            "img": "images/flags/en.png",
+            "img": "images/flags/in.svg",
             "fa": null,
             "faColors": { "bg": null, "fill": null }
           },
