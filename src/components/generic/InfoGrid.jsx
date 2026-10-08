@@ -32,7 +32,7 @@ function InfoGridItem({item}) {
                 </div>
 
                 <div className={`text-wrapper`}>
-                    <h6 className={`fw-bold mb-1`}>{item.title}</h6>
+                    <h3 className={`eq-h6 fw-bold mb-1`}>{item.title}</h3>
                     {item.href && (<ExternalLink href={item.href} className={`text-3 fw-bold`}>{item.value}</ExternalLink>)}
                     {!item.href && (<span className={`text-3 text-muted`}>{item.value}</span>)}
                 </div>

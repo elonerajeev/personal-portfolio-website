@@ -20,7 +20,7 @@ function DropdownPicker({availableOptions, selectedOption, size, onOptionSelecte
         <div className={`dropdown-picker-wrapper`}>
             {availableOptions.length > 0 && (
                 <Dropdown className={`dropdown-picker`}>
-                    <Dropdown.Toggle variant={`transparent`} className={`dropdown-picker-toggle`} onClickCapture={_onToggleClicked}>
+                    <Dropdown.Toggle variant={`transparent`} className={`dropdown-picker-toggle`} onClickCapture={_onToggleClicked} aria-label={selectedOption.label}>
                         <MenuItem label={selectedOption.label}
                                   icon={selectedOption.imgUrl || selectedOption.faIcon}
                                   faSuffix={!shouldBehaveAsButton ? "fa-solid fa-caret-down" : null}

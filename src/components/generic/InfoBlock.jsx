@@ -22,7 +22,7 @@ function InfoBlockImageCol({img, fallbackIcon, fallbackIconColors}) {
     return (
         <div className={`info-block-image-col`}>
             {img && (
-                <ImageView src={img} alt={`logo`}/>
+                <ImageView src={img} alt={`logo`} eager={true}/>
             )}
             {!img && (
                 <FaIcon iconName={fallbackIcon}

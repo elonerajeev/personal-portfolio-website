@@ -3,6 +3,7 @@ import React from 'react'
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 import InfoBadge from "/src/components/generic/InfoBadge.jsx"
 import ExternalLink from "/src/components/generic/ExternalLink.jsx"
+import {altFromSrc} from "/src/components/generic/ImageView.jsx"
 
 function Thread({ items, shouldShowAsComplete }) {
     items = items || []
@@ -11,12 +12,18 @@ function Thread({ items, shouldShowAsComplete }) {
         <ul className={`thread`}>
             {items.map((item, key) => (
                 <li key={key} className={`thread-item`}>
-                    <div className="fa fa-stack circle">
-                        <i className="fa fa-circle fa-stack-1x"/>
-                    </div>
+                    {item.img ? (
+                        <div className={`circle circle-logo`}>
+                            <img src={item.img} alt={altFromSrc(item.img)} loading={`lazy`} width={40} height={40}/>
+                        </div>
+                    ) : (
+                        <div className="fa fa-stack circle">
+                            <i className="fa fa-circle fa-stack-1x"/>
+                        </div>
+                    )}
 
                     <div className={`thread-item-content`}>
-                        <h6 className={`title fw-bold`} dangerouslySetInnerHTML={{__html: item.title}}/>
+                        <h3 className={`eq-h6 title fw-bold`} dangerouslySetInnerHTML={{__html: item.title}}/>
 
                         <div className={`badges pt-1`}>
                             <InfoBadge faIcon={`fa-solid fa-calendar`} text={item.date}/>

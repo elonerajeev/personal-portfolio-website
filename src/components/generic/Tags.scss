@@ -2,6 +2,8 @@
 
 .tags {
     .badge {
+        display: inline-block;
+        white-space: nowrap;
         background-color: var(--theme-tag-color);
         color: var(--theme-secondary);
         font-family: $custom-subheadings-font-family;
