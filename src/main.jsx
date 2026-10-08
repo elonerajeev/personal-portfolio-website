@@ -28,6 +28,19 @@ const AppProviders = ({ children }) => (
     </ErrorBoundary>
 )
 
+// After a new deploy, an already-open tab can request code chunks that no longer exist.
+// Reload once to pick up the new version instead of showing the error screen.
+window.addEventListener('vite:preloadError', (event) => {
+    const key = 'chunk-reload-at'
+    let last = 0
+    try { last = Number(sessionStorage.getItem(key)) || 0 } catch { /* storage unavailable */ }
+    if (Date.now() - last < 10000)
+        return // already reloaded just now; let the error boundary handle it
+    event.preventDefault()
+    try { sessionStorage.setItem(key, String(Date.now())) } catch { /* storage unavailable */ }
+    window.location.reload()
+})
+
 let container = null
 
 document.addEventListener('DOMContentLoaded', function(event) {
