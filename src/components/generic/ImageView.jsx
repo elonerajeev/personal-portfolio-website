@@ -48,7 +48,7 @@ function ImageView({className, src, alt, eager}) {
                  className={`image ${loadStatus === LoadStatus.LOADING ? `invisible position-absolute` : ``}`}
                  alt={alt}
                  loading={eager ? "eager" : "lazy"}
-                 fetchPriority={eager ? "high" : undefined}/>
+                 fetchpriority={eager ? "high" : undefined}/>
             )}
         </div>
     )
