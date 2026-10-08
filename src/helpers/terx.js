@@ -161,6 +161,19 @@ const ASCII = [
     '|_| \\_\\_|\\_\\',
 ]
 
+function osRelease(m) {
+    return [
+        ['NAME', 'RajeevOS'],
+        ['VERSION', `${new Date().getFullYear()}.${String(new Date().getMonth() + 1).padStart(2, '0')} (Cloud & DevOps)`],
+        ['ID', 'rajeevos'],
+        ['ID_LIKE', 'kali debian'],
+        ['PRETTY_NAME', `RajeevOS – ${m.role}`],
+        ['HOME_URL', 'https://www.rajeev.pro'],
+        ['SUPPORT_URL', 'https://github.com/elonerajeev'],
+        ['LOCATION', m.location],
+    ].map(([k, v]) => line(T(`${k}=`, 'info'), T(`"${v}"`, /_URL$/.test(k) ? 'accent' : undefined, /_URL$/.test(k) ? v : undefined)))
+}
+
 /* ---------- filesystem view ---------- */
 
 export const DIRS = ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'achievements', 'updates', 'contact']
@@ -191,13 +204,17 @@ const COMMANDS = {
     'kubectl get pods': { desc: 'projects as running pods' },
     'docker ps': { desc: 'tool stack as containers' },
     'terraform plan': { desc: 'what hiring me would provision' },
+    'systemctl status career': { desc: 'career as a running service' },
+    'helm list': { desc: 'skills as deployed Helm releases' },
+    'aws sts get-caller-identity': { desc: 'my identity card' },
+    'cat /etc/os-release': { desc: 'the OS this terminal runs on' },
     history: { desc: 'commands you ran' },
     date: { desc: 'current date' },
     echo: { desc: 'print text' },
     clear: { desc: 'clear the screen (Ctrl+L)' },
 }
 
-export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'kubectl get skills', 'sudo', 'exit'])]
+export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'kubectl get skills', 'terraform apply', 'sudo', 'exit'])]
 
 function sectionOutput(name, m) {
     switch (name) {
@@ -337,6 +354,8 @@ export function runCommand(raw, state) {
         if (DIRS.includes(t)) return { output: [], cwd: t }
         return { output: [line(T(`cd: ${args[0]}: No such file or directory`, 'err'))], cwd }
     }
+    case cmd === 'cat' && arg === '/etc/os-release':
+        return { output: osRelease(m), cwd }
     case cmd === 'cat': {
         const t = target(arg) || cwd
         const out = t && sectionOutput(t.replace(/\.(txt|md)$/, '') === 'readme' ? 'README.md' : t, m)
@@ -397,6 +416,57 @@ export function runCommand(raw, state) {
                 ? line(T('Apply → ', 'muted'), T("run 'contact' to start the conversation", 'accent'))
                 : line(T("Next: run 'terraform apply' or 'contact'", 'muted'))].filter(Boolean)
         return { output: out, cwd }
+    }
+    case full === 'systemctl status career' || full === 'systemctl status career.service': {
+        const cur = m.work.find((w) => w.current)
+        const since = m.since ? m.since.toLocaleString('en', { month: 'short', year: 'numeric' }) : 'n/a'
+        const journal = m.work.slice(0, 4).map((w) => line(
+            T(`${(w.start ? w.start.toLocaleString('en', { month: 'short', year: 'numeric' }) : '').padEnd(10)} rajeev career[1]: `, 'muted'),
+            T(`${w.current ? 'Started' : 'Completed'} ${w.role} @ ${w.company}`)))
+        return { output: [
+            line(T('● ', 'ok'), T('career.service', 'bold'), T(` – ${m.name}, ${m.role}`)),
+            line(T('     Loaded: ', 'info'), T('loaded (/etc/systemd/system/career.service; '), T('enabled', 'ok'), T('; preset: enabled)')),
+            line(T('     Active: ', 'info'), T('active (running)', 'ok'), T(` since ${since}; ${yearsText(m.months)} in Cloud & DevOps`)),
+            line(T('   Main PID: ', 'info'), T(cur ? `${cur.role} @ ${cur.company}` : m.role)),
+            line(T('      Tasks: ', 'info'), T(`${m.projects.length} projects, ${m.skills.flatMap((g) => /language/i.test(g.group) ? [] : g.items).length} tools`)),
+            line(T('     Status: ', 'info'), T(m.status, 'ok')),
+            blank(),
+            ...journal,
+        ], cwd }
+    }
+    case full === 'helm list' || full === 'helm ls' || full === 'helm list -a': {
+        const out = [line(T('NAME'.padEnd(30) + 'NAMESPACE'.padEnd(22) + 'REVISION  STATUS     CHART', 'bold'))]
+        for (const g of m.skills.filter((x) => !/language/i.test(x.group))) {
+            const ns = g.group.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+            g.items.forEach((s, i) => {
+                const name = s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 28)
+                out.push(line(T(name.padEnd(30)), T(ns.slice(0, 20).padEnd(22), 'muted'), T(String(i + 1).padEnd(10)), T('deployed'.padEnd(11), 'ok'), T(`${name}-${Math.max(1, Math.floor((m.months || 12) / 12))}.0.0`, 'info')))
+            })
+        }
+        return { output: out, cwd }
+    }
+    case full === 'aws sts get-caller-identity': {
+        const cur = m.work.find((w) => w.current)
+        const gh = m.contact.find((c) => /github/i.test(c.href))
+        const li = m.contact.find((c) => /linkedin/i.test(c.href))
+        const mail = m.contact.find((c) => /^mailto:/.test(c.href))
+        const fields = [
+            ['UserId', 'AIDARAJEEVKUMAR'],
+            ['Account', 'rajeev-pro'],
+            ['Arn', `arn:aws:iam::rajeev-pro:user/${m.role.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`],
+            ['Name', m.name],
+            ['Role', cur ? `${cur.role} @ ${cur.company}` : m.role],
+            ['Experience', yearsText(m.months)],
+            ['Location', m.location],
+            mail && ['Email', mail.value, mail.href],
+            gh && ['GitHub', gh.href, gh.href],
+            li && ['LinkedIn', li.href, li.href],
+        ].filter(Boolean)
+        return { output: [
+            line(T('{')),
+            ...fields.map(([k, v, href], i) => line(T(`    "${k}": `, 'info'), T(`"${v}"`, href ? 'accent' : 'ok', href), T(i < fields.length - 1 ? ',' : ''))),
+            line(T('}')),
+        ], cwd }
     }
     case cmd === 'sudo':
         return { output: [line(T('you are already root. With great power comes great responsibility.', 'warn'))], cwd }
