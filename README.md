@@ -1,110 +1,102 @@
-# 🚀 **Rajeev Kumar - Portfolio Website**    
+# Rajeev Kumar — Portfolio
 
-🎯 **Live Demo**: [Click Here](https://rajeevxportfolio.netlify.app/)  
+[![CI / Deploy](https://github.com/elonerajeev/personal-portfolio-website/actions/workflows/ci.yml/badge.svg)](https://github.com/elonerajeev/personal-portfolio-website/actions/workflows/ci.yml)
+[![Netlify](https://img.shields.io/badge/live-rajeevxportfolio.netlify.app-34d399)](https://rajeevxportfolio.netlify.app)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-📌 **GitHub Repo**: [Portfolio Repository](https://github.com/elonerajeev/personal-portfolio-website.git)  
+Personal site of **Rajeev Kumar**, Cloud & DevOps Engineer. It's a fast, static, accessible
+single page with experience, projects, skills, credentials and a contact form.
 
----
+**Live:** https://rajeevxportfolio.netlify.app
 
-## 📖 **Overview**  
-This is my **personal portfolio website** built with **React.js**. It showcases my:  
-✅ **Skills & Expertise**  
-✅ **Projects & Achievements**  
-✅ **Education & Experience**  
-✅ **Resume Download**  
-✅ **Contact Information**  
+## Stack
 
-It is designed to be **fast, responsive, and visually appealing**.  
+| Layer     | Choice                                                                  |
+| --------- | ----------------------------------------------------------------------- |
+| Framework | [Astro 7](https://astro.build) (static output, zero JS by default)      |
+| Styling   | [Tailwind CSS 4](https://tailwindcss.com) with light/dark design tokens |
+| Language  | TypeScript (strict)                                                     |
+| Content   | Astro content collections (YAML + Zod schemas)                          |
+| Icons     | `astro-icon` with Lucide + Simple Icons, inlined at build time          |
+| Forms     | Netlify Forms (honeypot spam protection, no third-party keys)           |
+| Hosting   | Netlify, deployed by GitHub Actions (PRs get preview URLs)              |
+| Quality   | `astro check`, ESLint 10, Prettier, Dependabot                          |
 
----
+## Getting started
 
-## 🚀 **Tech Stack**  
-| Technology | Purpose |
-|------------|---------|
-| **React.js** | Frontend Development |
-| **Tailwind CSS** | Styling & UI Components |
-| **Framer Motion** | Smooth Animations |
-| **React Router** | Navigation Between Pages |
-| **EmailJS** | Contact Form Functionality |
-| **FontAwesome** | Icons for UI Elements |
+Requires Node.js 22.12+ (see `.nvmrc`).
 
----
-
-## 📌 **Features**  
-✅ **Responsive Design** - Works on all devices 📱💻  
-✅ **Dark Mode Toggle 🌙**  
-✅ **Interactive Animations 🎨**  
-✅ **Project Showcase with Filters**  
-✅ **Download Resume as PDF 📄**  
-✅ **Contact Form with EmailJS ✉️**
-
-
-## 🎨 **UI Preview**  
-| **Section** | **Preview** |
-|------------|------------|
-| **Homepage** | ![Home](https://rajeevxportfolio.netlify.app/) |
-| **Portfolio** | ![Portfolio](https://rajeevxportfolio.netlify.app/) |
-| **Contact** | ![Contact](https://rajeevxportfolio.netlify.app/#contact) |
-
----
-
-## 🔧 **Installation & Setup**  
-Follow these simple steps to set up the project on your local machine:  
-
-1️⃣ **Clone the Repository**  
-```sh
-git clone https://github.com/elonerajeev/personal-portfolio-website.git
-cd personal-portfolio-website
-```
-
-2️⃣ **Install Dependencies**  
 ```sh
 npm install
+npm run dev        # http://localhost:4321
 ```
 
-3️⃣ **Start the Development Server**  
+| Script             | What it does                                   |
+| ------------------ | ---------------------------------------------- |
+| `npm run dev`      | Start the dev server                           |
+| `npm run build`    | Build the static site to `dist/`               |
+| `npm run preview`  | Serve the production build locally             |
+| `npm run check`    | Type-check `.astro` and `.ts` files            |
+| `npm run lint`     | ESLint                                         |
+| `npm run format`   | Format everything with Prettier                |
+| `npm run validate` | Everything CI runs: check, lint, format, build |
+
+## Editing content
+
+All content is typed data. You never need to touch the components.
+
+| What                        | File                                       |
+| --------------------------- | ------------------------------------------ |
+| Name, role, email, socials  | `src/data/site.ts`                         |
+| Hero stats & core strengths | `src/data/site.ts`                         |
+| Work experience             | `src/content/experience.yaml`              |
+| Projects                    | `src/content/projects.yaml`                |
+| Skills                      | `src/content/skills.yaml`                  |
+| Certifications/achievements | `src/content/credentials.yaml`             |
+| Education                   | `src/content/education.yaml`               |
+| Resume PDF                  | `public/documents/rajeev-kumar-resume.pdf` |
+
+Schemas live in `src/content.config.ts`, so a typo (a bad date, a missing field, a wrong
+category) fails the build instead of shipping a broken page.
+
+## Project structure
+
+```
+src/
+├── assets/            # images optimised at build time (AVIF/WebP, responsive sizes)
+├── components/
+│   ├── sections/      # Hero, About, Experience, Projects, Skills, Credentials, Education, Contact
+│   └── *.astro        # Header, Footer, Section, Tags, ThemeToggle
+├── content/           # YAML content collections
+├── data/site.ts       # site-wide profile data
+├── icons/             # local SVG icons
+├── layouts/           # BaseLayout: SEO, Open Graph, JSON-LD, theme
+├── lib/               # small helpers
+├── pages/             # index, thanks, 404, robots.txt
+└── styles/global.css  # Tailwind + theme tokens
+```
+
+## Deployment
+
+`.github/workflows/ci.yml` validates every push and PR, then deploys with the Netlify CLI:
+
+- **`main`**: production deploy.
+- **Pull requests**: preview deploy at `pr-<number>--<site>.netlify.app`, with the link posted on the PR.
+
+Required repository secrets: `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID`.
+Security headers and legacy-URL redirects are in `netlify.toml`.
+
+### Custom domain
+
+When the custom domain goes live (e.g. `rajeev.pro`), add it in Netlify, then set it as a
+repository variable:
+
 ```sh
-npm run dev
+gh variable set SITE_URL --body "https://rajeev.pro"
 ```
 
-4️⃣ **Open in Browser**  
-Visit: `http://localhost:5173/personal-portfolio-website/`
+Canonical URLs, the sitemap, `robots.txt` and Open Graph tags all derive from it.
 
----
+## License
 
-## 📄 **Resume Integration**  
-To update your resume, replace the file in the **public/documents** folder:  
-```sh
-/public/documents/rajeevKumar_JIETCS22087.pdf
-```
-Ensure the **Resume.js** component points to the correct file:
-```jsx
-const resumeUrl = "/documents/rajeevKumar_JIETCS22087.pdf";
-```
-
----
-
-## 📬 **Contact Me**  
-💼 **Portfolio**: [elonerajeev.github.io](https://elonerajeev.github.io)  
-📧 **Email**: [elonerajeev@gmail.com](mailto:elonerajeev@gmail.com)  
-🔗 **LinkedIn**: [linkedin.com/in/heyrajeev1](https://www.linkedin.com/in/heyrajeev1/)  
-🐙 **GitHub**: [github.com/elonerajeev](https://github.com/elonerajeev)  
-
----
-
-## 📜 **License**  
-This project is **open-source** and available under the **MIT License**.  
-
----
-
-## ⭐ **Show Your Support**  
-If you like this project, **give it a star ⭐** on GitHub! 🙌  
-
----
-
-### 🎯 **Next Steps** (Future Improvements)  
-✅ Add a blog section 📝  
-✅ Improve animations for better UI ✨  
-✅ Optimize SEO for better visibility 🔍  
-
----
+[MIT](LICENSE). The code is free to reuse; the personal content (text, photo, resume) is not.
