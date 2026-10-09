@@ -3,6 +3,7 @@ import React from 'react'
 import Article from "/src/components/wrappers/Article.jsx"
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
+import {useData} from "/src/providers/DataProvider.jsx"
 import {useUtils} from "/src/helpers/utils.js"
 
 const utils = useUtils()
@@ -79,6 +80,25 @@ function LogoDisc({src, title, size = 'md'}) {
     )
 }
 
+/** The venture's domain as a blue link: the site when live, otherwise a "notify me" email. */
+function VentureLink({v, className = ''}) {
+    const {getSettings} = useData()
+    if (!v.domain) return null
+    if (v.live) {
+        return <a className={`v-link ${className}`} href={v.href} target={`_blank`} rel={`noopener noreferrer`}>{v.domain}</a>
+    }
+    const email = getSettings()?.emailjs?.toEmail
+    if (!email) return <span className={`v-link-muted ${className}`}>{v.domain}</span>
+    const subject = encodeURIComponent(`Notify me: ${v.title}`)
+    const body = encodeURIComponent(`Hi Rajeev, please let me know when ${v.domain} launches.`)
+    return (
+        <a className={`v-link ${className}`} href={`mailto:${email}?subject=${subject}&body=${body}`}
+           title={`Not live yet: click to get notified when ${v.domain} launches`}>
+            {v.domain}
+        </a>
+    )
+}
+
 function DomainAction({v}) {
     if (v.live) {
         return (
@@ -88,8 +108,8 @@ function DomainAction({v}) {
         )
     }
     return (
-        <span className={`v-domain`} title={`Not live yet`}>
-            <FaIcon iconName={`fa-solid fa-globe`} className={`me-2`}/>{v.domain}<span className={`v-domain-soon`}>soon</span>
+        <span className={`v-domain`}>
+            <FaIcon iconName={`fa-solid fa-globe`} className={`me-2`}/><VentureLink v={v}/><span className={`v-domain-soon`}>soon</span>
         </span>
     )
 }
@@ -197,7 +217,7 @@ function ProjectBoard({v}) {
                 <LogoDisc src={v.img} title={v.title} size={`md`}/>
                 <div>
                     <div className={`fw-bold`}>{v.title}</div>
-                    <div className={`v-mono v-board-muted`}>{v.domain}</div>
+                    <div className={`v-mono`}><VentureLink v={v}/></div>
                 </div>
             </div>
 

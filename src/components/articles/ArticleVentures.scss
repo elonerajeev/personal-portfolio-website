@@ -64,6 +64,14 @@ $mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospa
         font-size: 0.8rem;
         color: var(--theme-secondary-3, #bbb);
     }
+    .v-link {
+        color: #58a6ff !important;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        &:hover { color: #79b8ff !important; }
+    }
+    .v-link-muted { color: var(--theme-secondary-3, #bbb); }
+
     .v-domain-soon {
         margin-left: 0.6rem;
         padding: 0 0.4rem;

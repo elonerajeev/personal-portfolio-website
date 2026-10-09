@@ -318,7 +318,11 @@ function sectionOutput(name, m) {
             const facts = [['owner', v.info.owner], ['team', v.info.contributors !== undefined ? `${v.info.contributors} contributor${v.info.contributors === 1 ? '' : 's'}` : null], ['pricing', v.info.pricing], ['launch', v.info.launch]].filter(([, x]) => x)
             if (facts.length) out.push(blank(), ...facts.map(([k, x]) => line(T(`  ${k}`.padEnd(12), 'info'), T(x))))
             if (v.href) out.push(line(T('  → ', 'muted'), T(v.domain || v.href, 'accent', v.href)))
-            else if (v.domain) out.push(line(T(`  → ${v.domain}`, 'muted'), T('  (not live yet)', 'muted')))
+            else if (v.domain) {
+                const mail = m.contact.find((c) => /^mailto:/.test(c.href))
+                const notify = mail && `${mail.href}?subject=${encodeURIComponent(`Notify me: ${v.title}`)}`
+                out.push(line(T('  → ', 'muted'), T(v.domain, 'info', notify || undefined), T('  (not live yet · click to get notified)', 'muted')))
+            }
         }
         return out
     }
