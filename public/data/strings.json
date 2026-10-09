@@ -1,6 +1,8 @@
 {
     "locales": {
         "en": {
+            "dark": "Dark theme",
+            "light": "Light theme",
             "link": "View certificate",
             "see_project": "See project",
             "about": "About",

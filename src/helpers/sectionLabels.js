@@ -3,6 +3,7 @@ const SECTION_LABELS = {
     education: "Education",
     skills: "Skills",
     resume: "Resume",
+    ventures: "Ventures",
     experience: "Experience",
     portfolio: "Projects",
     achievements: "Achievements",

@@ -35,7 +35,8 @@ const ARTICLES = {
     ArticleTerminal: lazy(() => import("/src/components/articles/ArticleTerminal.jsx")),
     ArticleTestimonials: lazy(() => import("/src/components/articles/ArticleTestimonials.jsx")),
     ArticleThread: lazy(() => import("/src/components/articles/ArticleThread.jsx")),
-    ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx"))
+    ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx")),
+    ArticleVentures: lazy(() => import("/src/components/articles/ArticleVentures.jsx"))
 }
 
 const utils = useUtils()

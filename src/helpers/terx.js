@@ -7,7 +7,7 @@
  * by React (no HTML injection).
  *
  * Output format: an array of lines; each line is an array of segments
- *   { text, tone?, href? }   tone: 'accent' | 'muted' | 'ok' | 'warn' | 'err' | 'info' | 'bold'
+ *   { text, tone?, href?, download? }   tone: 'accent' | 'muted' | 'ok' | 'warn' | 'err' | 'info' | 'bold'
  */
 
 export const MAX_INPUT = 200
@@ -122,7 +122,19 @@ export function buildModel(settings, sections) {
     const key = (h) => h.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '').toLowerCase()
     const contact = contacts.filter((c) => (seen.has(key(c.href)) ? false : seen.add(key(c.href))))
 
-    const resumeHref = safeHref(items('resume')?.[0]?.links?.find((x) => x.href)?.href)
+    const resumeHref = safeHref(items('about', 'resume')?.[0]?.links?.find((x) => x.href)?.href)
+
+    const ventures = (items('ventures') || []).map((i) => {
+        const l = en(i.locales)
+        const text = plain(l.text)
+        return {
+            title: plain(l.title),
+            status: /coming soon/i.test(text) ? 'coming soon' : 'live',
+            text: text.replace(/^coming soon\s*·\s*/i, ''),
+            domain: (l.tags || []).find((t) => /\.rajeev\.pro$/.test(t)) || '',
+            href: safeHref(i.links?.find((x) => x.href)?.href),
+        }
+    })
     const about = plain(en(items('about', 'short_description')?.[0]?.locales).text)
 
     return {
@@ -130,7 +142,7 @@ export function buildModel(settings, sections) {
         role: en(profile.locales).role || 'Cloud & DevOps Engineer',
         status: en(settings?.status?.locales).message || '',
         location: 'India',
-        about, work, projects, skills, education, contact, resumeHref,
+        about, work, projects, skills, education, contact, resumeHref, ventures,
         certs: mapThread(items('achievements', 'certifications')),
         achievements: mapThread(items('achievements', 'achievements')),
         updates: mapThread(items('updates', 'updates')),
@@ -141,7 +153,7 @@ export function buildModel(settings, sections) {
 
 /* ---------- output helpers ---------- */
 
-const T = (text, tone, href) => ({ text: String(text), tone, href })
+const T = (text, tone, href, download) => ({ text: String(text), tone, href, download })
 const line = (...segs) => segs.flat().filter(Boolean)
 const blank = () => [T('')]
 const heading = (text) => line(T(`# ${text}`, 'accent'))
@@ -176,7 +188,7 @@ function osRelease(m) {
 
 /* ---------- filesystem view ---------- */
 
-export const DIRS = ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'achievements', 'updates', 'contact']
+export const DIRS = ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'achievements', 'ventures', 'updates', 'contact']
 const FILES = ['resume.pdf', 'README.md']
 
 /* ---------- commands ---------- */
@@ -198,7 +210,9 @@ const COMMANDS = {
     achievements: { desc: 'achievements' },
     updates: { desc: 'latest news' },
     contact: { desc: 'how to reach me' },
-    resume: { desc: 'download the resume (PDF)' },
+    ventures: { desc: 'what I am launching next' },
+    resume: { desc: 'view or download my resume (PDF)' },
+    fullscreen: { desc: 'toggle fullscreen (Esc to exit)' },
     uptime: { desc: 'time spent in Cloud/DevOps' },
     'git log': { desc: 'career timeline as commits' },
     'kubectl get pods': { desc: 'projects as running pods' },
@@ -214,7 +228,7 @@ const COMMANDS = {
     clear: { desc: 'clear the screen (Ctrl+L)' },
 }
 
-export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'kubectl get skills', 'terraform apply', 'sudo', 'exit'])]
+export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'kubectl get skills', 'terraform apply', 'sudo', 'exit', 'fullscreen'])]
 
 function sectionOutput(name, m) {
     switch (name) {
@@ -273,9 +287,30 @@ function sectionOutput(name, m) {
     case 'contact':
         return [heading('contact'), ...m.contact.map((c) => line(T((c.label || 'link').padEnd(10), 'info'), T(c.value, 'accent', c.href))),
             line(T('location'.padEnd(10), 'info'), T(m.location))]
+    case 'ventures': {
+        const out = [heading('ventures'), line(T("what I'm building next, alongside my DevOps work", 'muted')), blank()]
+        for (const v of m.ventures) {
+            out.push(line(T(v.status === 'live' ? '● ' : '◌ ', v.status === 'live' ? 'ok' : 'warn'), T(v.title, 'bold'), T(`  [${v.status}]`, v.status === 'live' ? 'ok' : 'warn')))
+            if (v.text) out.push(line(T(`  ${v.text}`)))
+            if (v.href) out.push(line(T('  → ', 'muted'), T(v.domain || v.href, 'accent', v.href)))
+            else if (v.domain) out.push(line(T(`  → ${v.domain} (launching soon)`, 'muted')))
+            out.push(blank())
+        }
+        return out
+    }
     case 'resume.pdf':
-    case 'resume':
-        return m.resumeHref ? [line(T('resume.pdf  ', 'info'), T('download / open', 'accent', m.resumeHref))] : [line(T('resume not available', 'warn'))]
+    case 'resume': {
+        if (!m.resumeHref) return [line(T('resume not available', 'warn'))]
+        const file = m.resumeHref.split('/').pop()
+        return [
+            heading('resume'),
+            line(T(`${m.name} – ${m.role}`, 'bold'), T(` · ${yearsText(m.months)} in Cloud & DevOps`, 'muted')),
+            blank(),
+            line(T('  ⬇ ', 'ok'), T('Download PDF', 'accent', m.resumeHref, file), T('    ', undefined), T('👁 ', 'info'), T('Open in browser', 'accent', m.resumeHref)),
+            blank(),
+            line(T("tip: 'aws sts get-caller-identity' prints my identity card", 'muted')),
+        ]
+    }
     default:
         return null
     }
@@ -361,7 +396,7 @@ export function runCommand(raw, state) {
         const out = t && sectionOutput(t.replace(/\.(txt|md)$/, '') === 'readme' ? 'README.md' : t, m)
         return out ? { output: out, cwd } : { output: [line(T(`cat: ${args[0] || ''}: No such file or directory`, 'err'))], cwd }
     }
-    case ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'certs', 'achievements', 'updates', 'contact', 'resume'].includes(cmd):
+    case ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'certs', 'achievements', 'ventures', 'updates', 'contact', 'resume'].includes(cmd):
         return { output: sectionOutput(cmd === 'certs' ? 'certifications' : cmd, m), cwd }
     case full === 'git log' || full.startsWith('git log'): {
         const events = [
@@ -468,6 +503,8 @@ export function runCommand(raw, state) {
             line(T('}')),
         ], cwd }
     }
+    case cmd === 'fullscreen' || full === 'exit fullscreen':
+        return { output: [], cwd, fullscreen: full === 'exit fullscreen' ? false : 'toggle' }
     case cmd === 'sudo':
         return { output: [line(T('you are already root. With great power comes great responsibility.', 'warn'))], cwd }
     case cmd === 'exit' || cmd === 'logout':

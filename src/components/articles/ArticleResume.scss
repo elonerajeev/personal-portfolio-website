@@ -1,0 +1,63 @@
+@import "/src/styles/extend";
+
+.article-resume {
+    .resume-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+        border-radius: $standard-border-radius;
+        background-color: var(--theme-soft);
+        border: 1px solid var(--theme-soft-3);
+
+        @include media-breakpoint-down(md) {
+            flex-wrap: wrap;
+        }
+    }
+
+    .resume-card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        color: #e53935;
+        font-size: 1.5rem;
+    }
+
+    .resume-card-body {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .resume-card-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    .resume-btn {
+        border-radius: 999px;
+        padding: 0.4rem 1rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    // !important: the theme's global link colour would otherwise win over the button text.
+    .resume-btn-primary {
+        background-color: var(--theme-highlight);
+        color: #111111 !important;
+        &:hover { filter: brightness(1.08); }
+        .fa-icon { color: #111111 !important; opacity: 1; }
+    }
+
+    .resume-btn-outline {
+        border: 1px solid var(--theme-highlight);
+        color: var(--theme-highlight);
+        &:hover { background-color: var(--theme-highlight); color: #111111 !important; }
+    }
+}

@@ -57,11 +57,11 @@
         },
 
         {
-            "id": "resume",
+            "id": "ventures",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/resume.json",
-            "faIcon": "fa-solid fa-file-pdf",
-            "faIconColor": "#EF5350"
+            "jsonPath": "/data/sections/ventures.json",
+            "faIcon": "fa-solid fa-rocket",
+            "faIconColor": "#FF7043"
         },
 
         {

@@ -1,0 +1,150 @@
+{
+  "locales": {
+    "en": {
+      "title": "Ventures",
+      "title_menu": "Ventures",
+      "title_long_prefix": "What I'm building next",
+      "title_long": "My **Ventures**"
+    }
+  },
+  "articles": [
+    {
+      "id": "ventures",
+      "component": "ArticleVentures",
+      "config": {
+        "variants": [
+          "cards",
+          "roadmap",
+          "board"
+        ]
+      },
+      "locales": {
+        "en": {}
+      },
+      "categories": [
+        {
+          "id": "academy",
+          "locales": {
+            "en": {
+              "singular": "Academy",
+              "plural": "Academy"
+            }
+          }
+        },
+        {
+          "id": "finance",
+          "locales": {
+            "en": {
+              "singular": "Finance",
+              "plural": "Finance"
+            }
+          }
+        },
+        {
+          "id": "products",
+          "locales": {
+            "en": {
+              "singular": "Products",
+              "plural": "Products"
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "categoryId": "academy",
+          "icon": {
+            "img": "images/tech/venture-devops-academy.svg",
+            "fa": "fa-solid fa-graduation-cap",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [],
+          "locales": {
+            "en": {
+              "title": "DevOps & Cloud Academy",
+              "text": "**Coming soon** · Hands-on courses on CI/CD, Docker, Kubernetes, Terraform and AWS, built from real production work. Launching at devops.rajeev.pro.",
+              "tags": [
+                "Courses",
+                "DevOps & Cloud",
+                "devops.rajeev.pro"
+              ]
+            }
+          },
+          "accent": "#4FC3F7",
+          "phase": "Phase 1",
+          "stage": "plan",
+          "highlights": [
+            "Project-based labs on real cloud setups",
+            "CI/CD, Docker, Kubernetes, Terraform, AWS",
+            "From fundamentals to production-ready"
+          ]
+        },
+        {
+          "categoryId": "finance",
+          "icon": {
+            "img": "images/tech/finance-markets.svg",
+            "fa": "fa-solid fa-chart-line",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [],
+          "locales": {
+            "en": {
+              "title": "Finance & Trading Academy",
+              "text": "**Coming soon** · Courses on personal finance, investing and trading fundamentals with a data-driven, risk-first approach. Launching at finance.rajeev.pro.",
+              "tags": [
+                "Courses",
+                "Finance & Investing",
+                "finance.rajeev.pro"
+              ]
+            }
+          },
+          "accent": "#66BB6A",
+          "phase": "Phase 2",
+          "stage": "plan",
+          "highlights": [
+            "Personal finance & investing fundamentals",
+            "Trading basics with risk management first",
+            "Data-driven, no hype"
+          ]
+        },
+        {
+          "categoryId": "products",
+          "icon": {
+            "img": "images/tech/venture-products.svg",
+            "fa": "fa-solid fa-rocket",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [],
+          "locales": {
+            "en": {
+              "title": "Products & Tools",
+              "text": "**Coming soon** · Ready-to-use templates and tools: CI/CD starters, Terraform modules and cloud cost dashboards. Launching at products.rajeev.pro.",
+              "tags": [
+                "Products",
+                "Templates & Tools",
+                "products.rajeev.pro"
+              ]
+            }
+          },
+          "accent": "#FF7043",
+          "phase": "Phase 3",
+          "stage": "plan",
+          "highlights": [
+            "CI/CD starter templates",
+            "Reusable Terraform modules",
+            "Cloud cost dashboards"
+          ]
+        }
+      ]
+    }
+  ]
+}

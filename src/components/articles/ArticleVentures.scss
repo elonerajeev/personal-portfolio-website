@@ -1,0 +1,277 @@
+@import "/src/styles/extend";
+
+.article-ventures {
+    .ventures-variant + .ventures-variant { margin-top: 3rem; }
+
+    .ventures-variant-label {
+        display: inline-block;
+        margin-bottom: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        border: 1px dashed var(--theme-highlight);
+        color: var(--theme-highlight);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+    }
+
+    .v-muted { color: var(--theme-secondary-4, #9f9f9f); }
+    .v-accent { color: var(--v-accent); }
+    .v-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8rem; }
+
+    /* shared */
+    .v-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-accent) 35%, transparent);
+        img { width: 70%; height: 70%; object-fit: contain; }
+    }
+    .v-logo-lg { width: 56px; height: 56px; }
+    .v-logo-sm { width: 40px; height: 40px; }
+
+    .v-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .v-status-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .v-status-soon {
+        color: #ffca28;
+        background: rgba(255, 202, 40, 0.12);
+        .v-status-dot { animation: v-pulse 1.6s ease-in-out infinite; }
+    }
+    .v-status-live { color: #3fb950; background: rgba(63, 185, 80, 0.14); }
+
+    .v-domain {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid var(--theme-soft-3);
+        background: var(--theme-tag-color);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+        color: var(--theme-secondary-3, #bbb);
+    }
+
+    .v-cta {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 1rem;
+        border-radius: 999px;
+        font-weight: 700;
+        background: var(--v-accent);
+        color: #111111 !important;
+        text-decoration: none;
+    }
+
+    /* Design A: launch cards */
+    .v-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+    }
+    .v-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 1.4rem 1.3rem 1.2rem;
+        border-radius: 14px;
+        background: var(--theme-soft);
+        border: 1px solid var(--theme-soft-3);
+        overflow: hidden;
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--v-accent), transparent);
+        }
+        &:hover {
+            transform: translateY(-4px);
+            border-color: color-mix(in srgb, var(--v-accent) 60%, transparent);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        }
+    }
+    .v-card-head { display: flex; align-items: center; justify-content: space-between; }
+    .v-checks {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.2rem;
+        font-size: 0.85rem;
+        li + li { margin-top: 0.35rem; }
+    }
+    .v-card-foot { margin-top: auto; }
+
+    /* Design B: roadmap */
+    .v-roadmap {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 0.5rem;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: calc(0.5rem + 19px);
+            width: 2px;
+            background: linear-gradient(var(--theme-highlight), var(--theme-soft-3));
+        }
+    }
+    .v-roadmap-item {
+        position: relative;
+        display: flex;
+        gap: 1.1rem;
+    }
+    .v-roadmap-item + .v-roadmap-item { margin-top: 1.4rem; }
+    .v-roadmap-marker { position: relative; z-index: 1; }
+    .v-roadmap-body {
+        flex: 1;
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        background: var(--theme-soft);
+        border: 1px solid var(--theme-soft-3);
+        border-left: 3px solid var(--v-accent);
+    }
+    .v-roadmap-top { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+    .v-phase {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--v-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+    .v-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .v-chip {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--v-accent) 14%, transparent);
+        color: var(--theme-secondary-2, #ddd);
+    }
+
+    /* Design C: deploy board */
+    .v-board {
+        border-radius: 12px;
+        border: 1px solid #30363d;
+        background: #0d1117;
+        color: #d6deeb;
+        overflow: hidden;
+    }
+    .v-board-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 1rem;
+        background: #161b22;
+        border-bottom: 1px solid #30363d;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8rem;
+    }
+    .v-board-dots {
+        display: inline-flex;
+        gap: 6px;
+        i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; }
+        i:nth-child(2) { background: #ffbd2e; }
+        i:nth-child(3) { background: #27c93f; }
+    }
+    .v-board-title { flex: 1; color: #8b949e; }
+    .v-board-env { color: #58a6ff; }
+    .v-board-head, .v-board-row {
+        display: grid;
+        grid-template-columns: minmax(200px, 1.3fr) minmax(220px, 1.4fr) auto;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.9rem 1rem;
+    }
+    .v-board-head {
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #8b949e;
+        border-bottom: 1px solid #21262d;
+    }
+    .v-board-row {
+        border-bottom: 1px solid #21262d;
+        transition: background 0.2s ease;
+        &:last-child { border-bottom: 0; }
+        &:hover { background: rgba(255, 255, 255, 0.03); }
+        .v-muted { color: #8b949e; }
+    }
+    .v-board-service { display: flex; align-items: center; gap: 0.75rem; }
+    .v-pipeline {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .v-stage {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+        color: #8b949e;
+    }
+    // Connector between stages (written flat: nested `& + &` would repeat the ancestor selector).
+    .v-stage + .v-stage::before {
+        content: "";
+        width: 26px;
+        height: 2px;
+        margin: 0 0.55rem;
+        border-radius: 2px;
+        background: #484f58;
+    }
+    .v-stage-done + .v-stage::before { background: #3fb950; }
+    .v-stage-dot {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid #30363d;
+        font-size: 0.6rem;
+    }
+    .v-stage-done { color: #d6deeb; .v-stage-dot { background: #3fb950; border-color: #3fb950; color: #0d1117; } }
+    .v-stage-active {
+        color: #ffca28;
+        .v-stage-dot { border-color: #ffca28; animation: v-pulse 1.6s ease-in-out infinite; }
+    }
+
+    @include media-breakpoint-down(md) {
+        .v-board-env { display: none; }
+    }
+
+    @include media-breakpoint-down(lg) {
+        .v-board-head { display: none; }
+        .v-board-row { grid-template-columns: 1fr; gap: 0.7rem; }
+    }
+}
+
+@keyframes v-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .article-ventures {
+        .v-card, .v-card:hover { transition: none; transform: none; }
+        .v-status-dot, .v-stage-dot { animation: none !important; }
+    }
+}
