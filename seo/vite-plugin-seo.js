@@ -258,7 +258,7 @@ ${urls.map((u) => `  <url>
 const GITHUB_USER = 'elonerajeev'
 
 // Drop anything that looks like personal data before it reaches the site.
-const looksPrivate = (s) => /[\w.+-]+@[\w-]+\.[\w.]+/.test(s) || /(?<!\d)[6-9]\d{9}(?!\d)/.test(s)
+const looksPrivate = (s) => /[\w.+-]+@[\w-]+\.[\w.]+/.test(s) || /\b[6-9]\d{9}\b/.test(s)
 const cleanText = (s, max = 90) => {
     const first = String(s || '').split('\n')[0].trim()
     if (!first || looksPrivate(first)) return null
