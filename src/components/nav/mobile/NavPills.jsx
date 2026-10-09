@@ -54,7 +54,9 @@ function NavPill({section, active, onClick}) {
         <SensitiveButton disabled={active}
                          className={`nav-pill ${active ? `nav-pill-active` : ''}`}
                          onClick={() => { onClick(section) }}>
-            <FaIcon iconName={section.faIcon}/>
+            <i className={`nav-pill-icon`} style={section.faIconColor ? {'--menu-icon-color': section.faIconColor} : undefined}>
+                <FaIcon iconName={section.faIcon}/>
+            </i>
             <span>{label}</span>
         </SensitiveButton>
     )

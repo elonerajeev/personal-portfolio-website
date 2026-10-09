@@ -1,18 +1,20 @@
 import "./ArticleTerminal.scss"
 import React, {useEffect, useRef, useState} from 'react'
+import {createPortal} from 'react-dom'
+import FaIcon from "/src/components/generic/FaIcon.jsx"
 import {useData} from "/src/providers/DataProvider.jsx"
 import {useGlobalState} from "/src/providers/GlobalStateProvider.jsx"
 import {buildModel, runCommand, complete, MAX_INPUT} from "/src/helpers/terx.js"
 
 const MAX_LINES = 400
-const QUICK_COMMANDS = ['help', 'neofetch', 'experience', 'projects', 'skills', 'kubectl get pods', 'git log', 'contact']
+const QUICK_COMMANDS = ['help', 'neofetch', 'ls', 'experience', 'projects', 'ventures', 'tree', 'contact']
 
 const BOOT = [
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Mounted /root/portfolio (read-only)'}],
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Started kubelet, docker and terraform services'}],
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Reached target TerX shell'}],
     [{text: ''}],
-    [{text: 'Welcome to ', tone: 'muted'}, {text: 'TerX', tone: 'accent'}, {text: ". Type 'help' to see what you can explore, or tap a command below.", tone: 'muted'}],
+    [{text: 'Welcome to ', tone: 'muted'}, {text: 'TerX', tone: 'accent'}, {text: ". Type 'help', or 'ls' to look around. Tab completes commands.", tone: 'muted'}],
     [{text: ''}],
 ]
 
@@ -28,23 +30,34 @@ function ArticleTerminal() {
     const [history, setHistory] = useState([])
     const [historyIndex, setHistoryIndex] = useState(-1)
     const [booted, setBooted] = useState(false)
+    const [fullscreen, setFullscreen] = useState(false)
 
     const outputRef = useRef(null)
     const inputRef = useRef(null)
 
     /* Boot sequence (instant when the user prefers reduced motion). */
     useEffect(() => {
+        const boot = BOOT
+
         if (prefersReducedMotion()) {
-            setLines(BOOT)
+            setLines(boot)
             setBooted(true)
             return
         }
-        const timers = BOOT.map((l, i) => setTimeout(() => {
+        const timers = boot.map((l, i) => setTimeout(() => {
             setLines((prev) => [...prev, l])
-            if (i === BOOT.length - 1) setBooted(true)
+            if (i === boot.length - 1) setBooted(true)
         }, 120 * (i + 1)))
         return () => timers.forEach(clearTimeout)
     }, [])
+
+    /* After boot, show what's here by running `ls` once, like logging into a fresh shell. */
+    const didAutoLs = useRef(false)
+    useEffect(() => {
+        if (!booted || didAutoLs.current) return
+        didAutoLs.current = true
+        execute('ls')
+    }, [booted])
 
     /* The page uses smooth-scrollbar, which captures wheel/touch on its container (outside React's
        root listener). Stop them natively here so the terminal scrolls on its own. */
@@ -58,7 +71,26 @@ function ArticleTerminal() {
             el.removeEventListener('wheel', stop)
             el.removeEventListener('touchmove', stop)
         }
-    }, [])
+    }, [fullscreen])
+
+    /* Fullscreen: Esc exits, page behind doesn't scroll, focus stays in the terminal. */
+    useEffect(() => {
+        if (!fullscreen) return
+        const onKey = (e) => { if (e.key === 'Escape') setFullscreen(false) }
+        const previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        window.addEventListener('keydown', onKey)
+        return () => {
+            document.body.style.overflow = previousOverflow
+            window.removeEventListener('keydown', onKey)
+        }
+    }, [fullscreen])
+
+    useEffect(() => {
+        if (booted) inputRef.current?.focus({preventScroll: true})
+        const el = outputRef.current
+        if (el) el.scrollTop = el.scrollHeight
+    }, [fullscreen])
 
     /* Keep the newest output in view. */
     useEffect(() => {
@@ -87,7 +119,18 @@ function ArticleTerminal() {
             setLines((prev) => [...prev, echo, ...result.output, [{text: ''}]].slice(-MAX_LINES))
         }
 
+        if (result.openUrl) {
+            // Triggered by the visitor's own Enter/click, so browsers allow it.
+            if (result.openUrl.startsWith('mailto:')) window.location.href = result.openUrl
+            else window.open(result.openUrl, '_blank', 'noopener,noreferrer')
+        }
+
+        if (result.fullscreen !== undefined) {
+            setFullscreen((f) => result.fullscreen === 'toggle' ? !f : result.fullscreen)
+        }
+
         if (result.navigate) {
+            setFullscreen(false)
             setTimeout(() => setActiveSection(result.navigate), 400)
         }
     }
@@ -142,14 +185,26 @@ function ArticleTerminal() {
         inputRef.current?.focus({preventScroll: true})
     }
 
-    return (
-        <article className={`article-terminal w-100`}>
-            <div className={`terx-window`} onClick={focusInput}>
-                <div className={`terx-titlebar`} aria-hidden={true}>
-                    <span className={`terx-dot terx-dot-red`}/>
-                    <span className={`terx-dot terx-dot-yellow`}/>
-                    <span className={`terx-dot terx-dot-green`}/>
-                    <span className={`terx-title`}>root@rajeev: {promptPath}</span>
+    const terminalWindow = (
+            <div className={`terx-window ${fullscreen ? 'terx-window-fullscreen' : ''}`}
+                 onClick={focusInput}
+                 role={fullscreen ? 'dialog' : undefined}
+                 aria-modal={fullscreen ? true : undefined}
+                 aria-label={fullscreen ? 'TerX terminal (fullscreen)' : undefined}>
+                <div className={`terx-titlebar`}>
+                    <span className={`terx-dots`} aria-hidden={true}>
+                        <span className={`terx-dot terx-dot-red`}/>
+                        <span className={`terx-dot terx-dot-yellow`}/>
+                        <span className={`terx-dot terx-dot-green`}/>
+                    </span>
+                    <span className={`terx-title`} aria-hidden={true}>root@rajeev: {promptPath}</span>
+                    <button type={`button`}
+                            className={`terx-fs-btn`}
+                            onClick={(e) => { e.stopPropagation(); setFullscreen((f) => !f) }}
+                            aria-label={fullscreen ? 'Exit fullscreen (Esc)' : 'Open terminal fullscreen'}
+                            title={fullscreen ? 'Exit fullscreen (Esc)' : 'Fullscreen'}>
+                        <FaIcon iconName={fullscreen ? 'fa-solid fa-compress' : 'fa-solid fa-expand'}/>
+                    </button>
                 </div>
 
                 <div className={`terx-output`}
@@ -184,6 +239,13 @@ function ArticleTerminal() {
                     )}
                 </div>
             </div>
+    )
+
+    return (
+        <article className={`article-terminal w-100`}>
+            {fullscreen
+                ? createPortal(<div className={`article-terminal terx-fs-backdrop`}>{terminalWindow}</div>, document.body)
+                : terminalWindow}
 
             <div className={`terx-quick`} role={`group`} aria-label={`Quick commands`}>
                 {QUICK_COMMANDS.map((c) => (
@@ -224,7 +286,8 @@ function TerminalLine({line}) {
                 <a key={i}
                    className={`terx-tone-${seg.tone || 'accent'} terx-link`}
                    href={seg.href}
-                   target={seg.href.startsWith('/') || seg.href.startsWith('mailto:') ? undefined : '_blank'}
+                   download={seg.download || undefined}
+                   target={seg.download || seg.href.startsWith('mailto:') ? undefined : '_blank'}
                    rel={`noopener noreferrer`}>{seg.text}</a>
             ) : (
                 <span key={i} className={seg.tone ? `terx-tone-${seg.tone}` : undefined}>{seg.text}</span>

@@ -1,84 +1,42 @@
-import React from "react";
-import { useParser } from "/src/helpers/parser.js";
+import "./ArticleResume.scss"
+import React from "react"
+import Article from "/src/components/wrappers/Article.jsx"
+import FaIcon from "/src/components/generic/FaIcon.jsx"
+import {useParser} from "/src/helpers/parser.js"
 
-const Resume = ({ data }) => {
-  const parser = useParser();
-  const parsedData = parser.parseArticleData(data);
-  const resumeItem = parser.parseArticleItems(parsedData.items)[0];
-  const resumeUrl = resumeItem.firstLink.href;
+/** Compact resume card: View (opens the PDF) and Download. */
+function ArticleResume({ data }) {
+    const parser = useParser()
+    const parsedData = parser.parseArticleData(data)
+    const item = parser.parseArticleItems(parsedData.items)[0]
+    const href = item?.firstLink?.href
+    if (!href) return null
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-        textAlign: "center",
-      }}
-    >
-      {/* <h2
-        style={{
-          fontSize: "24px",
-          fontWeight: "bold",
-          color: "#28a745",
-          marginBottom: "10px",
-        }}
-      >
-        📄 My Resume
-      </h2> */}
+    const fileName = href.split('/').pop()
 
-      <p style={{ fontSize: "16px", color: "lime", marginBottom: "15px" }}>
-        View or download my latest resume below:
-      </p>
+    return (
+        <Article className={`article-resume`} title={parsedData.title}>
+            <div className={`resume-card`}>
+                <div className={`resume-card-icon`} aria-hidden={true}>
+                    <FaIcon iconName={`fa-solid fa-file-pdf`}/>
+                </div>
 
-      <div
-        style={{
-          width: "90%",
-          maxWidth: "1000px",
-          height: "700px",
-          border: "1px solid #ddd",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          borderRadius: "8px",
-          overflow: "hidden",
-        }}
-      >
-        <iframe
-          src={resumeUrl}
-          width="100%"
-          height="100%"
-          style={{ border: "none" }}
-          title="Resume PDF"
-          onError={(e) => (e.target.outerHTML = "<p>Failed to load PDF.</p>")}
-        />
-      </div>
+                <div className={`resume-card-body`}>
+                    <h3 className={`eq-h6 fw-bold mb-1`}>{item.title}</h3>
+                    {item.text && <p className={`text-3 text-muted mb-0`} dangerouslySetInnerHTML={{__html: item.text}}/>}
+                </div>
 
-      <a
-        href={resumeUrl}
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#28a745",
-          color: "white",
-          textDecoration: "none",
-          borderRadius: "5px",
-          fontSize: "16px",
-          fontWeight: "bold",
-          display: "inline-block",
-          boxShadow: "0px 3px 5px rgba(0, 0, 0, 0.2)",
-          transition: "background-color 0.3s",
-        }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#218838")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#28a745")}
-      >
-        📥 Download Resume
-      </a>
-    </div>
-  );
-};
+                <div className={`resume-card-actions`}>
+                    <a className={`btn btn-sm resume-btn resume-btn-outline`} href={href} target={`_blank`} rel={`noopener noreferrer`}>
+                        <FaIcon iconName={`fa-solid fa-eye`} className={`me-2`}/>View
+                    </a>
+                    <a className={`btn btn-sm resume-btn resume-btn-primary`} href={href} download={fileName}>
+                        <FaIcon iconName={`fa-solid fa-download`} className={`me-2`}/>Download
+                    </a>
+                </div>
+            </div>
+        </Article>
+    )
+}
 
-export default Resume;
+export default ArticleResume

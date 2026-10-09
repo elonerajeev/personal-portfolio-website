@@ -1,0 +1,115 @@
+{
+  "locales": {
+    "en": {
+      "title": "Ventures",
+      "title_menu": "Ventures",
+      "title_long_prefix": "What I'm working on",
+      "title_long": "My **Ventures**"
+    }
+  },
+  "articles": [
+    {
+      "id": "ventures",
+      "component": "ArticleVentures",
+      "config": {
+        "variants": [
+          "cards",
+          "roadmap",
+          "board"
+        ]
+      },
+      "locales": {
+        "en": {}
+      },
+      "categories": [
+        {
+          "id": "academy",
+          "locales": {
+            "en": {
+              "singular": "Academy",
+              "plural": "Academy"
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "categoryId": "academy",
+          "icon": {
+            "img": "images/tech/venture-devops-academy.svg",
+            "fa": "fa-solid fa-graduation-cap",
+            "faColors": {
+              "bg": null,
+              "fill": null
+            }
+          },
+          "links": [],
+          "locales": {
+            "en": {
+              "title": "DevOps & Cloud Academy",
+              "text": "**Coming soon** · I'm turning what I do every day at work into practical courses. You build real pipelines and real infrastructure, step by step, instead of watching slides.",
+              "tags": [
+                "Courses",
+                "DevOps & Cloud",
+                "devops.rajeev.pro"
+              ]
+            }
+          },
+          "accent": "#4FC3F7",
+          "phase": "In progress",
+          "stage": "plan",
+          "highlights": [
+            "Learn by building real projects",
+            "CI/CD, Docker, Kubernetes, Terraform and AWS",
+            "From your first pipeline to production"
+          ],
+          "stages": [
+            {
+              "name": "Research & planning",
+              "status": "done",
+              "note": "Who it is for, what to cover, course outline"
+            },
+            {
+              "name": "Curriculum design",
+              "status": "active",
+              "note": "Modules, hands-on labs and capstone projects"
+            },
+            {
+              "name": "Content production",
+              "status": "todo",
+              "note": "Videos, lab guides and code repos"
+            },
+            {
+              "name": "Beta with early learners",
+              "status": "todo",
+              "note": "Small group, honest feedback, fixes"
+            },
+            {
+              "name": "Public launch",
+              "status": "todo",
+              "note": "Opens at devops.rajeev.pro"
+            },
+            {
+              "name": "Iterate",
+              "status": "todo",
+              "note": "New modules based on what learners ask for"
+            }
+          ],
+          "info": {
+            "owner": "Rajeev Kumar",
+            "contributors": 1,
+            "stack": [
+              "Kubernetes",
+              "Docker",
+              "Terraform",
+              "AWS",
+              "GitHub Actions"
+            ],
+            "pricing": "To be announced",
+            "launch": "To be announced"
+          }
+        }
+      ]
+    }
+  ]
+}

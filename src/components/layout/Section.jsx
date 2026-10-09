@@ -24,8 +24,10 @@ const TransitionClasses = {
 }
 
 const ARTICLES = {
+    ArticleAvailability: lazy(() => import("/src/components/articles/ArticleAvailability.jsx")),
     ArticleCards: lazy(() => import("/src/components/articles/ArticleCards.jsx")),
     ArticleContactForm: lazy(() => import("/src/components/articles/ArticleContactForm.jsx")),
+    ArticleGithubActivity: lazy(() => import("/src/components/articles/ArticleGithubActivity.jsx")),
     ArticleGrid: lazy(() => import("/src/components/articles/ArticleGrid.jsx")),
     ArticleInfoBlock: lazy(() => import("/src/components/articles/ArticleInfoBlock.jsx")),
     ArticleList: lazy(() => import("/src/components/articles/ArticleList.jsx")),
@@ -35,7 +37,8 @@ const ARTICLES = {
     ArticleTerminal: lazy(() => import("/src/components/articles/ArticleTerminal.jsx")),
     ArticleTestimonials: lazy(() => import("/src/components/articles/ArticleTestimonials.jsx")),
     ArticleThread: lazy(() => import("/src/components/articles/ArticleThread.jsx")),
-    ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx"))
+    ArticleTimeline: lazy(() => import("/src/components/articles/ArticleTimeline.jsx")),
+    ArticleVentures: lazy(() => import("/src/components/articles/ArticleVentures.jsx"))
 }
 
 const utils = useUtils()

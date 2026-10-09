@@ -21,13 +21,16 @@ function Notifications({displayingNotification, killNotification}) {
             setClassList(`notification-${displayingNotification.type}`)
         }, 50, schedulerTag)
 
+        // Errors stay longer so people can read the fallback (e.g. the email address).
+        const visibleFor = displayingNotification.type === 'error' ? 8000 : 4000
+
         scheduler.schedule(() => {
             setClassList(`notification-hiding notification-${displayingNotification.type}`)
-        }, 4000, schedulerTag)
+        }, visibleFor, schedulerTag)
 
         scheduler.schedule(() => {
             killNotification()
-        }, 4400, schedulerTag)
+        }, visibleFor + 400, schedulerTag)
     }, [displayingNotification])
 
     const _getIcon = () => {

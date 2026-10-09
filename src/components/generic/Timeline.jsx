@@ -31,6 +31,8 @@ function Timeline({items}) {
 
 function TimelineItem({item}) {
     const {getSelectedLanguage, getString} = useLanguage()
+    // Checked before the line below swaps 'now' for the display word.
+    const isCurrent = item.dateEnded === 'now' || item.dateEnded === getString('now')
 
     if(item.dateEnded === 'now')
         item.dateEnded = getString('now')
@@ -44,18 +46,26 @@ function TimelineItem({item}) {
     )
 
     return (
-        <li className={`timeline-item`}>
+        <li className={`timeline-item ${isCurrent ? 'timeline-item-current' : ''}`}>
             <div className={`timeline-avatar-wrapper`}>
-                <CircleAvatar img={item.img}
-                              alt={`timeline-item`}
-                              fallbackIcon={item.faIcon}
-                              fallbackIconColors={item.faIconColors}/>
+                <span className={`timeline-avatar-holder`}>
+                    <CircleAvatar img={item.img}
+                                  alt={`timeline-item`}
+                                  fallbackIcon={item.faIcon}
+                                  fallbackIconColors={item.faIconColors}/>
+                    {isCurrent && <span className={`live-dot timeline-live-dot`} aria-hidden={true}/>}
+                </span>
             </div>
 
             <div className={`timeline-content-wrapper`}>
                 <header className={`timeline-content-header mb-3`}>
                     <div className={`timeline-content-header-left`}>
-                        <h3 className={`eq-h5 title fw-bold mb-2`} dangerouslySetInnerHTML={{__html: utils.parseJsonText(item.title)}}/>
+                        <div className={`timeline-title-row`}>
+                            <h3 className={`eq-h5 title fw-bold mb-2`} dangerouslySetInnerHTML={{__html: utils.parseJsonText(item.title)}}/>
+                            {isCurrent && (
+                                <span className={`live-label`}><span className={`live-dot`} aria-hidden={true}/>Current</span>
+                            )}
+                        </div>
                         <div className={`info ms-3 text-muted font-family-subheadings fw-bold text-2`}>
                             <FaIcon iconName={'fa-solid fa-building'} className={`me-2`}/>
                             <span className={``} dangerouslySetInnerHTML={{__html: item.info}}/>

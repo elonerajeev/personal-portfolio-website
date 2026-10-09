@@ -253,12 +253,140 @@ ${urls.map((u) => `  <url>
 `
 }
 
+/* ---------- GitHub activity (fetched at build time, no client-side API calls) ---------- */
+
+const GITHUB_USER = 'elonerajeev'
+
+// Drop anything that looks like personal data before it reaches the site.
+const looksPrivate = (s) => /[\w.+-]+@[\w-]+\.[\w.]+/.test(s) || /\b[6-9]\d{9}\b/.test(s)
+const cleanText = (s, max = 90) => {
+    const first = String(s || '').split('\n')[0].trim()
+    if (!first || looksPrivate(first)) return null
+    return first.length > max ? first.slice(0, max - 1) + '…' : first
+}
+
+async function getJson(url, token) {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 10000)
+    try {
+        const res = await fetch(url, {
+            signal: controller.signal,
+            headers: {
+                Accept: 'application/vnd.github+json',
+                'User-Agent': 'rajeev.pro-build',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+        })
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+        return await res.json()
+    } finally {
+        clearTimeout(timer)
+    }
+}
+
+async function fetchGithubActivity() {
+    const token = process.env.GITHUB_TOKEN
+    const base = `https://api.github.com/users/${GITHUB_USER}`
+    try {
+        const [events, repos] = await Promise.all([
+            getJson(`${base}/events/public?per_page=100`, token),
+            getJson(`${base}/repos?sort=pushed&per_page=20&type=owner`, token),
+        ])
+
+        const activity = []
+        const pushSeen = new Set()
+        for (const e of events) {
+            const repo = e.repo?.name?.replace(`${GITHUB_USER}/`, '')
+            const repoUrl = `https://github.com/${e.repo?.name}`
+            const day = (e.created_at || '').slice(0, 10)
+            if (!repo || repo === GITHUB_USER) continue // skip the profile README repo
+
+            if (e.type === 'PullRequestEvent') {
+                // Newer event payloads say action 'merged' and omit the title; older ones say 'closed' + merged.
+                const pr = e.payload?.pull_request || {}
+                const action = e.payload?.action
+                const merged = action === 'merged' || (action === 'closed' && pr.merged)
+                if (!merged && action !== 'opened') continue
+                activity.push({ kind: merged ? 'merged' : 'opened', repo, repoUrl, number: e.payload?.number ?? pr.number, apiUrl: pr.url, title: cleanText(pr.title), url: pr.html_url || `${repoUrl}/pull/${e.payload?.number ?? pr.number}`, at: e.created_at })
+            } else if (e.type === 'PushEvent') {
+                const key = `${repo}:${day}`
+                if (pushSeen.has(key)) continue
+                pushSeen.add(key)
+                const branch = String(e.payload?.ref || '').replace('refs/heads/', '')
+                activity.push({ kind: 'push', repo, repoUrl, branch: cleanText(branch, 40), url: repoUrl, at: e.created_at })
+            } else if (e.type === 'CreateEvent' && e.payload?.ref_type === 'repository') {
+                activity.push({ kind: 'created', repo, repoUrl, url: repoUrl, at: e.created_at })
+            } else if (e.type === 'ReleaseEvent') {
+                const name = cleanText(e.payload?.release?.name || e.payload?.release?.tag_name, 60)
+                if (name) activity.push({ kind: 'release', repo, repoUrl, title: name, url: e.payload?.release?.html_url || repoUrl, at: e.created_at })
+            }
+        }
+
+        // Fill in missing PR titles (a few extra calls, build time only). Drop PRs we can't title safely.
+        let lookups = 0
+        for (const a of activity) {
+            if ((a.kind === 'merged' || a.kind === 'opened') && !a.title && a.apiUrl && lookups < 6) {
+                lookups++
+                try {
+                    const pr = await getJson(a.apiUrl, token)
+                    a.title = cleanText(pr.title)
+                    a.url = pr.html_url || a.url
+                } catch { /* keep without title */ }
+            }
+            delete a.apiUrl
+        }
+        // One merged/opened entry per PR number, newest first; drop untitled PRs.
+        const seenPr = new Set()
+        const finalActivity = activity.filter((a) => {
+            if (a.kind !== 'merged' && a.kind !== 'opened') return true
+            if (!a.title) return false
+            const key = `${a.repo}#${a.number}`
+            if (seenPr.has(key)) return false
+            seenPr.add(key)
+            return true
+        })
+
+        const topRepos = repos
+            .filter((r) => !r.fork && !r.private && r.name !== GITHUB_USER)
+            .slice(0, 5)
+            .map((r) => ({
+                name: r.name,
+                url: r.html_url,
+                description: cleanText(r.description, 110),
+                language: r.language || null,
+                stars: r.stargazers_count || 0,
+                pushedAt: r.pushed_at,
+            }))
+
+        return { ok: true, user: GITHUB_USER, profileUrl: `https://github.com/${GITHUB_USER}`, generatedAt: new Date().toISOString(), activity: finalActivity.slice(0, 8), repos: topRepos }
+    } catch (err) {
+        console.warn(`[portfolio-seo] GitHub activity unavailable: ${err.message}`)
+        return { ok: false, user: GITHUB_USER, profileUrl: `https://github.com/${GITHUB_USER}`, generatedAt: new Date().toISOString(), activity: [], repos: [] }
+    }
+}
+
 export default function seoPlugin() {
     let root = process.cwd()
+    let github = null
+    let githubFetchedAt = 0
     return {
         name: 'portfolio-seo',
         configResolved(config) {
             root = config.root
+        },
+        async buildStart() {
+            github = await fetchGithubActivity()
+        },
+        // Dev server: serve the same data, cached for 10 minutes to stay within GitHub's rate limit.
+        configureServer(server) {
+            server.middlewares.use('/data/github.json', async (req, res) => {
+                if (!github || Date.now() - githubFetchedAt > 10 * 60 * 1000) {
+                    github = await fetchGithubActivity()
+                    githubFetchedAt = Date.now()
+                }
+                res.setHeader('Content-Type', 'application/json')
+                res.end(JSON.stringify(github))
+            })
         },
         transformIndexHtml(html) {
             const content = loadContent(root)
@@ -272,6 +400,7 @@ export default function seoPlugin() {
             this.emitFile({ type: 'asset', fileName: 'llms.txt', source: buildLlms(content, false) })
             this.emitFile({ type: 'asset', fileName: 'llms-full.txt', source: buildLlms(content, true) })
             this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: buildSitemap() })
+            this.emitFile({ type: 'asset', fileName: 'data/github.json', source: JSON.stringify(github || { ok: false, activity: [], repos: [] }) })
         },
     }
 }

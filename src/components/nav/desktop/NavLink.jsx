@@ -4,7 +4,7 @@ import MenuItem from "/src/components/generic/MenuItem.jsx"
 import {useUtils} from "/src/helpers/utils.js"
 import SensitiveButton from "/src/components/generic/SensitiveButton.jsx"
 
-function NavLink({ shrink, label, icon, size, className, rounded, selected, disabled, onClick, tooltip }) {
+function NavLink({ shrink, label, icon, iconColor, size, className, rounded, selected, disabled, onClick, tooltip }) {
     const utils = useUtils()
 
     return (
@@ -14,6 +14,7 @@ function NavLink({ shrink, label, icon, size, className, rounded, selected, disa
             <MenuItem shrink={shrink}
                       label={label}
                       icon={icon}
+                      iconColor={iconColor}
                       hoverAnimation={true}
                       size={size}
                       tooltip={tooltip}

@@ -178,3 +178,67 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
     background: var(--theme-highlight);
     transform: scale(1.2);
 }
+
+/** Live "active now" indicator: same green and pulse as the profile's availability dot. **/
+.live-dot {
+    position: relative;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--theme-highlight);
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background-color: var(--theme-highlight);
+        animation: live-ping 1.8s ease-out infinite;
+    }
+}
+
+@keyframes live-ping {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(2.6); opacity: 0; }
+}
+
+.live-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-right: 0.6rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--theme-highlight);
+    background-color: rgba(157, 255, 142, 0.1);
+    .live-dot { width: 7px; height: 7px; }
+}
+
+.timeline-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 0.75rem;
+    .live-label { margin: 0 0 0.5rem; }
+}
+
+.timeline-avatar-holder {
+    position: relative;
+    display: inline-block;
+}
+.timeline-live-dot {
+    position: absolute;
+    right: 6%;
+    bottom: 6%;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--theme-section-background);
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .live-dot::after { animation: none; }
+}

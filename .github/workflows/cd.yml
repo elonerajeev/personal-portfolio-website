@@ -5,6 +5,9 @@ name: CD
 on:
   push:
     branches: [main]
+  schedule:
+    # Daily rebuild at 08:00 IST so the GitHub activity feed on Updates stays fresh.
+    - cron: "30 2 * * *"
   workflow_dispatch:
 
 permissions:

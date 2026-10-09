@@ -8,6 +8,18 @@
   },
   "articles": [
     {
+      "id": "availability",
+      "component": "ArticleAvailability",
+      "config": {
+        "ignorePaddingTop": true
+      },
+      "locales": {
+        "en": {
+          "reply_note": "I usually reply within a day."
+        }
+      }
+    },
+    {
       "id": "contact_form",
       "component": "ArticleContactForm",
       "config": {},

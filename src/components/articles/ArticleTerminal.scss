@@ -43,13 +43,24 @@
     .terx-dot-yellow { background: #ffbd2e; }
     .terx-dot-green { background: #27c93f; }
 
+    .terx-dots { display: inline-flex; gap: 8px; }
+
     .terx-title {
         flex: 1;
         text-align: center;
-        margin-right: 44px;
         color: var(--terx-muted);
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
         font-size: 0.8rem;
+    }
+
+    .terx-fs-btn {
+        border: 0;
+        background: transparent;
+        color: var(--terx-muted);
+        padding: 2px 6px;
+        border-radius: 6px;
+        line-height: 1;
+        &:hover, &:focus-visible { color: var(--terx-accent); background: rgba(255, 255, 255, 0.06); }
     }
 
     .terx-output {
@@ -143,5 +154,31 @@
             color: var(--terx-accent);
         }
         &:disabled { opacity: 0.5; }
+    }
+}
+
+// Fullscreen (rendered in a portal on <body>, outside the page's scroll container).
+.terx-fs-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    padding: 2vh 2vw;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(3px);
+
+    @include media-breakpoint-down(md) { padding: 0; }
+
+    .terx-window-fullscreen {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include media-breakpoint-down(md) { border-radius: 0; }
+
+        .terx-output {
+            flex: 1;
+            height: auto;
+            font-size: 0.92rem;
+        }
     }
 }
