@@ -25,11 +25,11 @@
         },
 
         {
-            "id": "portfolio",
+            "id": "ventures",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/portfolio.json",
-            "faIcon": "fa-solid fa-folder-open",
-            "faIconColor": "#FFD54F"
+            "jsonPath": "/data/sections/ventures.json",
+            "faIcon": "fa-solid fa-rocket",
+            "faIconColor": "#FF7043"
         },
 
         {
@@ -57,11 +57,11 @@
         },
 
         {
-            "id": "ventures",
+            "id": "portfolio",
             "categoryId": "showcase",
-            "jsonPath": "/data/sections/ventures.json",
-            "faIcon": "fa-solid fa-rocket",
-            "faIconColor": "#FF7043"
+            "jsonPath": "/data/sections/portfolio.json",
+            "faIcon": "fa-solid fa-folder-open",
+            "faIconColor": "#FFD54F"
         },
 
         {

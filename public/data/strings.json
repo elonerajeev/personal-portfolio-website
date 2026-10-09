@@ -19,7 +19,7 @@
             "leaving_site": "You'll be redirected to an external page in a new tab: <span class='text-muted'><br>«$url»</span><br><br>Please confirm if you'd like to continue.",
             "magic_cursor_on": "Magic Cursor: On",
             "message": "Message",
-            "message_sent_error": "There was an error sending your message.",
+            "message_sent_error": "Your message couldn't be sent right now. Please email me directly at elonerajeev@gmail.com.",
             "message_sent_success": "Your message has been sent successfully! I will respond as soon as possible.",
             "more_info": "More Info",
             "name": "Name",

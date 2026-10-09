@@ -51,6 +51,14 @@ function ArticleTerminal() {
         return () => timers.forEach(clearTimeout)
     }, [])
 
+    /* After boot, show what's here by running `ls` once, like logging into a fresh shell. */
+    const didAutoLs = useRef(false)
+    useEffect(() => {
+        if (!booted || didAutoLs.current) return
+        didAutoLs.current = true
+        execute('ls')
+    }, [booted])
+
     /* The page uses smooth-scrollbar, which captures wheel/touch on its container (outside React's
        root listener). Stop them natively here so the terminal scrolls on its own. */
     useEffect(() => {
