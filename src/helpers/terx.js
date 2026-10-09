@@ -127,12 +127,19 @@ export function buildModel(settings, sections) {
     const ventures = (items('ventures') || []).map((i) => {
         const l = en(i.locales)
         const text = plain(l.text)
+        const stages = i.stages || []
+        const active = stages.findIndex((st) => st.status === 'active')
+        const done = stages.filter((st) => st.status === 'done').length
         return {
             title: plain(l.title),
-            status: /coming soon/i.test(text) ? 'coming soon' : 'live',
+            status: /coming soon/i.test(text) ? 'in progress' : 'live',
             text: text.replace(/^coming soon\s*·\s*/i, ''),
             domain: (l.tags || []).find((t) => /\.rajeev\.pro$/.test(t)) || '',
             href: safeHref(i.links?.find((x) => x.href)?.href),
+            stages,
+            current: active >= 0 ? stages[active].name : null,
+            progress: stages.length ? Math.round(((done + (active >= 0 ? 0.5 : 0)) / stages.length) * 100) : null,
+            info: i.info || {},
         }
     })
     const about = plain(en(items('about', 'short_description')?.[0]?.locales).text)
@@ -188,47 +195,52 @@ function osRelease(m) {
 
 /* ---------- filesystem view ---------- */
 
-export const DIRS = ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'achievements', 'ventures', 'updates', 'contact']
-const FILES = ['resume.pdf', 'README.md']
+export const DIRS = ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'achievements', 'ventures', 'resume', 'updates', 'contact']
+const FILES = ['README.md']
 
 /* ---------- commands ---------- */
 
 const COMMANDS = {
-    help: { desc: 'list available commands' },
-    whoami: { desc: 'who is behind this terminal' },
-    neofetch: { desc: 'system summary, DevOps style' },
-    ls: { desc: 'list sections  (ls <section>)' },
-    cd: { desc: 'change directory  (cd projects)' },
-    cat: { desc: 'print a section or file  (cat README.md)' },
-    pwd: { desc: 'print working directory' },
-    about: { desc: 'short profile' },
-    experience: { desc: 'work history & years of experience' },
-    projects: { desc: 'projects with links' },
-    skills: { desc: 'tools & tech stack' },
-    education: { desc: 'academic background' },
-    certifications: { desc: 'certifications' },
-    achievements: { desc: 'achievements' },
-    updates: { desc: 'latest news' },
-    contact: { desc: 'how to reach me' },
-    ventures: { desc: 'what I am launching next' },
-    resume: { desc: 'view or download my resume (PDF)' },
-    fullscreen: { desc: 'toggle fullscreen (Esc to exit)' },
-    uptime: { desc: 'time spent in Cloud/DevOps' },
-    'git log': { desc: 'career timeline as commits' },
-    'kubectl get pods': { desc: 'projects as running pods' },
-    'docker ps': { desc: 'tool stack as containers' },
-    'terraform plan': { desc: 'what hiring me would provision' },
-    'systemctl status career': { desc: 'career as a running service' },
-    'helm list': { desc: 'skills as deployed Helm releases' },
-    'aws sts get-caller-identity': { desc: 'my identity card' },
-    'cat /etc/os-release': { desc: 'the OS this terminal runs on' },
-    history: { desc: 'commands you ran' },
-    date: { desc: 'current date' },
-    echo: { desc: 'print text' },
-    clear: { desc: 'clear the screen (Ctrl+L)' },
+    // explore
+    help: { group: 'explore', desc: 'this list' },
+    whoami: { group: 'explore', desc: 'who is behind this terminal' },
+    neofetch: { group: 'explore', desc: 'one-screen summary' },
+    about: { group: 'explore', desc: 'short profile' },
+    experience: { group: 'explore', desc: 'jobs and years of experience' },
+    projects: { group: 'explore', desc: 'projects with links' },
+    skills: { group: 'explore', desc: 'tools and tech stack' },
+    education: { group: 'explore', desc: 'degree and school' },
+    certifications: { group: 'explore', desc: 'certificates' },
+    achievements: { group: 'explore', desc: 'achievements' },
+    ventures: { group: 'explore', desc: 'what I am building next' },
+    updates: { group: 'explore', desc: 'latest news' },
+    contact: { group: 'explore', desc: 'how to reach me' },
+    resume: { group: 'explore', desc: 'view or download my resume' },
+    // shell
+    ls: { group: 'shell', desc: 'list folders  (ls projects, ls -l)', man: ['ls', 'ls -l', 'ls projects'] },
+    cd: { group: 'shell', desc: 'enter a folder  (cd resume, cd ..)', man: ['cd projects', 'cd resume', 'cd ..'] },
+    cat: { group: 'shell', desc: 'print a folder or file  (cat README.md)', man: ['cat README.md', 'cat skills', 'cat /etc/os-release'] },
+    tree: { group: 'shell', desc: 'everything as a file tree' },
+    grep: { group: 'shell', desc: 'search everything  (grep kubernetes)', man: ['grep kubernetes', 'grep terraform', 'grep aws'] },
+    open: { group: 'shell', desc: 'open a link  (open github)', man: ['open github', 'open linkedin', 'open resume', 'open email'] },
+    man: { group: 'shell', desc: 'how a command works  (man grep)' },
+    pwd: { group: 'shell', desc: 'current folder' },
+    history: { group: 'shell', desc: 'commands you ran' },
+    clear: { group: 'shell', desc: 'clear the screen (Ctrl+L)' },
+    fullscreen: { group: 'shell', desc: 'toggle fullscreen (Esc exits)' },
+    // devops
+    uptime: { group: 'devops', desc: 'time spent in Cloud & DevOps' },
+    'git log': { group: 'devops', desc: 'career timeline as commits' },
+    'kubectl get pods': { group: 'devops', desc: 'projects as running pods' },
+    'docker ps': { group: 'devops', desc: 'tool stack as containers' },
+    'helm list': { group: 'devops', desc: 'skills as Helm releases' },
+    'terraform plan': { group: 'devops', desc: 'what hiring me provisions' },
+    'systemctl status career': { group: 'devops', desc: 'career as a service' },
+    'aws sts get-caller-identity': { group: 'devops', desc: 'identity card' },
+    'cat /etc/os-release': { group: 'devops', desc: 'the OS behind TerX' },
 }
 
-export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'kubectl get skills', 'terraform apply', 'sudo', 'exit', 'fullscreen'])]
+export const COMPLETIONS = [...new Set([...Object.keys(COMMANDS), ...DIRS.flatMap((d) => [`ls ${d}`, `cd ${d}`, `cat ${d}`]), ...FILES.map((f) => `cat ${f}`), 'cat resume/resume.pdf', 'ls -l', 'open github', 'open linkedin', 'open x', 'open email', 'open resume', 'open site', ...Object.keys(COMMANDS).map((c) => `man ${c}`), 'kubectl get skills', 'terraform apply', 'exit fullscreen', 'sudo', 'exit'])]
 
 function sectionOutput(name, m) {
     switch (name) {
@@ -288,13 +300,25 @@ function sectionOutput(name, m) {
         return [heading('contact'), ...m.contact.map((c) => line(T((c.label || 'link').padEnd(10), 'info'), T(c.value, 'accent', c.href))),
             line(T('location'.padEnd(10), 'info'), T(m.location))]
     case 'ventures': {
-        const out = [heading('ventures'), line(T("what I'm building next, alongside my DevOps work", 'muted')), blank()]
+        const out = [heading('ventures')]
         for (const v of m.ventures) {
-            out.push(line(T(v.status === 'live' ? '● ' : '◌ ', v.status === 'live' ? 'ok' : 'warn'), T(v.title, 'bold'), T(`  [${v.status}]`, v.status === 'live' ? 'ok' : 'warn')))
+            out.push(blank(), line(T(v.status === 'live' ? '● ' : '◐ ', v.status === 'live' ? 'ok' : 'warn'), T(v.title, 'bold'), T(`  [${v.status}]`, v.status === 'live' ? 'ok' : 'warn')))
             if (v.text) out.push(line(T(`  ${v.text}`)))
+            if (v.stages.length) {
+                out.push(blank())
+                v.stages.forEach((st) => out.push(line(
+                    T(st.status === 'done' ? '  ✔ ' : st.status === 'active' ? '  ▶ ' : '  · ', st.status === 'done' ? 'ok' : st.status === 'active' ? 'warn' : 'muted'),
+                    T(st.name, st.status === 'active' ? 'bold' : st.status === 'done' ? undefined : 'muted'),
+                    st.status === 'active' ? T('  ← now', 'warn') : null)))
+                if (v.progress !== null) {
+                    const filled = Math.round(v.progress / 5)
+                    out.push(blank(), line(T('  progress  ', 'info'), T('█'.repeat(filled), 'ok'), T('░'.repeat(20 - filled), 'muted'), T(` ${v.progress}%`)))
+                }
+            }
+            const facts = [['owner', v.info.owner], ['team', v.info.contributors !== undefined ? `${v.info.contributors} contributor${v.info.contributors === 1 ? '' : 's'}` : null], ['pricing', v.info.pricing], ['launch', v.info.launch]].filter(([, x]) => x)
+            if (facts.length) out.push(blank(), ...facts.map(([k, x]) => line(T(`  ${k}`.padEnd(12), 'info'), T(x))))
             if (v.href) out.push(line(T('  → ', 'muted'), T(v.domain || v.href, 'accent', v.href)))
-            else if (v.domain) out.push(line(T(`  → ${v.domain} (launching soon)`, 'muted')))
-            out.push(blank())
+            else if (v.domain) out.push(line(T(`  → ${v.domain}`, 'muted'), T('  (not live yet)', 'muted')))
         }
         return out
     }
@@ -314,6 +338,81 @@ function sectionOutput(name, m) {
     default:
         return null
     }
+}
+
+/** One-line summary printed when entering a folder. */
+function dirSummary(name, m) {
+    const count = {
+        experience: m.work.length, projects: m.projects.length, skills: m.skills.reduce((n, g) => n + g.items.length, 0),
+        education: m.education.length, certifications: m.certs.length, achievements: m.achievements.length,
+        ventures: m.ventures.length, updates: m.updates.length, contact: m.contact.length,
+    }[name]
+    return line(T(`📂 ${name}/`, 'info'), count !== undefined ? T(`  ${count} entr${count === 1 ? 'y' : 'ies'}`, 'muted') : null,
+        T("  · 'ls' to list, 'cd ..' to go back", 'muted'))
+}
+
+/** Searchable index of everything public. */
+function searchIndex(m) {
+    return [
+        ...m.work.map((w) => ({ where: 'experience', title: `${w.role} @ ${w.company}`, text: [w.text, w.tags.join(' ')].join(' ') })),
+        ...m.projects.map((p) => ({ where: 'projects', title: p.title, text: [p.text, p.tags.join(' ')].join(' '), href: p.href })),
+        ...m.skills.flatMap((g) => g.items.map((it) => ({ where: 'skills', title: it, text: g.group }))),
+        ...m.certs.map((c) => ({ where: 'certifications', title: c.title, text: [c.info, c.text].join(' '), href: c.href })),
+        ...m.achievements.map((c) => ({ where: 'achievements', title: c.title, text: [c.info, c.text].join(' ') })),
+        ...m.education.map((e) => ({ where: 'education', title: e.title, text: [e.info, e.text].join(' ') })),
+        ...m.ventures.map((v) => ({ where: 'ventures', title: v.title, text: v.text })),
+        ...m.updates.map((u) => ({ where: 'updates', title: u.title, text: [u.info, u.text].join(' '), href: u.href })),
+    ]
+}
+
+/** Split text into segments with every case-insensitive match of `term` highlighted. */
+function highlight(text, term, baseTone) {
+    const out = []
+    const lower = text.toLowerCase(), t = term.toLowerCase()
+    let i = 0
+    for (let at = lower.indexOf(t); at !== -1; at = lower.indexOf(t, i)) {
+        if (at > i) out.push(T(text.slice(i, at), baseTone))
+        out.push(T(text.slice(at, at + t.length), 'warn'))
+        i = at + t.length
+    }
+    if (i < text.length) out.push(T(text.slice(i), baseTone))
+    return out
+}
+
+/** Context snippet around the first match. */
+function snippet(text, term, width = 70) {
+    const at = text.toLowerCase().indexOf(term.toLowerCase())
+    if (at < 0) return ''
+    let start = Math.max(0, at - Math.floor(width / 2))
+    let end = Math.min(text.length, start + width)
+    // snap to word boundaries so snippets don't start or end mid-word
+    if (start > 0) { const sp = text.indexOf(' ', start); if (sp !== -1 && sp < at) start = sp + 1 }
+    if (end < text.length) { const sp = text.lastIndexOf(' ', end); if (sp > at) end = sp }
+    return (start > 0 ? '…' : '') + text.slice(start, end).trim() + (end < text.length ? '…' : '')
+}
+
+function treeOutput(m) {
+    const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    const children = {
+        experience: m.work.map((w) => `${slug(w.role)}@${slug(w.company)}`),
+        projects: m.projects.map((p) => slug(p.title)),
+        skills: m.skills.map((g) => `${slug(g.group)}/ (${g.items.length})`),
+        certifications: m.certs.map((c) => slug(c.title)),
+        ventures: m.ventures.map((v) => slug(v.title)),
+        resume: ['resume.pdf'],
+        contact: m.contact.map((c) => (c.label || 'link').toLowerCase()),
+    }
+    const out = [line(T('/root', 'info'))]
+    const entries = [...DIRS, ...FILES]
+    entries.forEach((d, i) => {
+        const last = i === entries.length - 1
+        const isDir = DIRS.includes(d)
+        out.push(line(T(last ? '└── ' : '├── ', 'muted'), T(isDir ? `${d}/` : d, isDir ? 'info' : undefined)))
+        const kids = children[d] || []
+        kids.forEach((k, j) => out.push(line(T(`${last ? '    ' : '│   '}${j === kids.length - 1 ? '└── ' : '├── '}`, 'muted'), T(k))))
+    })
+    out.push(blank(), line(T(`${DIRS.length} directories, ${FILES.length + 1} files`, 'muted')))
+    return out
 }
 
 /**
@@ -339,9 +438,12 @@ export function runCommand(raw, state) {
 
     switch (true) {
     case cmd === 'help': {
-        const out = [line(T('TerX', 'accent'), T(' – explore my profile like a server. Available commands:', 'muted')), blank()]
-        for (const [k, v] of Object.entries(COMMANDS)) out.push(line(T(`  ${k}`.padEnd(22), 'ok'), T(v.desc, 'muted')))
-        out.push(blank(), line(T('tips: ', 'info'), T('Tab = autocomplete · ↑/↓ = history · Ctrl+L = clear · links are clickable', 'muted')))
+        const out = [line(T('TerX', 'accent'), T(" · explore my profile from a shell. 'man <command>' explains any command.", 'muted'))]
+        for (const [group, title] of [['explore', 'EXPLORE'], ['shell', 'SHELL'], ['devops', 'DEVOPS VIEWS']]) {
+            out.push(blank(), line(T(title, 'info')))
+            for (const [k, v] of Object.entries(COMMANDS).filter(([, c]) => c.group === group)) out.push(line(T(`  ${k}`.padEnd(30), 'ok'), T(v.desc, 'muted')))
+        }
+        out.push(blank(), line(T('keys: ', 'info'), T('Tab autocomplete · ↑/↓ history · Ctrl+L clear · Esc exit fullscreen', 'muted')))
         return { output: out, cwd }
     }
     case cmd === 'clear':
@@ -377,8 +479,15 @@ export function runCommand(raw, state) {
         for (let i = 0; i < rows; i++) out.push(line(T((ASCII[i] || '').padEnd(24), 'accent'), ...(facts[i] || [])))
         return { output: out, cwd }
     }
+    case cmd === 'ls' && /^-[la]+$/.test(arg) && !args[1]: {
+        const out = [line(T(`total ${DIRS.length + FILES.length}`, 'muted'))]
+        for (const d of DIRS) out.push(line(T('drwxr-xr-x  root root  ', 'muted'), T(`${d}/`, 'info')))
+        for (const f of FILES) out.push(line(T('-rw-r--r--  root root  ', 'muted'), T(f)))
+        return { output: out, cwd }
+    }
     case cmd === 'ls': {
-        const t = target(arg) || cwd
+        const t = target(arg.replace(/^-[la]+\s*/, '')) || cwd
+        if (t === 'resume') return { output: [line(T('resume.pdf', 'accent')), blank(), ...sectionOutput('resume', m)], cwd }
         if (!t) return { output: [line(...DIRS.map((d) => T(`${d}/  `, 'info')), ...FILES.map((f) => T(`${f}  `)))], cwd }
         const out = sectionOutput(t, m)
         return out ? { output: out, cwd } : { output: [line(T(`ls: cannot access '${args[0]}': No such file or directory`, 'err'))], cwd }
@@ -386,14 +495,15 @@ export function runCommand(raw, state) {
     case cmd === 'cd': {
         const t = target(arg)
         if (!t) return { output: [], cwd: null }
-        if (DIRS.includes(t)) return { output: [], cwd: t }
+        if (DIRS.includes(t)) return { output: t === 'resume' ? sectionOutput('resume', m) : [dirSummary(t, m)], cwd: t }
         return { output: [line(T(`cd: ${args[0]}: No such file or directory`, 'err'))], cwd }
     }
     case cmd === 'cat' && arg === '/etc/os-release':
         return { output: osRelease(m), cwd }
     case cmd === 'cat': {
         const t = target(arg) || cwd
-        const out = t && sectionOutput(t.replace(/\.(txt|md)$/, '') === 'readme' ? 'README.md' : t, m)
+        const name = t && t.replace(/^resume\//, '')
+        const out = name && sectionOutput(name.replace(/\.(txt|md)$/, '') === 'readme' ? 'README.md' : name, m)
         return out ? { output: out, cwd } : { output: [line(T(`cat: ${args[0] || ''}: No such file or directory`, 'err'))], cwd }
     }
     case ['about', 'experience', 'projects', 'skills', 'education', 'certifications', 'certs', 'achievements', 'ventures', 'updates', 'contact', 'resume'].includes(cmd):
@@ -501,6 +611,47 @@ export function runCommand(raw, state) {
             line(T('{')),
             ...fields.map(([k, v, href], i) => line(T(`    "${k}": `, 'info'), T(`"${v}"`, href ? 'accent' : 'ok', href), T(i < fields.length - 1 ? ',' : ''))),
             line(T('}')),
+        ], cwd }
+    }
+    case cmd === 'tree':
+        return { output: treeOutput(m), cwd }
+    case cmd === 'grep': {
+        const term = input.slice(4).trim().replace(/^["']|["']$/g, '').replace(/^-i\s+/, '')
+        if (!term) return { output: [line(T("usage: grep <word>   e.g. grep kubernetes", 'warn'))], cwd }
+        if (term.length < 2) return { output: [line(T('grep: use at least 2 characters', 'warn'))], cwd }
+        const hits = searchIndex(m).filter((e) => `${e.title} ${e.text}`.toLowerCase().includes(term.toLowerCase()))
+        if (!hits.length) return { output: [line(T(`no matches for "${term}"`, 'muted'))], cwd }
+        const out = [line(T(`${hits.length} match${hits.length === 1 ? '' : 'es'} for "${term}"`, 'muted')), blank()]
+        for (const h of hits.slice(0, 40)) {
+            out.push(line(T(`${h.where}/`.padEnd(16), 'info'), ...highlight(h.title, term, 'bold')))
+            const snip = snippet(h.text, term)
+            if (snip && !h.title.toLowerCase().includes(term.toLowerCase())) out.push(line(T(''.padEnd(16)), ...highlight(snip, term, 'muted')))
+        }
+        if (hits.length > 40) out.push(line(T(`… ${hits.length - 40} more`, 'muted')))
+        return { output: out, cwd }
+    }
+    case cmd === 'open': {
+        const what = arg.replace(/^@/, '')
+        const find = (re) => m.contact.find((c) => re.test(c.href))
+        const target = {
+            github: find(/github\.com/), linkedin: find(/linkedin\.com/), x: find(/x\.com|twitter\.com/), twitter: find(/x\.com|twitter\.com/),
+            email: find(/^mailto:/), mail: find(/^mailto:/),
+            resume: m.resumeHref ? { href: m.resumeHref, value: 'resume.pdf' } : null,
+            site: { href: 'https://www.rajeev.pro', value: 'www.rajeev.pro' },
+        }[what]
+        if (!what) return { output: [line(T('usage: open github | linkedin | x | email | resume | site', 'warn'))], cwd }
+        if (!target) return { output: [line(T(`open: unknown target '${args[0]}'`, 'err'), T("  · try 'open github'", 'muted'))], cwd }
+        return { output: [line(T('opening ', 'muted'), T(target.value, 'accent', target.href), T(' …', 'muted'))], cwd, openUrl: target.href }
+    }
+    case cmd === 'man': {
+        const name = input.slice(3).trim().toLowerCase()
+        const entry = COMMANDS[name]
+        if (!name) return { output: [line(T('usage: man <command>   e.g. man grep', 'warn'))], cwd }
+        if (!entry) return { output: [line(T(`No manual entry for ${name}`, 'err'))], cwd }
+        return { output: [
+            line(T(name.toUpperCase(), 'bold'), T('                TerX manual', 'muted')), blank(),
+            line(T('NAME', 'info')), line(T(`    ${name} - ${entry.desc}`)), blank(),
+            line(T('EXAMPLES', 'info')), ...(entry.man || [name]).map((e) => line(T(`    $ ${e}`, 'ok'))),
         ], cwd }
     }
     case cmd === 'fullscreen' || full === 'exit fullscreen':

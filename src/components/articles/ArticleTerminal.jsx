@@ -7,14 +7,14 @@ import {useGlobalState} from "/src/providers/GlobalStateProvider.jsx"
 import {buildModel, runCommand, complete, MAX_INPUT} from "/src/helpers/terx.js"
 
 const MAX_LINES = 400
-const QUICK_COMMANDS = ['help', 'neofetch', 'experience', 'projects', 'ventures', 'resume', 'kubectl get pods', 'contact']
+const QUICK_COMMANDS = ['help', 'neofetch', 'ls', 'experience', 'projects', 'ventures', 'tree', 'contact']
 
 const BOOT = [
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Mounted /root/portfolio (read-only)'}],
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Started kubelet, docker and terraform services'}],
     [{text: '[  OK  ] ', tone: 'ok'}, {text: 'Reached target TerX shell'}],
     [{text: ''}],
-    [{text: 'Welcome to ', tone: 'muted'}, {text: 'TerX', tone: 'accent'}, {text: ". Type 'help' to see what you can explore, or tap a command below.", tone: 'muted'}],
+    [{text: 'Welcome to ', tone: 'muted'}, {text: 'TerX', tone: 'accent'}, {text: ". Type 'help', or 'ls' to look around. Tab completes commands.", tone: 'muted'}],
     [{text: ''}],
 ]
 
@@ -37,12 +37,7 @@ function ArticleTerminal() {
 
     /* Boot sequence (instant when the user prefers reduced motion). */
     useEffect(() => {
-        const resumeHref = buildModel(getSettings(), getSections()).resumeHref
-        const boot = resumeHref ? [...BOOT.slice(0, -1), [
-            {text: '📄 Resume: ', tone: 'info'},
-            {text: 'download PDF', tone: 'accent', href: resumeHref, download: resumeHref.split('/').pop()},
-            {text: "  · or type 'resume' · ⛶ fullscreen in the title bar", tone: 'muted'},
-        ], [{text: ''}]] : BOOT
+        const boot = BOOT
 
         if (prefersReducedMotion()) {
             setLines(boot)
@@ -114,6 +109,12 @@ function ArticleTerminal() {
             setLines([])
         } else {
             setLines((prev) => [...prev, echo, ...result.output, [{text: ''}]].slice(-MAX_LINES))
+        }
+
+        if (result.openUrl) {
+            // Triggered by the visitor's own Enter/click, so browsers allow it.
+            if (result.openUrl.startsWith('mailto:')) window.location.href = result.openUrl
+            else window.open(result.openUrl, '_blank', 'noopener,noreferrer')
         }
 
         if (result.fullscreen !== undefined) {

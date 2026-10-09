@@ -3,7 +3,7 @@
     "en": {
       "title": "Ventures",
       "title_menu": "Ventures",
-      "title_long_prefix": "What I'm building next",
+      "title_long_prefix": "What I'm working on",
       "title_long": "My **Ventures**"
     }
   },
@@ -30,24 +30,6 @@
               "plural": "Academy"
             }
           }
-        },
-        {
-          "id": "finance",
-          "locales": {
-            "en": {
-              "singular": "Finance",
-              "plural": "Finance"
-            }
-          }
-        },
-        {
-          "id": "products",
-          "locales": {
-            "en": {
-              "singular": "Products",
-              "plural": "Products"
-            }
-          }
         }
       ],
       "items": [
@@ -65,7 +47,7 @@
           "locales": {
             "en": {
               "title": "DevOps & Cloud Academy",
-              "text": "**Coming soon** · Hands-on courses on CI/CD, Docker, Kubernetes, Terraform and AWS, built from real production work. Launching at devops.rajeev.pro.",
+              "text": "**Coming soon** · I'm turning what I do every day at work into practical courses. You build real pipelines and real infrastructure, step by step, instead of watching slides.",
               "tags": [
                 "Courses",
                 "DevOps & Cloud",
@@ -74,75 +56,58 @@
             }
           },
           "accent": "#4FC3F7",
-          "phase": "Phase 1",
+          "phase": "In progress",
           "stage": "plan",
           "highlights": [
-            "Project-based labs on real cloud setups",
-            "CI/CD, Docker, Kubernetes, Terraform, AWS",
-            "From fundamentals to production-ready"
-          ]
-        },
-        {
-          "categoryId": "finance",
-          "icon": {
-            "img": "images/tech/finance-markets.svg",
-            "fa": "fa-solid fa-chart-line",
-            "faColors": {
-              "bg": null,
-              "fill": null
+            "Learn by building real projects",
+            "CI/CD, Docker, Kubernetes, Terraform and AWS",
+            "From your first pipeline to production"
+          ],
+          "stages": [
+            {
+              "name": "Research & planning",
+              "status": "done",
+              "note": "Who it is for, what to cover, course outline"
+            },
+            {
+              "name": "Curriculum design",
+              "status": "active",
+              "note": "Modules, hands-on labs and capstone projects"
+            },
+            {
+              "name": "Content production",
+              "status": "todo",
+              "note": "Videos, lab guides and code repos"
+            },
+            {
+              "name": "Beta with early learners",
+              "status": "todo",
+              "note": "Small group, honest feedback, fixes"
+            },
+            {
+              "name": "Public launch",
+              "status": "todo",
+              "note": "Opens at devops.rajeev.pro"
+            },
+            {
+              "name": "Iterate",
+              "status": "todo",
+              "note": "New modules based on what learners ask for"
             }
-          },
-          "links": [],
-          "locales": {
-            "en": {
-              "title": "Finance & Trading Academy",
-              "text": "**Coming soon** · Courses on personal finance, investing and trading fundamentals with a data-driven, risk-first approach. Launching at finance.rajeev.pro.",
-              "tags": [
-                "Courses",
-                "Finance & Investing",
-                "finance.rajeev.pro"
-              ]
-            }
-          },
-          "accent": "#66BB6A",
-          "phase": "Phase 2",
-          "stage": "plan",
-          "highlights": [
-            "Personal finance & investing fundamentals",
-            "Trading basics with risk management first",
-            "Data-driven, no hype"
-          ]
-        },
-        {
-          "categoryId": "products",
-          "icon": {
-            "img": "images/tech/venture-products.svg",
-            "fa": "fa-solid fa-rocket",
-            "faColors": {
-              "bg": null,
-              "fill": null
-            }
-          },
-          "links": [],
-          "locales": {
-            "en": {
-              "title": "Products & Tools",
-              "text": "**Coming soon** · Ready-to-use templates and tools: CI/CD starters, Terraform modules and cloud cost dashboards. Launching at products.rajeev.pro.",
-              "tags": [
-                "Products",
-                "Templates & Tools",
-                "products.rajeev.pro"
-              ]
-            }
-          },
-          "accent": "#FF7043",
-          "phase": "Phase 3",
-          "stage": "plan",
-          "highlights": [
-            "CI/CD starter templates",
-            "Reusable Terraform modules",
-            "Cloud cost dashboards"
-          ]
+          ],
+          "info": {
+            "owner": "Rajeev Kumar",
+            "contributors": 1,
+            "stack": [
+              "Kubernetes",
+              "Docker",
+              "Terraform",
+              "AWS",
+              "GitHub Actions"
+            ],
+            "pricing": "To be announced",
+            "launch": "To be announced"
+          }
         }
       ]
     }
