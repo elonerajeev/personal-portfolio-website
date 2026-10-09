@@ -60,3 +60,17 @@
         color: var(--theme-nav-highlight);
     }
 }
+
+// Per-section icon colours (structure.json: faIconColor).
+.nav-pill .nav-pill-icon {
+    opacity: 1 !important;
+
+    .fa-icon {
+        color: var(--menu-icon-color, inherit);
+        opacity: 0.9 !important;
+    }
+}
+
+[data-theme="light"] .nav-pill .nav-pill-icon .fa-icon {
+    filter: brightness(0.7) saturate(1.3);
+}

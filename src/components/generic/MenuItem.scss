@@ -118,3 +118,15 @@
         display: none;
     }
 }
+
+// Per-section icon colours (structure.json: faIconColor), clearly visible in both themes.
+.menu-item-colored {
+    .menu-item-icon-wrapper .fa-icon {
+        color: var(--menu-icon-color);
+        opacity: 0.9;
+    }
+}
+
+[data-theme="light"] .menu-item-colored .menu-item-icon-wrapper .fa-icon {
+    filter: brightness(0.7) saturate(1.3);
+}

@@ -4,70 +4,80 @@
             "id": "about",
             "categoryId": "home",
             "jsonPath": "/data/sections/cover.json",
-            "faIcon": "fa-solid fa-address-card"
+            "faIcon": "fa-solid fa-address-card",
+            "faIconColor": "#4FC3F7"
         },
 
         {
             "id": "terx",
             "categoryId": "home",
             "jsonPath": "/data/sections/terx.json",
-            "faIcon": "fa-solid fa-terminal"
+            "faIcon": "fa-solid fa-terminal",
+            "faIconColor": "#9DFF8E"
         },
 
         {
             "id": "experience",
             "categoryId": "background",
             "jsonPath": "/data/sections/experience.json",
-            "faIcon": "fa-solid fa-briefcase"
+            "faIcon": "fa-solid fa-briefcase",
+            "faIconColor": "#FFB74D"
         },
 
         {
             "id": "portfolio",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/portfolio.json",
-            "faIcon": "fa-solid fa-folder-open"
+            "faIcon": "fa-solid fa-folder-open",
+            "faIconColor": "#FFD54F"
         },
 
         {
             "id": "skills",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/skills.json",
-            "faIcon": "fa-solid fa-tools"
+            "faIcon": "fa-solid fa-tools",
+            "faIconColor": "#BA68C8"
         },
 
         {
             "id": "achievements",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/achievements.json",
-            "faIcon": "fa-solid fa-award"
+            "faIcon": "fa-solid fa-award",
+            "faIconColor": "#F06292"
         },
 
         {
             "id": "education",
             "categoryId": "background",
             "jsonPath": "/data/sections/education.json",
-            "faIcon": "fa-solid fa-graduation-cap"
+            "faIcon": "fa-solid fa-graduation-cap",
+            "faIconColor": "#64B5F6"
         },
 
         {
             "id": "resume",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/resume.json",
-            "faIcon": "fa-solid fa-file-pdf"
+            "faIcon": "fa-solid fa-file-pdf",
+            "faIconColor": "#EF5350"
         },
 
         {
             "id": "updates",
             "categoryId": "more",
             "jsonPath": "/data/sections/updates.json",
-            "faIcon": "fa-solid fa-rss"
+            "faIcon": "fa-solid fa-rss",
+            "faIconColor": "#FF8A65"
         },
 
         {
             "id": "contact",
             "categoryId": "more",
             "jsonPath": "/data/sections/contact.json",
-            "faIcon": "fa-solid fa-pen-to-square"
+            "faIcon": "fa-solid fa-pen-to-square",
+            "faIconColor": "#4DB6AC"
         }
     ],
 

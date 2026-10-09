@@ -3,7 +3,7 @@ import React from 'react'
 import {useUtils} from "/src/helpers/utils.js"
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 
-function MenuItem({label, icon, faSuffix, hoverAnimation, selected, size, shrink, className, style, tooltip}) {
+function MenuItem({label, icon, iconColor, faSuffix, hoverAnimation, selected, size, shrink, className, style, tooltip}) {
     const utils = useUtils()
 
     label = label || 'Item'
@@ -18,9 +18,11 @@ function MenuItem({label, icon, faSuffix, hoverAnimation, selected, size, shrink
             ${utils.strIf(hoverAnimation, 'menu-item-with-hover')}
             ${utils.strIf(shrink, 'menu-item-compressed')}
             ${utils.strIf(selected, 'menu-item-selected')}
+            ${utils.strIf(iconColor, 'menu-item-colored')}
             ${className}
         `}>
-            <div className={`menu-item-icon-wrapper menu-item-icon-wrapper-${size}`}>
+            <div className={`menu-item-icon-wrapper menu-item-icon-wrapper-${size}`}
+                 style={iconColor ? {'--menu-icon-color': iconColor} : undefined}>
                 {isImageIcon && (
                     <img src={String(icon)} alt={label}/>
                 )}

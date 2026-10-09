@@ -93,6 +93,7 @@ function NavSidebarLinks({shouldShrink, sections}) {
                     <NavLink shrink={shouldShrink}
                              label={_getSectionLabel(section, getTranslation)}
                              icon={section.faIcon}
+                             iconColor={section.faIconColor}
                              size={1}
                              className={`px-4`}
                              disabled={_isActive(section)}
