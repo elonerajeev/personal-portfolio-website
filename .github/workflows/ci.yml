@@ -40,6 +40,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Read-only token for the build-time GitHub activity feed (higher API rate limit).
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Verify build (files, SEO essentials, privacy guard)
         run: npm run verify

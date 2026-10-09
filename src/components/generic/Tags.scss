@@ -1,6 +1,17 @@
 @import "/src/styles/extend";
 
 .tags {
+    // Official logo in place of the neutral icon, sized like the icon it replaces.
+    .tag-logo {
+        width: 1.15em;
+        height: 1.15em;
+        object-fit: contain;
+        vertical-align: -0.2em;
+        padding: 1px;
+        border-radius: 3px;
+        background: #ffffff;
+    }
+
     .badge {
         display: inline-block;
         white-space: nowrap;

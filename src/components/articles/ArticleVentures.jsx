@@ -1,9 +1,9 @@
 import "./ArticleVentures.scss"
-import React from 'react'
+import React, {useState} from 'react'
+import {useEmails} from "/src/helpers/emails.js"
 import Article from "/src/components/wrappers/Article.jsx"
 import FaIcon from "/src/components/generic/FaIcon.jsx"
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
-import {useData} from "/src/providers/DataProvider.jsx"
 import {useUtils} from "/src/helpers/utils.js"
 
 const utils = useUtils()
@@ -80,22 +80,93 @@ function LogoDisc({src, title, size = 'md'}) {
     )
 }
 
-/** The venture's domain as a blue link: the site when live, otherwise a "notify me" email. */
+/** The venture's domain as a blue link: the site when live, otherwise it takes you to the notify form. */
 function VentureLink({v, className = ''}) {
-    const {getSettings} = useData()
     if (!v.domain) return null
     if (v.live) {
         return <a className={`v-link ${className}`} href={v.href} target={`_blank`} rel={`noopener noreferrer`}>{v.domain}</a>
     }
-    const email = getSettings()?.emailjs?.toEmail
-    if (!email) return <span className={`v-link-muted ${className}`}>{v.domain}</span>
-    const subject = encodeURIComponent(`Notify me: ${v.title}`)
-    const body = encodeURIComponent(`Hi Rajeev, please let me know when ${v.domain} launches.`)
+    const focusForm = (e) => {
+        e.preventDefault()
+        const root = e.currentTarget.closest('.ventures-variant') || document
+        const input = root.querySelector('.v-notify-input')
+        input?.focus()
+    }
     return (
-        <a className={`v-link ${className}`} href={`mailto:${email}?subject=${subject}&body=${body}`}
-           title={`Not live yet: click to get notified when ${v.domain} launches`}>
+        <a className={`v-link ${className}`} href={`#notify-${v.id}`} onClick={focusForm}
+           title={`Not live yet: get notified when ${v.domain} launches`}>
             {v.domain}
         </a>
+    )
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+/** "Notify me" sign-up: sends the visitor's email to me through EmailJS (same as the contact form). */
+function NotifyForm({v}) {
+    const emails = useEmails()
+    const storageKey = `notify:${v.id}`
+    const [email, setEmail] = useState('')
+    const [trap, setTrap] = useState('')
+    const [state, setState] = useState(() => {
+        try { return localStorage.getItem(storageKey) ? 'done' : 'idle' } catch { return 'idle' }
+    })
+    const [error, setError] = useState('')
+
+    if (v.live) return null
+
+    const submit = async (e) => {
+        e.preventDefault()
+        if (trap) { setState('done'); return } // bots fill hidden fields
+        const value = email.trim()
+        if (!EMAIL_RE.test(value) || value.length > 200) { setError('Please enter a valid email.'); return }
+        setError('')
+        setState('sending')
+        const ok = emails.isInitialized() && await emails.sendContactEmail(
+            'Waitlist', value, `Notify me: ${v.title}`,
+            `Please let me know when ${v.domain || v.title} launches.`)
+        if (ok) {
+            try { localStorage.setItem(storageKey, '1') } catch { /* storage unavailable */ }
+            setState('done')
+        } else {
+            setState('idle')
+            setError("Couldn't send that right now. Please try again in a minute.")
+        }
+    }
+
+    if (state === 'done') {
+        return (
+            <p className={`v-notify-done`} role={`status`}>
+                <FaIcon iconName={`fa-solid fa-circle-check`} className={`me-2`}/>
+                You're on the list. I'll email you when it launches.
+            </p>
+        )
+    }
+
+    return (
+        <form className={`v-notify`} onSubmit={submit} noValidate>
+            <label className={`visually-hidden`} htmlFor={`notify-${v.id}`}>Email for launch updates</label>
+            <input id={`notify-${v.id}`}
+                   className={`v-notify-input`}
+                   type={`email`}
+                   inputMode={`email`}
+                   autoComplete={`email`}
+                   placeholder={`you@example.com`}
+                   maxLength={200}
+                   value={email}
+                   onChange={(e) => { setEmail(e.target.value); setError('') }}
+                   aria-invalid={!!error}
+                   aria-describedby={error ? `notify-${v.id}-error` : undefined}
+                   disabled={state === 'sending'}/>
+            {/* honeypot: hidden from people, tempting for bots */}
+            <input className={`v-notify-trap`} tabIndex={-1} autoComplete={`off`} aria-hidden={true}
+                   value={trap} onChange={(e) => setTrap(e.target.value)}/>
+            <button className={`v-notify-btn`} type={`submit`} disabled={state === 'sending'}>
+                {state === 'sending' ? 'Sending…' : 'Notify me'}
+            </button>
+            {error && <p id={`notify-${v.id}-error`} className={`v-notify-error`} role={`alert`}>{error}</p>}
+            <p className={`v-notify-note`}>One email when it launches. No spam.</p>
+        </form>
     )
 }
 
@@ -144,6 +215,7 @@ function OverviewCard({v}) {
                 )}
                 <ProgressBar v={v}/>
                 <div className={`mt-3`}><DomainAction v={v}/></div>
+                <NotifyForm v={v}/>
             </div>
 
             {v.highlights.length > 0 && (
@@ -188,6 +260,10 @@ function Roadmap({v}) {
                     </li>
                 ))}
             </ol>
+            <div className={`v-road-foot`}>
+                <DomainAction v={v}/>
+                <NotifyForm v={v}/>
+            </div>
         </div>
     )
 }
@@ -244,6 +320,7 @@ function ProjectBoard({v}) {
                     </div>
                 )}
             </dl>
+            <div className={`v-board-foot`}><NotifyForm v={v}/></div>
         </div>
     )
 }

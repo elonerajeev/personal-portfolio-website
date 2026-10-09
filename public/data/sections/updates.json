@@ -69,6 +69,16 @@
       ]
     },
     {
+      "id": "github",
+      "component": "ArticleGithubActivity",
+      "config": {},
+      "locales": {
+        "en": {
+          "title": "Live from **GitHub**"
+        }
+      }
+    },
+    {
       "id": "updates",
       "component": "ArticleThread",
       "config": {},
